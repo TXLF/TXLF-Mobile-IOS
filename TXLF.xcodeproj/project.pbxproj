@@ -13,9 +13,6 @@
 		5ECC26FA181C7673004C9F44 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5ECC26F8181C7673004C9F44 /* InfoPlist.strings */; };
 		5ECC26FC181C7673004C9F44 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ECC26FB181C7673004C9F44 /* main.m */; };
 		5ECC2700181C7674004C9F44 /* TXLFAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ECC26FF181C7674004C9F44 /* TXLFAppDelegate.m */; };
-		5ECC2703181C7674004C9F44 /* TXLFRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ECC2702181C7674004C9F44 /* TXLFRootViewController.m */; };
-		5ECC2706181C7674004C9F44 /* TXLFDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ECC2705181C7674004C9F44 /* TXLFDataViewController.m */; };
-		5ECC2709181C7674004C9F44 /* TXLFModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ECC2708181C7674004C9F44 /* TXLFModelController.m */; };
 		5ECC270C181C7674004C9F44 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5ECC270A181C7674004C9F44 /* Main.storyboard */; };
 		5ECC270E181C7674004C9F44 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5ECC270D181C7674004C9F44 /* Images.xcassets */; };
 		5ECC2715181C7674004C9F44 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ECC2714181C7674004C9F44 /* XCTest.framework */; };
@@ -23,6 +20,11 @@
 		5ECC2717181C7674004C9F44 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ECC26F3181C7673004C9F44 /* UIKit.framework */; };
 		5ECC271F181C7674004C9F44 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5ECC271D181C7674004C9F44 /* InfoPlist.strings */; };
 		5ECC2721181C7675004C9F44 /* TXLFTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ECC2720181C7675004C9F44 /* TXLFTests.m */; };
+		5ECC272B181C7EB7004C9F44 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ECC272A181C7EB7004C9F44 /* MapKit.framework */; };
+		5ECC272E181C82FF004C9F44 /* TXLFVenueScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ECC272D181C82FF004C9F44 /* TXLFVenueScreenViewController.m */; };
+		5ECC2731181CABFC004C9F44 /* TXLFProgramScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ECC2730181CABFC004C9F44 /* TXLFProgramScreenViewController.m */; };
+		5ECC2734181CAE3B004C9F44 /* TXLFModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ECC2733181CAE3B004C9F44 /* TXLFModel.m */; };
+		5ECC2738181CB336004C9F44 /* TXLFSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ECC2737181CB336004C9F44 /* TXLFSession.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,12 +48,6 @@
 		5ECC26FD181C7673004C9F44 /* TXLF-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TXLF-Prefix.pch"; sourceTree = "<group>"; };
 		5ECC26FE181C7674004C9F44 /* TXLFAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXLFAppDelegate.h; sourceTree = "<group>"; };
 		5ECC26FF181C7674004C9F44 /* TXLFAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXLFAppDelegate.m; sourceTree = "<group>"; };
-		5ECC2701181C7674004C9F44 /* TXLFRootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXLFRootViewController.h; sourceTree = "<group>"; };
-		5ECC2702181C7674004C9F44 /* TXLFRootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXLFRootViewController.m; sourceTree = "<group>"; };
-		5ECC2704181C7674004C9F44 /* TXLFDataViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXLFDataViewController.h; sourceTree = "<group>"; };
-		5ECC2705181C7674004C9F44 /* TXLFDataViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXLFDataViewController.m; sourceTree = "<group>"; };
-		5ECC2707181C7674004C9F44 /* TXLFModelController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TXLFModelController.h; sourceTree = "<group>"; };
-		5ECC2708181C7674004C9F44 /* TXLFModelController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXLFModelController.m; sourceTree = "<group>"; };
 		5ECC270B181C7674004C9F44 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5ECC270D181C7674004C9F44 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		5ECC2713181C7674004C9F44 /* TXLFTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TXLFTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -59,6 +55,15 @@
 		5ECC271C181C7674004C9F44 /* TXLFTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TXLFTests-Info.plist"; sourceTree = "<group>"; };
 		5ECC271E181C7674004C9F44 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5ECC2720181C7675004C9F44 /* TXLFTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TXLFTests.m; sourceTree = "<group>"; };
+		5ECC272A181C7EB7004C9F44 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		5ECC272C181C82FF004C9F44 /* TXLFVenueScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXLFVenueScreenViewController.h; sourceTree = "<group>"; };
+		5ECC272D181C82FF004C9F44 /* TXLFVenueScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXLFVenueScreenViewController.m; sourceTree = "<group>"; };
+		5ECC272F181CABFC004C9F44 /* TXLFProgramScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXLFProgramScreenViewController.h; sourceTree = "<group>"; };
+		5ECC2730181CABFC004C9F44 /* TXLFProgramScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXLFProgramScreenViewController.m; sourceTree = "<group>"; };
+		5ECC2732181CAE3B004C9F44 /* TXLFModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXLFModel.h; sourceTree = "<group>"; };
+		5ECC2733181CAE3B004C9F44 /* TXLFModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXLFModel.m; sourceTree = "<group>"; };
+		5ECC2736181CB336004C9F44 /* TXLFSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXLFSession.h; sourceTree = "<group>"; };
+		5ECC2737181CB336004C9F44 /* TXLFSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXLFSession.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +73,7 @@
 			files = (
 				5ECC26F2181C7673004C9F44 /* CoreGraphics.framework in Frameworks */,
 				5ECC26F4181C7673004C9F44 /* UIKit.framework in Frameworks */,
+				5ECC272B181C7EB7004C9F44 /* MapKit.framework in Frameworks */,
 				5ECC26F0181C7673004C9F44 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -107,6 +113,7 @@
 		5ECC26EE181C7673004C9F44 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5ECC272A181C7EB7004C9F44 /* MapKit.framework */,
 				5ECC26EF181C7673004C9F44 /* Foundation.framework */,
 				5ECC26F1181C7673004C9F44 /* CoreGraphics.framework */,
 				5ECC26F3181C7673004C9F44 /* UIKit.framework */,
@@ -120,12 +127,8 @@
 			children = (
 				5ECC26FE181C7674004C9F44 /* TXLFAppDelegate.h */,
 				5ECC26FF181C7674004C9F44 /* TXLFAppDelegate.m */,
-				5ECC2701181C7674004C9F44 /* TXLFRootViewController.h */,
-				5ECC2702181C7674004C9F44 /* TXLFRootViewController.m */,
-				5ECC2704181C7674004C9F44 /* TXLFDataViewController.h */,
-				5ECC2705181C7674004C9F44 /* TXLFDataViewController.m */,
-				5ECC2707181C7674004C9F44 /* TXLFModelController.h */,
-				5ECC2708181C7674004C9F44 /* TXLFModelController.m */,
+				5ECC2739181CB346004C9F44 /* Models */,
+				5ECC2735181CAE5D004C9F44 /* Views/Screens */,
 				5ECC270A181C7674004C9F44 /* Main.storyboard */,
 				5ECC270D181C7674004C9F44 /* Images.xcassets */,
 				5ECC26F6181C7673004C9F44 /* Supporting Files */,
@@ -160,6 +163,28 @@
 				5ECC271D181C7674004C9F44 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5ECC2735181CAE5D004C9F44 /* Views/Screens */ = {
+			isa = PBXGroup;
+			children = (
+				5ECC272C181C82FF004C9F44 /* TXLFVenueScreenViewController.h */,
+				5ECC272D181C82FF004C9F44 /* TXLFVenueScreenViewController.m */,
+				5ECC272F181CABFC004C9F44 /* TXLFProgramScreenViewController.h */,
+				5ECC2730181CABFC004C9F44 /* TXLFProgramScreenViewController.m */,
+			);
+			name = Views/Screens;
+			sourceTree = "<group>";
+		};
+		5ECC2739181CB346004C9F44 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5ECC2732181CAE3B004C9F44 /* TXLFModel.h */,
+				5ECC2733181CAE3B004C9F44 /* TXLFModel.m */,
+				5ECC2736181CB336004C9F44 /* TXLFSession.h */,
+				5ECC2737181CB336004C9F44 /* TXLFSession.m */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -210,6 +235,13 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Texas Linux Fest";
 				TargetAttributes = {
+					5ECC26EB181C7673004C9F44 = {
+						SystemCapabilities = {
+							com.apple.iOS = {
+								enabled = 1;
+							};
+						};
+					};
 					5ECC2712181C7674004C9F44 = {
 						TestTargetID = 5ECC26EB181C7673004C9F44;
 					};
@@ -260,11 +292,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5ECC2703181C7674004C9F44 /* TXLFRootViewController.m in Sources */,
 				5ECC2700181C7674004C9F44 /* TXLFAppDelegate.m in Sources */,
-				5ECC2709181C7674004C9F44 /* TXLFModelController.m in Sources */,
-				5ECC2706181C7674004C9F44 /* TXLFDataViewController.m in Sources */,
+				5ECC2734181CAE3B004C9F44 /* TXLFModel.m in Sources */,
+				5ECC272E181C82FF004C9F44 /* TXLFVenueScreenViewController.m in Sources */,
 				5ECC26FC181C7673004C9F44 /* main.m in Sources */,
+				5ECC2738181CB336004C9F44 /* TXLFSession.m in Sources */,
+				5ECC2731181CABFC004C9F44 /* TXLFProgramScreenViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
