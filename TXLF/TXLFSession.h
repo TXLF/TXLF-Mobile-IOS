@@ -16,6 +16,9 @@
     NSString *sessionDocumentation; //URL to slides
 }
 
++(NSData *) fetchSessions;
++(void) generateSessions;
+
 -(void)setsessionName:(NSString *)name;
 -(void)setsessionPresenter:(NSString *) fname
                           :(NSString *) lname

@@ -10,6 +10,40 @@
 
 @implementation TXLFSession
 
+// !! These session data-structures need to be updated to be a super-set of ones in the JSON feed
+
++(NSData *) fetchSessions {
+    //These need to be specified in a resource file or something
+    NSString *localCachePath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)
+                                 objectAtIndex:0] stringByAppendingPathComponent:@"session-schedule_mobile.json"];
+    //NSURL *url = [NSURL URLWithString:@"http://2013.texaslinuxfest.org/session-schedule_mobile"]; //This URL contains enclosing 'sessions()' which causes issues for un-serialization below; for now, we just use a local network copy with the enclosing parens removed
+    NSURL *url = [NSURL URLWithString:@"http://inni.odlenixon.com/session-schedule_mobile"];
+    NSData *sessionJSON = [NSData dataWithContentsOfURL:url];
+    if(sessionJSON) {
+        [sessionJSON writeToFile:localCachePath atomically:YES];
+        NSLog(@"Session JSON cached to %@", localCachePath);
+    } else {
+        sessionJSON = [NSData dataWithContentsOfFile:localCachePath];
+    }
+    return sessionJSON;
+}
+
++(void) generateSessions {
+    NSData* sessionJSON = [TXLFSession fetchSessions];
+    NSError *errorObj = [[NSError alloc] initWithCoder:nil];
+    NSDictionary* sessionDictionary = [NSJSONSerialization JSONObjectWithData:sessionJSON options:0 error:&errorObj];
+    //NSLog(@"This is the error: %@", errorObj); //Probably need some error handling/sanitation or something
+    NSLog(@"Session JSON converted to dictionary data");
+    
+    NSArray* sessionKeys = [sessionDictionary allKeys];
+    NSArray* sessionValues = [sessionDictionary allValues];
+    NSLog(@"Here are the keys: %@", sessionKeys);
+    NSLog(@"Here are the values: %@", sessionValues);
+                              
+    
+    
+}
+
 -(void)setsessionName:(NSString *)name {
     sessionName=name;
 }
@@ -35,8 +69,8 @@
                          :(NSString *) floor
                          :(NSString *) roomNumber
                          :(NSString *) roomName
-                         :(NSNumber *) gpsX
-                         :(NSNumber *) gpsY
+                         :(NSNumber *) gpsX //Can we just make these floats?
+                         :(NSNumber *) gpsY //Can we just make these floats?
                          :(NSString *) notes {
     [sessionLocation insertObject:address atIndex:0];
     [sessionLocation insertObject:building atIndex:1];
@@ -54,7 +88,7 @@
 }
 
 -(void)setsessionDocumentation:(NSString *) url {
-    sessionDocumentation=url;
+    sessionDocumentation=url; //This should probably be a URL object of array of URL objects
 }
     
 -(NSString *)sessionName {
@@ -87,10 +121,22 @@
             [self setsessionPresenter:@"Jane" :@"Doe" :@"TXLF" :@"Tester" :@"info@texaslinuxfest.org" :@"555.555.5555" :@"N/A"];
         }
         if(!sessionLocation) {
-            [self setsessionLocation:@"" :<#(NSString *)#> :<#(NSString *)#> :<#(NSString *)#> :<#(NSString *)#> :<#(NSNumber *)#> :<#(NSNumber *)#> :<#(NSString *)#>]
+            [self setsessionLocation:@"500 East Cesar Chavez, Austin, TX, 78701" :@"Austin Convention Center - Building 1" :@"1" :@"101" :@"Lecture Hall" :[NSNumber numberWithFloat:85.6] :[NSNumber numberWithFloat:85.6] :@"No Notes"];
         }
-        
+        if(!sessionDateTime) {
+            [self setsessionDateTime:[NSDate date]];
+        }
+        if(!sessionDocumentation) {
+            [self setsessionDocumentation:@"http://texaslinuxfest.org"];
+        }
     }
+    return self;
+}
+
+-(id) initWithTitleTime:(NSString *) title :(NSDate *) time {
+    self = [self init];
+    [self setsessionName:title];
+    [self setsessionDateTime:time];
     return self;
 }
 
