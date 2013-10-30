@@ -18,6 +18,8 @@
 
 +(NSData *) fetchSessions;
 +(void) generateSessions;
++(NSDictionary *) stripJSONObject:(NSDictionary *) dict :(NSString *) objectName;
+
 
 -(void)setsessionName:(NSString *)name;
 -(void)setsessionPresenter:(NSString *) fname

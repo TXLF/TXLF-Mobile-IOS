@@ -16,9 +16,12 @@
     //These need to be specified in a resource file or something
     NSString *localCachePath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)
                                  objectAtIndex:0] stringByAppendingPathComponent:@"session-schedule_mobile.json"];
-    //NSURL *url = [NSURL URLWithString:@"http://2013.texaslinuxfest.org/session-schedule_mobile"]; //This URL contains enclosing 'sessions()' which causes issues for un-serialization below; for now, we just use a local network copy with the enclosing parens removed
-    NSURL *url = [NSURL URLWithString:@"http://inni.odlenixon.com/session-schedule_mobile"];
-    NSData *sessionJSON = [NSData dataWithContentsOfURL:url];
+    NSURL *url = [NSURL URLWithString:@"http://2013.texaslinuxfest.org/session-schedule_mobile"];
+    NSString* tempString = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
+    //There is an extra "sessions(...)" around the JSON for some reason, probably needs sanitation too
+    NSRange subRange = {9, [tempString length] - 10};
+    NSString* sessionJSONString = [tempString substringWithRange:subRange];
+    NSData *sessionJSON = [sessionJSONString dataUsingEncoding:NSUTF8StringEncoding];
     if(sessionJSON) {
         [sessionJSON writeToFile:localCachePath atomically:YES];
         NSLog(@"Session JSON cached to %@", localCachePath);
@@ -28,20 +31,28 @@
     return sessionJSON;
 }
 
+//This may return an NSArray
++(NSDictionary *) stripJSONObject:(NSDictionary *) dict :(NSString *) objectName {
+    NSError *errorObj = [[NSError alloc] initWithCoder:nil];
+    NSArray* innerArray = [dict objectForKey:objectName];
+    NSData*  innerData  = [NSJSONSerialization dataWithJSONObject:innerArray options:0 error:&errorObj];
+    id results = [NSJSONSerialization JSONObjectWithData:innerData options:0 error:&errorObj];
+    return results;
+}
+
 +(void) generateSessions {
     NSData* sessionJSON = [TXLFSession fetchSessions];
-    NSError *errorObj = [[NSError alloc] initWithCoder:nil];
+    NSError* errorObj = [[NSError alloc] initWithCoder:nil];
     NSDictionary* sessionDictionary = [NSJSONSerialization JSONObjectWithData:sessionJSON options:0 error:&errorObj];
-    //NSLog(@"This is the error: %@", errorObj); //Probably need some error handling/sanitation or something
-    NSLog(@"Session JSON converted to dictionary data");
-    
-    NSArray* sessionKeys = [sessionDictionary allKeys];
-    NSArray* sessionValues = [sessionDictionary allValues];
-    NSLog(@"Here are the keys: %@", sessionKeys);
-    NSLog(@"Here are the values: %@", sessionValues);
-                              
-    
-    
+    //Probably need some error handling or something
+    NSDictionary* sessions = [TXLFSession stripJSONObject:sessionDictionary :@"nodes"];
+    for(id singleSession in sessions) {
+        NSDictionary* session = [TXLFSession stripJSONObject:singleSession :@"node"];
+        NSString* title = [session objectForKey:@"title"];
+        NSString* time = [session objectForKey:@"field_session_slot"];
+        NSLog(@"Session Time: %@ Title: %@", time, title);
+        //From here we generate the sessions ...
+    }
 }
 
 -(void)setsessionName:(NSString *)name {
