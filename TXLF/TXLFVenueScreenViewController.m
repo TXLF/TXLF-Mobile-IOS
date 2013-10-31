@@ -27,7 +27,6 @@
     CLLocationCoordinate2D location = CLLocationCoordinate2DMake(30.281998, -97.740386);
     MKCoordinateRegion region = MKCoordinateRegionMake(location, MKCoordinateSpanMake(0.01, 0.01));
     [map setRegion:region animated:YES];
-    [TXLFSession generateSessions];
 	// Do any additional setup after loading the view.
 }
 

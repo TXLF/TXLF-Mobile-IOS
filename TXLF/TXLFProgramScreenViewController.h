@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TXLFProgramScreenViewController : UITableViewController
+@interface TXLFProgramScreenViewController : UITableViewController {
+    NSMutableArray* sessionArray;
+}
 
 @end

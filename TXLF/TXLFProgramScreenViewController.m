@@ -7,6 +7,7 @@
 //
 
 #import "TXLFProgramScreenViewController.h"
+#import "TXLFSession.h"
 
 @interface TXLFProgramScreenViewController ()
 
@@ -32,6 +33,7 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+        sessionArray = [TXLFSession generateSessions];
 }
 
 - (void)didReceiveMemoryWarning
@@ -60,7 +62,7 @@
 {
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
+    //[[cell textLabel] setText:[[sessionArray objectAtIndex:0] sessionName]];
     // Configure the cell...
     
     return cell;

@@ -31,8 +31,8 @@
     return sessionJSON;
 }
 
-//This may return an NSArray
-+(NSDictionary *) stripJSONObject:(NSDictionary *) dict :(NSString *) objectName {
+//This may return an NSArray or NSDictionary, the typing probably needs refining
++(id) stripJSONObject:(NSDictionary *) dict :(NSString *) objectName {
     NSError *errorObj = [[NSError alloc] initWithCoder:nil];
     NSArray* innerArray = [dict objectForKey:objectName];
     NSData*  innerData  = [NSJSONSerialization dataWithJSONObject:innerArray options:0 error:&errorObj];
@@ -40,19 +40,22 @@
     return results;
 }
 
-+(void) generateSessions {
++(NSMutableArray *) generateSessions {
     NSData* sessionJSON = [TXLFSession fetchSessions];
     NSError* errorObj = [[NSError alloc] initWithCoder:nil];
     NSDictionary* sessionDictionary = [NSJSONSerialization JSONObjectWithData:sessionJSON options:0 error:&errorObj];
     //Probably need some error handling or something
-    NSDictionary* sessions = [TXLFSession stripJSONObject:sessionDictionary :@"nodes"];
+    //The typing for sessions propably needs to be refined
+    NSArray* sessions = [TXLFSession stripJSONObject:sessionDictionary :@"nodes"];
+    NSMutableArray* sessionArray = [[NSMutableArray alloc] init];
     for(id singleSession in sessions) {
-        NSDictionary* session = [TXLFSession stripJSONObject:singleSession :@"node"];
-        NSString* title = [session objectForKey:@"title"];
-        NSString* time = [session objectForKey:@"field_session_slot"];
-        NSLog(@"Session Time: %@ Title: %@", time, title);
-        //From here we generate the sessions ...
+        NSDictionary* sessionDict = [TXLFSession stripJSONObject:singleSession :@"node"];
+        NSString* title1 = [sessionDict objectForKey:@"title"];
+        TXLFSession* session = [[self alloc] initWithTitleTime:title1 :[NSDate date]]; //Current date as placeholder
+        [sessionArray addObject:session];
+        NSLog(@"Session: %@", [session sessionName]);
     }
+    return sessionArray;
 }
 
 -(void)setsessionName:(NSString *)name {
