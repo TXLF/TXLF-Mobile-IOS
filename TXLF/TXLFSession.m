@@ -24,7 +24,8 @@
     NSData *sessionJSON = [sessionJSONString dataUsingEncoding:NSUTF8StringEncoding];
     if(sessionJSON) {
         [sessionJSON writeToFile:localCachePath atomically:YES];
-        NSLog(@"Session JSON cached to %@", localCachePath);
+        NSLog(@"Boo!");
+        
     } else {
         sessionJSON = [NSData dataWithContentsOfFile:localCachePath];
     }
