@@ -8,6 +8,7 @@
 
 #import "TXLFProgramScreenViewController.h"
 #import "TXLFSession.h"
+#import "TXLFSessionStore.h"
 
 @interface TXLFProgramScreenViewController ()
 
@@ -15,11 +16,21 @@
 
 @implementation TXLFProgramScreenViewController
 
+-(id) init {
+    self = [super initWithStyle:UITableViewStyleGrouped];
+    if(self) {
+        [TXLFSessionStore sharedStore];
+        NSLog(@"Here");
+    }
+
+    return self;
+}
+
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
-        // Custom initialization
     }
     return self;
 }
@@ -33,7 +44,8 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-        sessionArray = [TXLFSession generateSessions];
+            NSLog(@"Here");
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -48,23 +60,24 @@
 {
 #warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return [[[TXLFSessionStore sharedStore] allSessions] count];
+    NSLog(@"Row count: %d", [[[TXLFSessionStore sharedStore] allSessions] count]);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    //[[cell textLabel] setText:[[sessionArray objectAtIndex:0] sessionName]];
-    // Configure the cell...
-    
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+    TXLFSession* session = [[[TXLFSessionStore sharedStore] allSessions] objectAtIndex:[indexPath row]];
+    [[cell textLabel] setText:[session sessionName]];
+    [[cell detailTextLabel] setText:[[session sessionDateTime] description]];
+    NSLog(@"Session: %@", [session sessionName]);
     return cell;
 }
 

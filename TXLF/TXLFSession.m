@@ -16,7 +16,8 @@
     //These need to be specified in a resource file or something
     NSString *localCachePath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)
                                  objectAtIndex:0] stringByAppendingPathComponent:@"session-schedule_mobile.json"];
-    NSURL *url = [NSURL URLWithString:@"http://2013.texaslinuxfest.org/session-schedule_mobile"];
+    //NSURL *url = [NSURL URLWithString:@"http://2013.texaslinuxfest.org/session-schedule_mobile"];
+    NSURL *url = [NSURL URLWithString:@"http://inni.odlenixon.com/session-schedule_mobile"];
     NSString* tempString = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
     //There is an extra "sessions(...)" around the JSON for some reason, probably needs sanitation too
     NSRange subRange = {9, [tempString length] - 10};
@@ -24,7 +25,7 @@
     NSData *sessionJSON = [sessionJSONString dataUsingEncoding:NSUTF8StringEncoding];
     if(sessionJSON) {
         [sessionJSON writeToFile:localCachePath atomically:YES];
-        NSLog(@"Boo!");
+        NSLog(@"Session information cached locally.");
         
     } else {
         sessionJSON = [NSData dataWithContentsOfFile:localCachePath];
@@ -41,7 +42,7 @@
     return results;
 }
 
-+(NSMutableArray *) generateSessions {
++(NSArray *) generateSessions {
     NSData* sessionJSON = [TXLFSession fetchSessions];
     NSError* errorObj = [[NSError alloc] initWithCoder:nil];
     NSDictionary* sessionDictionary = [NSJSONSerialization JSONObjectWithData:sessionJSON options:0 error:&errorObj];
@@ -54,7 +55,6 @@
         NSString* title1 = [sessionDict objectForKey:@"title"];
         TXLFSession* session = [[self alloc] initWithTitleTime:title1 :[NSDate date]]; //Current date as placeholder
         [sessionArray addObject:session];
-        NSLog(@"Session: %@", [session sessionName]);
     }
     return sessionArray;
 }

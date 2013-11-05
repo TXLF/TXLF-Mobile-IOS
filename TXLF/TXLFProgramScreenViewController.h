@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface TXLFProgramScreenViewController : UITableViewController {
-    NSMutableArray* sessionArray;
+    IBOutlet UITableView *tableView;
 }
 
 @end

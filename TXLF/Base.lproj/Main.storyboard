@@ -26,7 +26,7 @@
         <scene sceneID="lIg-nb-KmI">
             <objects>
                 <tabBarController definesPresentationContext="YES" id="QQX-5s-Gj0" sceneMemberID="viewController">
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="v9R-yR-Ldn">
                         <rect key="frame" x="129" y="330" width="163" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -61,11 +61,14 @@
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="a5T-rl-t76" id="jdb-YB-Cdh"/>
-                            <outlet property="delegate" destination="a5T-rl-t76" id="z6h-F7-oIA"/>
+                            <outlet property="dataSource" destination="a5T-rl-t76" id="Zu1-Mm-MHW"/>
+                            <outlet property="delegate" destination="a5T-rl-t76" id="uBc-Qh-RFZ"/>
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Program" id="m6V-6V-HzM"/>
+                    <connections>
+                        <outlet property="tableView" destination="RpC-Ik-ugY" id="pnL-4U-aZv"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eLc-qX-pTx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
