@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="QQX-5s-Gj0">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
         <!--Venue Screen View Controller - Venue-->
@@ -22,6 +22,56 @@
             </objects>
             <point key="canvasLocation" x="834" y="287"/>
         </scene>
+        <!--Program Screen View Controller - Program-->
+        <scene sceneID="EZD-YE-SJb">
+            <objects>
+                <tableViewController id="CRi-AS-cbY" customClass="TXLFProgramScreenViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="49" sectionHeaderHeight="22" sectionFooterHeight="22" id="BnW-Hx-8iK">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="sessionCell" textLabel="KxD-U0-RFZ" detailTextLabel="xfb-K0-Kl9" rowHeight="49" style="IBUITableViewCellStyleSubtitle" id="SF4-V8-5Eb" customClass="TXLFSessionCell">
+                                <rect key="frame" x="0.0" y="22" width="320" height="49"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" tableViewCell="SF4-V8-5Eb" id="oor-Wn-Pxi">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="48"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KxD-U0-RFZ">
+                                            <rect key="frame" x="15" y="6" width="34" height="22"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xfb-K0-Kl9">
+                                            <rect key="frame" x="15" y="28" width="43" height="15"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="sessionName" destination="KxD-U0-RFZ" id="LHh-D9-dtd"/>
+                                    <outlet property="sessionPresenter" destination="xfb-K0-Kl9" id="2ac-TJ-9xp"/>
+                                    <outlet property="sessionView" destination="oor-Wn-Pxi" id="cVo-YZ-513"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="CRi-AS-cbY" id="TK8-u5-PyK"/>
+                            <outlet property="delegate" destination="CRi-AS-cbY" id="BHg-vk-8bH"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="Program" id="pV7-EW-kJA"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7At-te-zLC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="836" y="936"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="lIg-nb-KmI">
             <objects>
@@ -34,45 +84,13 @@
                     </tabBar>
                     <connections>
                         <segue destination="7Ux-HG-uql" kind="relationship" relationship="viewControllers" id="ehA-p4-HCG"/>
-                        <segue destination="a5T-rl-t76" kind="relationship" relationship="viewControllers" id="XnI-oe-8Fx"/>
+                        <segue destination="CRi-AS-cbY" kind="relationship" relationship="viewControllers" id="usp-yX-gLi"/>
                         <segue destination="d1P-MI-xGf" kind="relationship" relationship="viewControllers" id="HpX-6e-vS2"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ccx-Po-quf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="324" y="534"/>
-        </scene>
-        <!--Program Screen View Controller - Program-->
-        <scene sceneID="AYt-Au-197">
-            <objects>
-                <tableViewController id="a5T-rl-t76" customClass="TXLFProgramScreenViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="RpC-Ik-ugY">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="wVJ-bi-jRq">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wVJ-bi-jRq" id="S1Q-YH-FDW">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="a5T-rl-t76" id="Zu1-Mm-MHW"/>
-                            <outlet property="delegate" destination="a5T-rl-t76" id="uBc-Qh-RFZ"/>
-                        </connections>
-                    </tableView>
-                    <tabBarItem key="tabBarItem" title="Program" id="m6V-6V-HzM"/>
-                    <connections>
-                        <outlet property="tableView" destination="RpC-Ik-ugY" id="pnL-4U-aZv"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="eLc-qX-pTx" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="834" y="941"/>
         </scene>
         <!--View Controller - Scan ID-->
         <scene sceneID="f0g-YI-xUt">

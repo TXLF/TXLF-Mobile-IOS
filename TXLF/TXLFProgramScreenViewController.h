@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface TXLFProgramScreenViewController : UITableViewController {
-    IBOutlet UITableView *tableView;
 }
 
 @end

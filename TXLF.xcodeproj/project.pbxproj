@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5E0587CC18288DA80080B553 /* TXLFSessionStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E0587CB18288DA80080B553 /* TXLFSessionStore.m */; };
+		5E341A991831CEB6001B23EC /* TXLFSessionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E341A981831CEB6001B23EC /* TXLFSessionCell.m */; };
 		5ECC26F0181C7673004C9F44 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ECC26EF181C7673004C9F44 /* Foundation.framework */; };
 		5ECC26F2181C7673004C9F44 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ECC26F1181C7673004C9F44 /* CoreGraphics.framework */; };
 		5ECC26F4181C7673004C9F44 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ECC26F3181C7673004C9F44 /* UIKit.framework */; };
@@ -41,6 +42,8 @@
 /* Begin PBXFileReference section */
 		5E0587CA18288DA80080B553 /* TXLFSessionStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXLFSessionStore.h; sourceTree = "<group>"; };
 		5E0587CB18288DA80080B553 /* TXLFSessionStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXLFSessionStore.m; sourceTree = "<group>"; };
+		5E341A971831CEB6001B23EC /* TXLFSessionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXLFSessionCell.h; sourceTree = "<group>"; };
+		5E341A981831CEB6001B23EC /* TXLFSessionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXLFSessionCell.m; sourceTree = "<group>"; };
 		5ECC26EC181C7673004C9F44 /* TXLF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TXLF.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5ECC26EF181C7673004C9F44 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5ECC26F1181C7673004C9F44 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -94,6 +97,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5E341A961831CCE3001B23EC /* Program */ = {
+			isa = PBXGroup;
+			children = (
+				5E341A971831CEB6001B23EC /* TXLFSessionCell.h */,
+				5E341A981831CEB6001B23EC /* TXLFSessionCell.m */,
+				5ECC272F181CABFC004C9F44 /* TXLFProgramScreenViewController.h */,
+				5ECC2730181CABFC004C9F44 /* TXLFProgramScreenViewController.m */,
+			);
+			name = Program;
+			sourceTree = "<group>";
+		};
 		5ECC26E3181C7673004C9F44 = {
 			isa = PBXGroup;
 			children = (
@@ -173,8 +187,7 @@
 			children = (
 				5ECC272C181C82FF004C9F44 /* TXLFVenueScreenViewController.h */,
 				5ECC272D181C82FF004C9F44 /* TXLFVenueScreenViewController.m */,
-				5ECC272F181CABFC004C9F44 /* TXLFProgramScreenViewController.h */,
-				5ECC2730181CABFC004C9F44 /* TXLFProgramScreenViewController.m */,
+				5E341A961831CCE3001B23EC /* Program */,
 			);
 			name = Views/Screens;
 			sourceTree = "<group>";
@@ -299,6 +312,7 @@
 			files = (
 				5ECC2700181C7674004C9F44 /* TXLFAppDelegate.m in Sources */,
 				5E0587CC18288DA80080B553 /* TXLFSessionStore.m in Sources */,
+				5E341A991831CEB6001B23EC /* TXLFSessionCell.m in Sources */,
 				5ECC2734181CAE3B004C9F44 /* TXLFModel.m in Sources */,
 				5ECC272E181C82FF004C9F44 /* TXLFVenueScreenViewController.m in Sources */,
 				5ECC26FC181C7673004C9F44 /* main.m in Sources */,

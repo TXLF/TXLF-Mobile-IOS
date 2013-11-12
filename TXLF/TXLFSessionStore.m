@@ -27,7 +27,8 @@
 -(id)init {
     self = [super init];
     if(self)
-        allSessions = [[NSMutableArray alloc] init];
+        allSessions = [TXLFSession generateSessions];
+        //allSessions = [[NSMutableArray alloc] init];
     return self;
 }
 
