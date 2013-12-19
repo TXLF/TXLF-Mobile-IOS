@@ -11,12 +11,13 @@
 
 @implementation TXLFVenueScreenViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithCoder:(NSCoder *)decoder
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-
-        // Custom initialization
+    self = [super initWithCoder:decoder];
+    if(self) {
+        locationManager = [[CLLocationManager alloc] init];
+        [locationManager setDelegate:self];
+        venueLocation = CLLocationCoordinate2DMake(30.26384,-97.73958);
     }
     return self;
 }
@@ -24,10 +25,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    CLLocationCoordinate2D location = CLLocationCoordinate2DMake(30.281998, -97.740386);
-    MKCoordinateRegion region = MKCoordinateRegionMake(location, MKCoordinateSpanMake(0.01, 0.01));
+    MKCoordinateRegion region = MKCoordinateRegionMake(venueLocation, MKCoordinateSpanMake(0.01, 0.01));
     [map setRegion:region animated:YES];
-	// Do any additional setup after loading the view.
+
 }
 
 - (void)didReceiveMemoryWarning

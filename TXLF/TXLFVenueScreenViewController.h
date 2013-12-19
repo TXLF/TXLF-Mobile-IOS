@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 
-@interface TXLFVenueScreenViewController : UIViewController {
+@interface TXLFVenueScreenViewController : UIViewController <CLLocationManagerDelegate> {
     IBOutlet MKMapView *map;
+    CLLocationManager *locationManager;
+    CLLocationCoordinate2D venueLocation;
 }
 
 @end
