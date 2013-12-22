@@ -148,6 +148,7 @@ Entrances on Brazos and San Jacinto</string>
                         <segue destination="1QJ-Ru-K0r" kind="relationship" relationship="viewControllers" id="v7L-99-Vva"/>
                         <segue destination="Smt-TS-V3r" kind="relationship" relationship="viewControllers" id="Ufi-ft-f4p"/>
                         <segue destination="d1P-MI-xGf" kind="relationship" relationship="viewControllers" id="HpX-6e-vS2"/>
+                        <segue destination="whh-fv-aXQ" kind="relationship" relationship="viewControllers" id="k3H-LZ-a0b"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ccx-Po-quf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -183,8 +184,46 @@ Entrances on Brazos and San Jacinto</string>
             </objects>
             <point key="canvasLocation" x="763" y="1103"/>
         </scene>
+        <!--Register View Controller - Check-In-->
+        <scene sceneID="Cme-KV-Iti">
+            <objects>
+                <viewController id="whh-fv-aXQ" customClass="TXLFRegisterViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="aNz-eG-waj"/>
+                        <viewControllerLayoutGuide type="bottom" id="gQB-Rx-Tny"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="arv-Yr-ZPS">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lfh-LG-L58" customClass="TXLFTopBanner">
+                                <rect key="frame" x="0.0" y="20" width="320" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.1724224973" green="0.32631147710000002" blue="0.89370329479999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HTs-1T-GNz">
+                                <rect key="frame" x="0.0" y="51" width="320" height="379"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Check-In" image="icon_check-in.png" id="ggZ-Ee-fmD"/>
+                    <connections>
+                        <outlet property="regPage" destination="HTs-1T-GNz" id="rI3-1b-ReP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3PE-mU-Fb7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="763" y="1673"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="icon_check-in.png" width="32" height="32"/>
         <image name="icon_scan.png" width="32" height="32"/>
         <image name="icon_session.png" width="32" height="32"/>
         <image name="icon_venue.png" width="32" height="32"/>

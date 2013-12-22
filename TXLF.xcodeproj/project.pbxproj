@@ -12,6 +12,8 @@
 		5E7647171862AB360030AFB6 /* TXLFTopBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E7647161862AB360030AFB6 /* TXLFTopBanner.m */; };
 		5E7647191862BC620030AFB6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E7647181862BC620030AFB6 /* AVFoundation.framework */; };
 		5E76471C186656000030AFB6 /* TXLFTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E76471B186656000030AFB6 /* TXLFTabBarController.m */; };
+		5E91EC3F18676A5700EB6431 /* TXLFRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E91EC3E18676A5700EB6431 /* TXLFRegisterViewController.m */; };
+		5E91EC4418676E0B00EB6431 /* icon_check-in.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E91EC4318676E0B00EB6431 /* icon_check-in.png */; };
 		5EA82C4D186683B800B318FF /* TXLFSessionDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EA82C4B186683B800B318FF /* TXLFSessionDetailViewController.m */; };
 		5EA82C4E186683B800B318FF /* TXLFSessionDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EA82C4C186683B800B318FF /* TXLFSessionDetailViewController.xib */; };
 		5EA82C5018668BC800B318FF /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EA82C4F18668BC800B318FF /* iAd.framework */; };
@@ -58,6 +60,9 @@
 		5E7647181862BC620030AFB6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		5E76471A186656000030AFB6 /* TXLFTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXLFTabBarController.h; sourceTree = "<group>"; };
 		5E76471B186656000030AFB6 /* TXLFTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXLFTabBarController.m; sourceTree = "<group>"; };
+		5E91EC3D18676A5700EB6431 /* TXLFRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXLFRegisterViewController.h; sourceTree = "<group>"; };
+		5E91EC3E18676A5700EB6431 /* TXLFRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXLFRegisterViewController.m; sourceTree = "<group>"; };
+		5E91EC4318676E0B00EB6431 /* icon_check-in.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_check-in.png"; path = "Logo/icon_check-in.png"; sourceTree = "<group>"; };
 		5EA82C4A186683B800B318FF /* TXLFSessionDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXLFSessionDetailViewController.h; sourceTree = "<group>"; };
 		5EA82C4B186683B800B318FF /* TXLFSessionDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXLFSessionDetailViewController.m; sourceTree = "<group>"; };
 		5EA82C4C186683B800B318FF /* TXLFSessionDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TXLFSessionDetailViewController.xib; sourceTree = "<group>"; };
@@ -142,9 +147,20 @@
 			name = Program;
 			sourceTree = "<group>";
 		};
+		5E91EC4018676A6200EB6431 /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				5E91EC3D18676A5700EB6431 /* TXLFRegisterViewController.h */,
+				5E91EC3E18676A5700EB6431 /* TXLFRegisterViewController.m */,
+			);
+			name = Register;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		5EA82C5D1866A13A00B318FF /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				5E91EC4318676E0B00EB6431 /* icon_check-in.png */,
 				5EA82C5E1866CCF500B318FF /* icon_tux.png */,
 				5EA82C5B1866A01A00B318FF /* icon_session.png */,
 				5EA82C5918669EB300B318FF /* icon_scan.png */,
@@ -190,6 +206,7 @@
 		5ECC26F5181C7673004C9F44 /* TXLF */ = {
 			isa = PBXGroup;
 			children = (
+				5EA82C5D1866A13A00B318FF /* Icons */,
 				5ECC270A181C7674004C9F44 /* Main.storyboard */,
 				5ECC26FE181C7674004C9F44 /* TXLFAppDelegate.h */,
 				5ECC26FF181C7674004C9F44 /* TXLFAppDelegate.m */,
@@ -234,10 +251,10 @@
 			isa = PBXGroup;
 			children = (
 				5E7647151862AB360030AFB6 /* TXLFTopBanner.h */,
-				5EA82C5D1866A13A00B318FF /* Icons */,
 				5E7647161862AB360030AFB6 /* TXLFTopBanner.m */,
 				5E76471A186656000030AFB6 /* TXLFTabBarController.h */,
 				5E76471B186656000030AFB6 /* TXLFTabBarController.m */,
+				5E91EC4018676A6200EB6431 /* Register */,
 				5E00C17E1862A6900030E510 /* Venue */,
 				5E341A961831CCE3001B23EC /* Program */,
 			);
@@ -347,6 +364,7 @@
 				5ECC270C181C7674004C9F44 /* Main.storyboard in Resources */,
 				5EA82C5C1866A01A00B318FF /* icon_session.png in Resources */,
 				5EA82C4E186683B800B318FF /* TXLFSessionDetailViewController.xib in Resources */,
+				5E91EC4418676E0B00EB6431 /* icon_check-in.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,6 +384,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5ECC2700181C7674004C9F44 /* TXLFAppDelegate.m in Sources */,
+				5E91EC3F18676A5700EB6431 /* TXLFRegisterViewController.m in Sources */,
 				5E0587CC18288DA80080B553 /* TXLFSessionStore.m in Sources */,
 				5E7647171862AB360030AFB6 /* TXLFTopBanner.m in Sources */,
 				5E76471C186656000030AFB6 /* TXLFTabBarController.m in Sources */,
