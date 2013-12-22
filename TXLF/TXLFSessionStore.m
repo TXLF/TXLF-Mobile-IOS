@@ -9,7 +9,6 @@
 #import "TXLFSessionStore.h"
 #import "TXLFSession.h"
 
-//Most of the methods in TXLFSession need to be moved here.
 
 @implementation TXLFSessionStore
 
@@ -20,15 +19,14 @@
     return sharedStore;
 }
 
-+(id)allowWithZone:(NSZone*) zone {
++(id)allocWithZone:(NSZone*) zone {
     return [self sharedStore];
 }
 
 -(id)init {
     self = [super init];
     if(self)
-        allSessions = [TXLFSession generateSessions];
-        //allSessions = [[NSMutableArray alloc] init];
+        allSessions = [TXLFSessionStore generateSessions];
     return self;
 }
 
@@ -36,8 +34,71 @@
     return allSessions;
 }
 
--(void) addSessions {
-    allSessions = [TXLFSession generateSessions];
++(NSData *) fetchSessions {
+    //These need to be specified in a resource file or something
+    NSString *localCachePath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)
+                                 objectAtIndex:0] stringByAppendingPathComponent:@"session-schedule_mobile.json"];
+    //NSURL *url = [NSURL URLWithString:@"http://2013.texaslinuxfest.org/session-schedule_mobile"];
+    NSURL *url = [NSURL URLWithString:@"http://inni.odlenixon.com/session-schedule_mobile"];
+    NSString* tempString = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
+    //There is an extra "sessions(...)" around the JSON for some reason, probably needs sanitation too
+    NSRange subRange = {9, [tempString length] - 10};
+    NSString* sessionJSONString = [tempString substringWithRange:subRange];
+    NSData *sessionJSON = [sessionJSONString dataUsingEncoding:NSUTF8StringEncoding];
+    if(sessionJSON) {
+        [sessionJSON writeToFile:localCachePath atomically:YES];
+        NSLog(@"Session information cached locally.");
+        
+    } else {
+        sessionJSON = [NSData dataWithContentsOfFile:localCachePath];
+    }
+    return sessionJSON;
+}
+
+//This may return an NSArray or NSDictionary, the typing probably needs refining
++(id) stripJSONObject:(NSDictionary *) dict :(NSString *) objectName {
+    NSError *errorObj = [[NSError alloc] initWithCoder:nil];
+    NSArray* innerArray = [dict objectForKey:objectName];
+    NSData*  innerData  = [NSJSONSerialization dataWithJSONObject:innerArray options:0 error:&errorObj];
+    id results = [NSJSONSerialization JSONObjectWithData:innerData options:0 error:&errorObj];
+    return results;
+}
+
++(NSArray *) generateSessions {
+    NSData* sessionJSON = [TXLFSessionStore fetchSessions];
+    NSError* errorObj = [[NSError alloc] initWithCoder:nil];
+    NSDictionary* sessionDictionary = [NSJSONSerialization JSONObjectWithData:sessionJSON options:0 error:&errorObj];
+    //Probably need some error handling or something
+    //The typing for sessions propably needs to be refined
+    NSArray* sessions = [TXLFSessionStore stripJSONObject:sessionDictionary :@"nodes"];
+    NSMutableArray* sessionArray = [[NSMutableArray alloc] init];
+    for(id singleSession in sessions) {
+        NSDictionary* sessionDict = [TXLFSessionStore stripJSONObject:singleSession :@"node"];
+        NSString* stitle = [sessionDict objectForKey:@"title"];
+        NSString* sslot = [sessionDict objectForKey:@"field_session_slot"];
+        NSString* snid = [sessionDict objectForKey:@"nid"];
+        NSString* sroom = [sessionDict objectForKey:@"field_session_room"];
+        NSString* spath = [sessionDict objectForKey:@"path"];
+        NSString* sbody = [sessionDict objectForKey:@"body"];
+        NSString* sexperience = [sessionDict objectForKey:@"field_experience"];
+        NSString* surl = [sessionDict objectForKey:@"uri"];
+        NSString* sbio = [sessionDict objectForKey:@"field_profile_bio"];
+        NSString* spic = [sessionDict objectForKey:@"picture"];
+        NSString* scompany = [sessionDict objectForKey:@"field_profile_company"];
+        NSString* swebsite = [sessionDict objectForKey:@"field_profile_website"];
+        NSString* sfname = [sessionDict objectForKey:@"field_profile_first_name"];
+        NSString* slname = [sessionDict objectForKey:@"field_profile_last_name"];
+        NSString* suid_1 = [sessionDict objectForKey:@"uid_1"];
+        TXLFSession* session = [[TXLFSession alloc] initWithTitleTime:stitle :[NSDate date]]; //Current date as placeholder
+        [session setsessionPresenter:sfname :slname :scompany :stitle :@"N/A" :@"N/A" :sbio
+                                            :[UIImage imageWithContentsOfFile:@"/net/inni.odlenixon.com/mnt/NI/home/george/src/TXLF/TXLF/icon_tux.png"]
+                                            :[NSURL URLWithString:swebsite] :@"N/A"];
+        [session setsessionLocation:nil :@"Austin Convention Center" :@"N/A" :sroom :@"N/A" :[[NSNumber alloc] init] :[[NSNumber alloc] init] :@"N/A"];
+        [session setsessionAbstract:sbody];
+        [session setsessionExperience:sexperience];
+        [sessionArray addObject:session];
+    }
+    return sessionArray;
 }
 
 @end

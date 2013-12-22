@@ -17,35 +17,27 @@
 
 @implementation TXLFProgramScreenViewController
 
--(id) init {
-    self = [super initWithStyle:UITableViewStyleGrouped];
-    if(self) {
-       
-        NSLog(@"Here");
-    }
-
-    return self;
-}
-
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    //self = [super initWithStyle:style];
-    //if (self) {
-    //}
-    return [self init];
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    //id topGuide = self.topLayoutGuide;
+    //id myView = self.view;
+    //NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings (myView, topGuide);
+    //[myView addConstraints:
+     // [NSLayoutConstraint constraintsWithVisualFormat: @"V:[topGuide]-21-[myView]"
+       //                                      options: 0
+         //                                    metrics: nil
+           //                                    views: viewsDictionary]];
+    //[myView layoutSubviews];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     //self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    NSLog(@"In viewDidLoad");
      [TXLFSessionStore sharedStore];
+    NSLog(@"Exiting viewDidLoad");
     //TXLFSession* session = [[[TXLFSessionStore sharedStore] allSessions] objectAtIndex:0];
     //NSLog(@"Session: %@", [session sessionName]);
     
@@ -69,7 +61,6 @@
 {
     // Return the number of rows in the section.
     return [[[TXLFSessionStore sharedStore] allSessions] count];
-    NSLog(@"Row count: %d", [[[TXLFSessionStore sharedStore] allSessions] count]);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -82,59 +73,15 @@
     TXLFSession* session = [[[TXLFSessionStore sharedStore] allSessions] objectAtIndex:[indexPath row]];
     cell.textLabel.text = [session sessionName];
     [[cell sessionPresenter] setText:[[session sessionDateTime] description]];
-    NSLog(@"Session: %@", [session sessionName]);
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+    TXLFSessionDetailViewController *detailView = [[TXLFSessionDetailViewController alloc] init];
+    TXLFSession* session = [[[TXLFSessionStore sharedStore] allSessions] objectAtIndex:[indexPath row]];
+    [detailView setSession:session];
+    [[self navigationController] pushViewController:detailView animated:YES];
 }
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a story board-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-
- */
 
 @end

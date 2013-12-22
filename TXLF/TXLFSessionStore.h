@@ -17,6 +17,9 @@
 +(TXLFSessionStore *) sharedStore;
 
 -(NSArray *) allSessions;
--(void) addSessions;
+
++(NSData *) fetchSessions;
++(NSMutableArray *) generateSessions;
++(id) stripJSONObject:(NSDictionary *) dict :(NSString *) objectName;
 
 @end

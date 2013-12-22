@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TXLFSessionDetailViewController.h"
 
 @interface TXLFProgramScreenViewController : UITableViewController {
 }

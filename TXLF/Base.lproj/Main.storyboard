@@ -4,22 +4,18 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
-        <!--Venue Screen View Controller - Venue-->
+        <!--Venue-->
         <scene sceneID="Wqq-TW-Eg6">
             <objects>
-                <viewController id="1QJ-Ru-K0r" customClass="TXLFVenueScreenViewController" sceneMemberID="viewController">
+                <viewController id="1QJ-Ru-K0r" userLabel="Venue" customClass="TXLFVenueScreenViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="BxW-IG-ht9"/>
-                        <viewControllerLayoutGuide type="bottom" id="cSV-Cr-4yR"/>
+                        <viewControllerLayoutGuide type="top" id="wFZ-UZ-pWy"/>
+                        <viewControllerLayoutGuide type="bottom" id="zLx-4J-jcN"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ghS-to-pR1">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="WDf-Ez-HL5">
-                                <rect key="frame" x="0.0" y="115" width="320" height="216"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </mapView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3YA-5C-8Zn" customClass="TXLFTopBanner">
                                 <rect key="frame" x="0.0" y="20" width="320" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -28,6 +24,10 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="WDf-Ez-HL5">
+                                <rect key="frame" x="0.0" y="115" width="320" height="216"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </mapView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="320" translatesAutoresizingMaskIntoConstraints="NO" id="G61-0R-qPM">
                                 <rect key="frame" x="0.0" y="52" width="320" height="62"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -56,40 +56,41 @@ Entrances on Brazos and San Jacinto</string>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Venue" id="M3R-dY-OGA"/>
+                    <tabBarItem key="tabBarItem" title="Venue" image="icon_venue.png" id="M3R-dY-OGA"/>
                     <connections>
                         <outlet property="map" destination="WDf-Ez-HL5" id="UGe-jo-Pke"/>
+                        <outlet property="view" destination="ghS-to-pR1" id="Ze3-2j-gSa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RP3-Y9-cT7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="824" y="-326"/>
+            <point key="canvasLocation" x="763" y="-50"/>
         </scene>
-        <!--Program Screen View Controller - Program-->
-        <scene sceneID="EZD-YE-SJb">
+        <!--Sessions-->
+        <scene sceneID="Rly-JX-6VK">
             <objects>
-                <tableViewController id="CRi-AS-cbY" customClass="TXLFProgramScreenViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="49" sectionHeaderHeight="22" sectionFooterHeight="22" id="BnW-Hx-8iK">
+                <tableViewController id="VyA-6a-Gqi" userLabel="Sessions" customClass="TXLFProgramScreenViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="EBU-Pv-0Hj" userLabel="Session Table">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="sessionCell" textLabel="KxD-U0-RFZ" detailTextLabel="xfb-K0-Kl9" rowHeight="49" style="IBUITableViewCellStyleSubtitle" id="SF4-V8-5Eb" customClass="TXLFSessionCell">
-                                <rect key="frame" x="0.0" y="22" width="320" height="49"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="KmL-hf-Xo5" detailTextLabel="9q7-gh-jFE" style="IBUITableViewCellStyleSubtitle" id="id7-ud-qTW" userLabel="Session Cell" customClass="TXLFSessionCell">
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" tableViewCell="SF4-V8-5Eb" id="oor-Wn-Pxi">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="48"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="id7-ud-qTW" id="G5q-3p-62X">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KxD-U0-RFZ">
-                                            <rect key="frame" x="15" y="6" width="34" height="22"/>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KmL-hf-Xo5" userLabel="Session">
+                                            <rect key="frame" x="15" y="3" width="34" height="22"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xfb-K0-Kl9">
-                                            <rect key="frame" x="15" y="28" width="43" height="15"/>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9q7-gh-jFE" userLabel="Presenter">
+                                            <rect key="frame" x="15" y="25" width="43" height="15"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -98,36 +99,54 @@ Entrances on Brazos and San Jacinto</string>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="sessionName" destination="KxD-U0-RFZ" id="LHh-D9-dtd"/>
-                                    <outlet property="sessionPresenter" destination="xfb-K0-Kl9" id="2ac-TJ-9xp"/>
-                                    <outlet property="sessionView" destination="oor-Wn-Pxi" id="cVo-YZ-513"/>
+                                    <outlet property="sessionName" destination="KmL-hf-Xo5" id="WbA-jH-Cbb"/>
+                                    <outlet property="sessionPresenter" destination="9q7-gh-jFE" id="TKT-oC-LsM"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="CRi-AS-cbY" id="TK8-u5-PyK"/>
-                            <outlet property="delegate" destination="CRi-AS-cbY" id="BHg-vk-8bH"/>
+                            <outlet property="dataSource" destination="VyA-6a-Gqi" id="Caq-fp-2go"/>
+                            <outlet property="delegate" destination="VyA-6a-Gqi" id="QzX-VQ-Bd1"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Program" id="pV7-EW-kJA"/>
+                    <navigationItem key="navigationItem" title="Sessions" id="otM-F4-W7t"/>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="7At-te-zLC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mYL-zO-O9Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="824" y="332"/>
+            <point key="canvasLocation" x="1173" y="534"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Session Navigation-->
+        <scene sceneID="ifz-AU-TDH">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="Smt-TS-V3r" userLabel="Session Navigation" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Sessions" image="icon_session.png" id="8HX-J6-zMz"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="rdb-yM-JFi">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="VyA-6a-Gqi" kind="relationship" relationship="rootViewController" id="SeC-oX-YQ2"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JK4-Qd-5Vk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="763" y="534"/>
+        </scene>
+        <!--Tabs-->
         <scene sceneID="lIg-nb-KmI">
             <objects>
-                <tabBarController definesPresentationContext="YES" id="QQX-5s-Gj0" sceneMemberID="viewController">
+                <tabBarController definesPresentationContext="YES" id="QQX-5s-Gj0" userLabel="Tabs" customClass="TXLFTabBarController" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="v9R-yR-Ldn">
                         <rect key="frame" x="129" y="330" width="163" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" red="0.1724224973" green="0.32631147710000002" blue="0.89370329479999999" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="1QJ-Ru-K0r" kind="relationship" relationship="viewControllers" id="v7L-99-Vva"/>
-                        <segue destination="CRi-AS-cbY" kind="relationship" relationship="viewControllers" id="usp-yX-gLi"/>
+                        <segue destination="Smt-TS-V3r" kind="relationship" relationship="viewControllers" id="Ufi-ft-f4p"/>
                         <segue destination="d1P-MI-xGf" kind="relationship" relationship="viewControllers" id="HpX-6e-vS2"/>
                     </connections>
                 </tabBarController>
@@ -135,13 +154,13 @@ Entrances on Brazos and San Jacinto</string>
             </objects>
             <point key="canvasLocation" x="324" y="534"/>
         </scene>
-        <!--View Controller - Scan ID-->
+        <!--Scan ID-->
         <scene sceneID="f0g-YI-xUt">
             <objects>
-                <viewController id="d1P-MI-xGf" sceneMemberID="viewController">
+                <viewController id="d1P-MI-xGf" userLabel="Scan ID" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="zdw-7h-r3F"/>
-                        <viewControllerLayoutGuide type="bottom" id="Vlb-xQ-Ims"/>
+                        <viewControllerLayoutGuide type="top" id="CjS-XG-6Fy"/>
+                        <viewControllerLayoutGuide type="bottom" id="aqH-Nc-cgj"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Mfv-yK-hcq">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
@@ -158,13 +177,18 @@ Entrances on Brazos and San Jacinto</string>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Scan ID" id="Y3Z-Da-rqy"/>
+                    <tabBarItem key="tabBarItem" title="Scan ID" image="icon_scan.png" id="Y3Z-Da-rqy"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hBh-Qv-yeH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="824" y="1003"/>
+            <point key="canvasLocation" x="763" y="1103"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="icon_scan.png" width="32" height="32"/>
+        <image name="icon_session.png" width="32" height="32"/>
+        <image name="icon_venue.png" width="32" height="32"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

@@ -10,57 +10,17 @@
 
 @implementation TXLFSession
 
-// !! These session data-structures need to be updated to be a super-set of ones in the JSON feed
-
-+(NSData *) fetchSessions {
-    //These need to be specified in a resource file or something
-    NSString *localCachePath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)
-                                 objectAtIndex:0] stringByAppendingPathComponent:@"session-schedule_mobile.json"];
-    //NSURL *url = [NSURL URLWithString:@"http://2013.texaslinuxfest.org/session-schedule_mobile"];
-    NSURL *url = [NSURL URLWithString:@"http://inni.odlenixon.com/session-schedule_mobile"];
-    NSString* tempString = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
-    //There is an extra "sessions(...)" around the JSON for some reason, probably needs sanitation too
-    NSRange subRange = {9, [tempString length] - 10};
-    NSString* sessionJSONString = [tempString substringWithRange:subRange];
-    NSData *sessionJSON = [sessionJSONString dataUsingEncoding:NSUTF8StringEncoding];
-    if(sessionJSON) {
-        [sessionJSON writeToFile:localCachePath atomically:YES];
-        NSLog(@"Session information cached locally.");
-        
-    } else {
-        sessionJSON = [NSData dataWithContentsOfFile:localCachePath];
-    }
-    return sessionJSON;
-}
-
-//This may return an NSArray or NSDictionary, the typing probably needs refining
-+(id) stripJSONObject:(NSDictionary *) dict :(NSString *) objectName {
-    NSError *errorObj = [[NSError alloc] initWithCoder:nil];
-    NSArray* innerArray = [dict objectForKey:objectName];
-    NSData*  innerData  = [NSJSONSerialization dataWithJSONObject:innerArray options:0 error:&errorObj];
-    id results = [NSJSONSerialization JSONObjectWithData:innerData options:0 error:&errorObj];
-    return results;
-}
-
-+(NSArray *) generateSessions {
-    NSData* sessionJSON = [TXLFSession fetchSessions];
-    NSError* errorObj = [[NSError alloc] initWithCoder:nil];
-    NSDictionary* sessionDictionary = [NSJSONSerialization JSONObjectWithData:sessionJSON options:0 error:&errorObj];
-    //Probably need some error handling or something
-    //The typing for sessions propably needs to be refined
-    NSArray* sessions = [TXLFSession stripJSONObject:sessionDictionary :@"nodes"];
-    NSMutableArray* sessionArray = [[NSMutableArray alloc] init];
-    for(id singleSession in sessions) {
-        NSDictionary* sessionDict = [TXLFSession stripJSONObject:singleSession :@"node"];
-        NSString* title1 = [sessionDict objectForKey:@"title"];
-        TXLFSession* session = [[self alloc] initWithTitleTime:title1 :[NSDate date]]; //Current date as placeholder
-        [sessionArray addObject:session];
-    }
-    return sessionArray;
-}
-
 -(void)setsessionName:(NSString *)name {
     sessionName=name;
+}
+
+-(void)setsessionAbstract:(NSString *) abstract {
+    sessionAbstract = abstract;
+}
+
+-(void)setsessionExperience:(NSString *) experience{
+    sessionExperience = experience;
+    
 }
 
 -(void)setsessionPresenter:(NSString *) fname
@@ -69,6 +29,9 @@
                           :(NSString *) title
                           :(NSString *) email
                           :(NSString *) phone
+                          :(NSString *) bio
+                          :(UIImage *) pic
+                          :(NSURL *) website
                           :(NSString *) notes {
     [sessionPresenter insertObject:fname   atIndex:0];
     [sessionPresenter insertObject:lname   atIndex:1];
@@ -76,7 +39,10 @@
     [sessionPresenter insertObject:title   atIndex:3];
     [sessionPresenter insertObject:email   atIndex:4];
     [sessionPresenter insertObject:phone   atIndex:5];
-    [sessionPresenter insertObject:notes   atIndex:6];
+    [sessionPresenter insertObject:bio     atIndex:6];
+    [sessionPresenter insertObject:pic     atIndex:7];
+    [sessionPresenter insertObject:website atIndex:8];
+    [sessionPresenter insertObject:notes   atIndex:9];
 }
 
 -(void)setsessionLocation:(NSString *) address
@@ -110,6 +76,10 @@
     return sessionName;
 }
 
+-(NSString *)sessionAbstract {
+    return sessionAbstract;
+}
+
 -(NSMutableArray *)sessionPresenter {
     return sessionPresenter;
 }
@@ -128,12 +98,13 @@
 
 -(id) init {
     self = [super init];
+    sessionPresenter = [[NSMutableArray alloc] init];
     if(self) {
         if(!sessionName) {
             [self setsessionName:@"Test Session"];
         }
         if(!sessionPresenter) {
-            [self setsessionPresenter:@"Jane" :@"Doe" :@"TXLF" :@"Tester" :@"info@texaslinuxfest.org" :@"555.555.5555" :@"N/A"];
+            [self setsessionPresenter:@"Jane" :@"Doe" :@"TXLF" :@"Tester" :@"info@texaslinuxfest.org" :@"555.555.5555" :@"bio" :[NSURL URLWithString:@"http://texaslinuxfest.org"] :nil :@"N/A"];
         }
         if(!sessionLocation) {
             [self setsessionLocation:@"500 East Cesar Chavez, Austin, TX, 78701" :@"Austin Convention Center - Building 1" :@"1" :@"101" :@"Lecture Hall" :[NSNumber numberWithFloat:85.6] :[NSNumber numberWithFloat:85.6] :@"No Notes"];

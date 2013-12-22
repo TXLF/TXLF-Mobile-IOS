@@ -10,24 +10,32 @@
 
 @interface TXLFSession : NSObject {
     NSString *sessionName;
+    NSString *sessionAbstract;
+    NSString *sessionExperience;
+    
     NSMutableArray  *sessionPresenter; //First Name, Last Name, Company, Title, Email Address, Phone Number, Notes
     NSMutableArray  *sessionLocation; //Addresss, Building, Floor, Room #, Room name, Notes
     NSDate   *sessionDateTime;
     NSString *sessionDocumentation; //URL to slides
 }
 
-+(NSData *) fetchSessions;
-+(NSMutableArray *) generateSessions;
-+(id) stripJSONObject:(NSDictionary *) dict :(NSString *) objectName;
-
-
 -(void)setsessionName:(NSString *)name;
+
+-(void)setsessionAbstract:(NSString *) abstract;
+
+-(void)setsessionExperience:(NSString *) experience;
+
 -(void)setsessionPresenter:(NSString *) fname
                           :(NSString *) lname
                           :(NSString *) company
                           :(NSString *) title
                           :(NSString *) email
-                          :(NSString *) phone :(NSString *) notes;
+                          :(NSString *) phone
+                          :(NSString *) bio
+                          :(UIImage *) pic
+                          :(NSURL *) website
+                          :(NSString *) notes;
+
 -(void)setsessionLocation:(NSString *) address
                          :(NSString *) building
                          :(NSString *) floor
@@ -36,14 +44,20 @@
                          :(NSNumber *) gpsX
                          :(NSNumber *) gpsY
                          :(NSString *) notes;
+
 -(void)setsessionDateTime:(NSDate *) dateTime;
+
 -(void)setsessionDocumentation:(NSString *) url;
 
+-(id) initWithTitleTime:(NSString *) title :(NSDate *) time;
+
 -(NSString *)sessionName;
+-(NSString *)sessionAbstract;
 -(NSMutableArray *)sessionPresenter;
 -(NSMutableArray *)sessionLocation;
 -(NSDate *)sessionDateTime;
 -(NSString *)sessionDocumentation;
+
 
 
 
