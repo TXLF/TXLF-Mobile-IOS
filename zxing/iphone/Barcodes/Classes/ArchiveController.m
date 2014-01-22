@@ -52,7 +52,7 @@
 	
 	ScanCell *cell = (ScanCell *)[tableView dequeueReusableCellWithIdentifier:ScanIdentifier];
 	if (cell == nil) {
-		cell = [[[ScanCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ScanIdentifier] autorelease];
+		cell = [[ScanCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ScanIdentifier];
 	}
   
 	// Configure the cell
@@ -69,7 +69,7 @@
   ParsedResult *result = [results objectAtIndex:idx];
   ScanViewController *scanViewController = [[ScanViewController alloc] initWithResult:result forScan:scan];
   [self.navigationController pushViewController:scanViewController animated:YES];
-  [scanViewController release];
+  //[scanViewController release];
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -102,28 +102,28 @@
 }
 
 
-- (void)dealloc {
-  [scans release];
-  [results release];
-  delegate = nil;
-  [dateFormatter release];
-	[super dealloc];
-}
+//- (void)dealloc {
+//  [scans release];
+//  [results release];
+//  delegate = nil;
+//  [dateFormatter release];
+//	[super dealloc];
+//}
 
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
   NSMutableArray *theScans = [[NSMutableArray alloc] init];
   self.scans = theScans;
-  [theScans release];
+  //[theScans release];
   
   NSMutableArray *theResults = [[NSMutableArray alloc] init];
   self.results = theResults;
-  [theResults release];
+  //[theResults release];
   
   NSDateFormatter *theDateFormatter = [[NSDateFormatter alloc] init];
   self.dateFormatter = theDateFormatter;
-  [theDateFormatter release];
+  //[theDateFormatter release];
   
   self.title = NSLocalizedString(@"ScanArchiveTitle", @"Scan Archive");
   self.navigationItem.rightBarButtonItem = [self editButtonItem];

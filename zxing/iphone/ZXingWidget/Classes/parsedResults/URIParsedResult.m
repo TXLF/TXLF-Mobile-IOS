@@ -78,11 +78,11 @@
   [actions addObject:[self createAction]];
 }
 
-- (void)dealloc {
-  [URL release];
-  [urlString release];
-  [title release];
-  [super dealloc];
-}
+//- (void)dealloc {
+//  [URL release];
+//  [urlString release];
+//  [title release];
+//  [super dealloc];
+//}
 
 @end

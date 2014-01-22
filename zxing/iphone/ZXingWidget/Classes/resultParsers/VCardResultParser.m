@@ -107,7 +107,7 @@
     NSString *url = [[rawText vcardValueForFieldWithPrefix:@"URL"] stringWithTrimmedWhitespace];
 
     BusinessCardParsedResult *result =
-        [[[BusinessCardParsedResult alloc] init] autorelease];
+        [[BusinessCardParsedResult alloc] init];
 
     if ([names count]) {
         result.names = names;
@@ -354,8 +354,8 @@
     NSStringEncoding encoding;
     encoding = CFStringConvertEncodingToNSStringEncoding(
         CFStringConvertIANACharSetNameToEncoding((CFStringRef) charset));
-    return [[[NSString alloc] initWithData:temp
-                                  encoding:encoding] autorelease];
+    return [[NSString alloc] initWithData:temp
+                                  encoding:encoding];
 }
 
 - (NSString *)vcardValueForFieldWithPrefix:(NSString *)prefix {

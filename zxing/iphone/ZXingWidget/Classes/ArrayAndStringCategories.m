@@ -58,7 +58,7 @@
   int max = [self length];
   NSRange searchRange;
   NSRange foundRange;
-  NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+  //NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
   while (i < max) {
     searchRange = NSMakeRange(i, max - i);
     foundRange = [self rangeOfString:prefix options:0 range:searchRange];
@@ -77,24 +77,24 @@
       } else if ([self characterAtIndex:termRange.location-1] == (unichar)'\\') {
         i++;
       } else {
-        NSAutoreleasePool *secondaryPool = [[NSAutoreleasePool alloc] init];
+        //NSAutoreleasePool *secondaryPool = [[NSAutoreleasePool alloc] init];
         NSString *substring = [self substringWithRange:NSMakeRange(start, termRange.location - start)];
         NSString *unescaped = [substring backslashUnescaped];
         NSString *toBeInArray = [[NSString alloc] initWithString:unescaped];
-        [secondaryPool release];
+        //[secondaryPool release];
         if (result == nil) {
           result = [[NSMutableArray alloc] initWithCapacity:1];
         }
         [result addObject:toBeInArray];
-        [toBeInArray release];
+        //[toBeInArray release];
         i = termRange.location + termRange.length;
         done = true;
       }
     }
   }
-  [pool release];
+  //[pool release];
 
-  return [result autorelease];
+  return result;
 }
 
 - (NSString *)fieldWithPrefix:(NSString *)prefix {

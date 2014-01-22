@@ -50,11 +50,11 @@
 
 @implementation ViewController
 
-- (void)dealloc {
-  [swap release];
-  [capture release];
-  [super dealloc];
-}
+//- (void)dealloc {
+//  [swap release];
+//  [capture release];
+//  [super dealloc];
+//}
 
 - (ZXCapture*)capture {
   if (!capture) {
@@ -65,7 +65,7 @@
 }
 
 - (void)loadView {
-  self.view = [[[View alloc] init] autorelease];
+  self.view = [[View alloc] init];
   [self.view.layer addSublayer:self.capture.layer];
 
   // self.capture.luminance = true;
@@ -118,7 +118,7 @@
 
 - (void)didReceiveMemoryWarning {
   if (swap && !swap.window) {
-    [swap release];
+    //[swap release];
     swap = nil;
   }
 }
@@ -131,7 +131,7 @@
 
 - (void)captureResult:(ZXCapture*)capture result:(ZXResult*)result {
   // NSLog(@"%@", result.text);
-  UILabel* label = [[[UILabel alloc] init] autorelease];
+  UILabel* label = [[UILabel alloc] init];
   label.font = [UIFont systemFontOfSize:36];
   label.text = result.text;
   label.textColor = [UIColor yellowColor];

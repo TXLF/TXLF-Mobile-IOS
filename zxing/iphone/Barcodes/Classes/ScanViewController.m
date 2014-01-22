@@ -47,7 +47,7 @@
     dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateStyle:NSDateFormatterLongStyle];
     [dateFormatter setTimeStyle:NSDateFormatterLongStyle];
-    bodyFont = [[UIFont fontWithName:FONT_NAME size:FONT_SIZE] retain];
+    bodyFont = [UIFont fontWithName:FONT_NAME size:FONT_SIZE];
 	}
 	return self;
 }
@@ -72,7 +72,7 @@
 - (UITableViewCell *)cellWithIdentifier:(NSString *)identifier inTableView:(UITableView *)tableView {
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
 	if (cell == nil) {
-                cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault  reuseIdentifier:identifier] autorelease];
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault  reuseIdentifier:identifier];
 	}
   return cell;
 }
@@ -86,12 +86,12 @@
 	static NSString *DatetimeIdentifier = @"ScanViewDatetimeIdentifier";
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:DatetimeIdentifier];
 	if (cell == nil) {
-		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:DatetimeIdentifier] autorelease];
+		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:DatetimeIdentifier];
     cell.frame = CGRectMake(0, 0, 320, 34);
     UILabel *label = [cell textLabel];
     label.font = [UIFont systemFontOfSize:[UIFont systemFontSize] * 2.0 / 3.0];
     label.textColor = [UIColor grayColor];
-    label.textAlignment = UITextAlignmentCenter;
+    label.textAlignment = NSTextAlignmentCenter;
 	}
   return cell;
 }
@@ -100,7 +100,7 @@
 	static NSString *BodyIdentifier = @"ScanViewBodyIdentifier";
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:BodyIdentifier];
 	if (cell == nil) {
-		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:BodyIdentifier] autorelease];
+		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:BodyIdentifier];
     cell.frame = CGRectMake(0, 0, 320, BODY_HEIGHT);
     UITextView *textView = [[UITextView alloc] initWithFrame:CGRectInset(cell.contentView.bounds, 6, 6)];
     textView.font = bodyFont;
@@ -109,7 +109,7 @@
     textView.dataDetectorTypes = UIDataDetectorTypeAll;
     [textView setAutoresizingMask:(UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight)];
     [cell.contentView addSubview:textView];
-    [textView release];
+    //[textView release];
 	}
   return cell;
 }
@@ -118,17 +118,17 @@
 	static NSString *ButtonIdentifier = @"ScanViewButtonIdentifier";
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ButtonIdentifier];
 	if (cell == nil) {
-		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ButtonIdentifier] autorelease];
+		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ButtonIdentifier];
     cell.frame = CGRectMake(0, 0, 320, 44);
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectInset(cell.contentView.bounds, 6, 6)];
     label.font = [UIFont boldSystemFontOfSize:[UIFont systemFontSize]];
     [label setTag:BUTTON_LABEL_TAG];
-    label.lineBreakMode = UILineBreakModeMiddleTruncation;
+    label.lineBreakMode =  NSLineBreakByTruncatingMiddle;
     label.textColor = [UIColor grayColor];
-    label.textAlignment = UITextAlignmentCenter;
+    label.textAlignment = NSTextAlignmentCenter;
     [label setAutoresizingMask:(UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight)];
     [cell.contentView addSubview:label];
-    [label release];
+    //[label release];
 	}
   return cell;
 }
@@ -140,7 +140,12 @@
     if (indexPath.row == 0) {
       return TITLE_HEIGHT;
     } else if (indexPath.row == 1) {
-      CGSize size = [[result stringForDisplay] sizeWithFont:bodyFont constrainedToSize:CGSizeMake(280.0, TEXT_VIEW_HEIGHT) lineBreakMode:UILineBreakModeWordWrap];
+        CGSize constraint = CGSizeMake(280.0, TEXT_VIEW_HEIGHT);
+        NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+        paragraphStyle.lineBreakMode = NSLineBreakByTruncatingMiddle;
+        CGRect displayRect = [[result stringForDisplay] boundingRectWithSize:constraint options:NSStringDrawingTruncatesLastVisibleLine attributes:@{NSFontAttributeName : bodyFont, NSParagraphStyleAttributeName : paragraphStyle} context:nil];
+        CGSize size = displayRect.size;
+      //CGSize size = [[result stringForDisplay] sizeWithFont:bodyFont constrainedToSize:CGSizeMake(280.0, TEXT_VIEW_HEIGHT) lineBreakMode:NSLineBreakByTruncatingMiddle];
 #if ZXING_DEBUG
       NSLog(@"text size = %f", size.height);
 #endif
@@ -223,13 +228,13 @@
 }
 
 
-- (void)dealloc {
-  [result release];
-  [scan release];
-  [bodyFont release];
-  [dateFormatter release];
-	[super dealloc];
-}
+//- (void)dealloc {
+//  [result release];
+//  [scan release];
+//  [bodyFont release];
+//  [dateFormatter release];
+//	[super dealloc];
+//}
 
 
 - (void)viewDidLoad {

@@ -34,6 +34,10 @@
     return allSessions;
 }
 
+-(NSArray *) sessionSlots {
+    return sessionSlots;
+}
+
 +(NSData *) fetchSessions {
     //These need to be specified in a resource file or something
     NSString *localCachePath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)
@@ -89,7 +93,7 @@
         NSString* sfname = [sessionDict objectForKey:@"field_profile_first_name"];
         NSString* slname = [sessionDict objectForKey:@"field_profile_last_name"];
         NSString* suid_1 = [sessionDict objectForKey:@"uid_1"];
-        TXLFSession* session = [[TXLFSession alloc] initWithTitleTime:stitle :[NSDate date]]; //Current date as placeholder
+        TXLFSession* session = [[TXLFSession alloc] initWithTitleTime:stitle :[self parseSessionDate:sslot]]; //Current date as placeholder
         [session setsessionPresenter:sfname :slname :scompany :stitle :@"N/A" :@"N/A" :sbio
                                             :[UIImage imageWithContentsOfFile:@"/net/inni.odlenixon.com/mnt/NI/home/george/src/TXLF/TXLF/icon_tux.png"]
                                             :[NSURL URLWithString:swebsite] :@"N/A"];
@@ -100,5 +104,36 @@
     }
     return sessionArray;
 }
+
++(NSMutableArray *) parseSessionDate :(NSString *) dates {
+    NSArray* times = [dates componentsSeparatedByString:@" - "];
+    NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init];
+    NSString* startTimeString = [[times objectAtIndex:0] stringByAppendingString:@" "];
+    startTimeString  = [startTimeString stringByAppendingString:[times objectAtIndex:1]];
+    NSString* endTimeString = [[times objectAtIndex:2] stringByAppendingString:@" "];
+    endTimeString = [endTimeString stringByAppendingString:[times objectAtIndex:3]];
+    NSDate* startTime = [dateFormat dateFromString:startTimeString];
+    NSDate* endTime = [dateFormat dateFromString:endTimeString];
+    
+    if(!startTime || !endTime) {
+        [dateFormat setDateFormat:@"EEE, MM/dd/yyyy h:mma"];
+        startTime = [dateFormat dateFromString:startTimeString];
+        endTime = [dateFormat dateFromString:endTimeString];
+    }
+    
+    // These are in GMT conversion to CST will need to occur somewhere
+    NSLog(@"Start Time: %@", startTime);
+    NSLog(@"End Time: %@", endTime);
+    //[dateFormat SetDateFormat:@""];
+    NSMutableArray* start_end_time;
+    // May need to isert object at Index
+    [start_end_time addObject:startTime];
+    [start_end_time addObject:endTime];
+    return start_end_time;
+}
+
+
+
+
 
 @end

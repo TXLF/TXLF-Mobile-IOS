@@ -8,7 +8,8 @@
 
 #import <SenTestingKit/SenTestingKit.h>
 #import <UIKit/UIKit.h>
-#import "EmailAddressResultParserResultParser.h"
+#import "EmailAddressResultParser.h"
+#import "EmailParsedResult.h"
 #import "URIParsedResult.h"
 
 @interface EmailAddressResultParserTests : SenTestCase
@@ -20,7 +21,7 @@
   NSString *msg =
       @"mailto:user@example.com?subject=the+subject&body=the%20body";
   EmailParsedResult *result = (EmailParsedResult *)
-      [EmailAddressResultParserResultParser parsedResultForString:msg
+      [EmailAddressResultParser parsedResultForString:msg
                                                  format:BarcodeFormat_QR_CODE];
   STAssertTrue([result.to isEqualToString:@"user@example.com"],
                @"Wrong to %@", result.to);
@@ -35,7 +36,7 @@
       @"mailto:bogus@example.com?to=user@exampe.com&subject=the+subject&"
       @"body=the%20body";
   EmailParsedResult *result = (EmailParsedResult *)
-      [EmailAddressResultParserResultParser parsedResultForString:msg
+      [EmailAddressResultParser parsedResultForString:msg
                                                  format:BarcodeFormat_QR_CODE];
   STAssertTrue([result.to isEqualToString:@"user@example.com"],
                @"Wrong to %@", result.to);
@@ -49,7 +50,7 @@
   NSString *msg =
       @"mailto:user@example.com";
   EmailParsedResult *result = (EmailParsedResult *)
-      [EmailAddressResultParserResultParser parsedResultForString:msg
+      [EmailAddressResultParser parsedResultForString:msg
                                                  format:BarcodeFormat_QR_CODE];
   STAssertTrue([result.to isEqualToString:@"user@example.com"],
                @"Wrong to %@", result.to);
@@ -61,7 +62,7 @@
   NSString *msg =
       @"mailto:user";
   EmailParsedResult *result = (EmailParsedResult *)
-      [EmailAddressResultParserResultParser parsedResultForString:msg
+      [EmailAddressResultParser parsedResultForString:msg
                                                  format:BarcodeFormat_QR_CODE];
   STAssertTrue([result.to isEqualToString:@"user"],
                @"Wrong to %@", result.to);
@@ -73,7 +74,7 @@
   NSString *msg =
       @"user@example.com";
   EmailParsedResult *result = (EmailParsedResult *)
-      [EmailAddressResultParserResultParser parsedResultForString:msg
+      [EmailAddressResultParser parsedResultForString:msg
                                                  format:BarcodeFormat_QR_CODE];
   STAssertTrue([result.to isEqualToString:@"user@example.com"],
                @"Wrong to %@", result.to);
@@ -87,43 +88,39 @@
   NSString *msg =
       @"I like traffic lights";
   EmailParsedResult *result = (EmailParsedResult *)
-      [EmailAddressResultParserResultParser parsedResultForString:msg
+      [EmailAddressResultParser parsedResultForString:msg
                                                  format:BarcodeFormat_QR_CODE];
   STAssertNil(result, @"Bogus message parsed");
 }
 
 - (void)testMalformedDoubleAtEmailAddressResultParser {
-  NSString *msg =
-      @"me@here@there"
+  NSString *msg = @"me@here@there";
   EmailParsedResult *result = (EmailParsedResult *)
-      [EmailAddressResultParserResultParser parsedResultForString:msg
+      [EmailAddressResultParser parsedResultForString:msg
                                                  format:BarcodeFormat_QR_CODE];
   STAssertNil(result, @"Bogus message parsed");
 }
 
 - (void)testMalformedBogusCharEmailAddressResultParser {
-  NSString *msg =
-      @"me(yeah)me@google.com"
+  NSString *msg = @"me(yeah)me@google.com";
   EmailParsedResult *result = (EmailParsedResult *)
-      [EmailAddressResultParserResultParser parsedResultForString:msg
+      [EmailAddressResultParser parsedResultForString:msg
                                                  format:BarcodeFormat_QR_CODE];
   STAssertNil(result, @"Bogus message parsed");
 }
 
 - (void)testMalformedJustMailtoEmailAddressResultParser {
-  NSString *msg =
-      @"mailto:"
+  NSString *msg = @"mailto:";
   EmailParsedResult *result = (EmailParsedResult *)
-      [EmailAddressResultParserResultParser parsedResultForString:msg
+      [EmailAddressResultParser parsedResultForString:msg
                                                  format:BarcodeFormat_QR_CODE];
   STAssertNil(result, @"Bogus message parsed");
 }
 
 - (void)testMalformedEmptyEmailAddressResultParser {
-  NSString *msg =
-      @""
+  NSString *msg = @"";
   EmailParsedResult *result = (EmailParsedResult *)
-      [EmailAddressResultParserResultParser parsedResultForString:msg
+      [EmailAddressResultParser parsedResultForString:msg
                                                  format:BarcodeFormat_QR_CODE];
   STAssertNil(result, @"Bogus message parsed");
 }

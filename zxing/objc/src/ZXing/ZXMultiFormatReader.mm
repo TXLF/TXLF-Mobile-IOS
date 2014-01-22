@@ -22,7 +22,7 @@
 
 - (ZXMultiFormatReader*)init {
   zxing::MultiFormatReader* multi = new zxing::MultiFormatReader();
-  [super initWithReader:multi];
+  self = [super initWithReader:multi];
   return self;
 }
 

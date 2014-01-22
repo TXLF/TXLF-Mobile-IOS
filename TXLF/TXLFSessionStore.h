@@ -12,14 +12,17 @@
 
 @interface TXLFSessionStore : NSObject {
     NSMutableArray *allSessions;
+    NSMutableArray *sessionSlots;
 }
 
 +(TXLFSessionStore *) sharedStore;
 
 -(NSArray *) allSessions;
+-(NSArray *) sessionSlots;
 
 +(NSData *) fetchSessions;
 +(NSMutableArray *) generateSessions;
 +(id) stripJSONObject:(NSDictionary *) dict :(NSString *) objectName;
++(NSMutableArray *) parseSessionDate:(NSString *) dates;
 
 @end

@@ -64,8 +64,12 @@
     
 }
 
--(void)setsessionDateTime:(NSDate *) dateTime {
-    sessionDateTime=dateTime;
+// This should include a field for the origonal JSON text
+// in case there is some special formating that would be useful to preserve
+-(void)setsessionDateTime:(NSDate *) startTime
+                         :(NSDate *) endTime {
+    [sessionDateTime insertObject:startTime atIndex:0];
+    [sessionDateTime insertObject:endTime atIndex:1];
 }
 
 -(void)setsessionDocumentation:(NSString *) url {
@@ -88,7 +92,7 @@
     return sessionLocation;
 }
 
--(NSDate *)sessionDateTime {
+-(NSMutableArray *)sessionDateTime {
     return sessionDateTime;
 }
 
@@ -110,7 +114,7 @@
             [self setsessionLocation:@"500 East Cesar Chavez, Austin, TX, 78701" :@"Austin Convention Center - Building 1" :@"1" :@"101" :@"Lecture Hall" :[NSNumber numberWithFloat:85.6] :[NSNumber numberWithFloat:85.6] :@"No Notes"];
         }
         if(!sessionDateTime) {
-            [self setsessionDateTime:[NSDate date]];
+            [self setsessionDateTime:[NSDate date] :[NSDate date]];
         }
         if(!sessionDocumentation) {
             [self setsessionDocumentation:@"http://texaslinuxfest.org"];
@@ -119,10 +123,10 @@
     return self;
 }
 
--(id) initWithTitleTime:(NSString *) title :(NSDate *) time {
+-(id) initWithTitleTime:(NSString *) title :(NSMutableArray *) time {
     self = [self init];
     [self setsessionName:title];
-    [self setsessionDateTime:time];
+    [self setsessionDateTime:[time objectAtIndex:0] :[time objectAtIndex:1]];
     return self;
 }
 

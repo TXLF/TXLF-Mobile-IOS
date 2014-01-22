@@ -69,15 +69,15 @@
 }
 
 
-- (void)dealloc {
-  delegate = nil;
-  [webView release];
-	[super dealloc];
-}
+//- (void)dealloc {
+  //delegate = nil;
+  //[webView release];
+	//[super dealloc];
+//}
 
 // open a URL, asynchronously
 - (void) openURL:(NSURL *)url {
-  [url autorelease];
+  //[url autorelease];
   [[UIApplication sharedApplication] openURL:url];
 }
 
@@ -90,7 +90,7 @@
     return true;
   } else {
     // any other url:s are handed off to the system
-    NSURL *url = [[request URL] retain];
+    NSURL *url = [request URL];
     [self performSelectorOnMainThread:@selector(openURL:) withObject:url waitUntilDone:NO];
     return NO;
   }

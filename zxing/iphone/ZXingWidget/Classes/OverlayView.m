@@ -112,25 +112,25 @@ static const CGFloat kLicenseButtonPadding = 10;
         [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelTitle otherButtonTitles:viewTitle, nil];
 
     [av show];
-    [self retain]; // For the delegate callback ...
-    [av release];
+    //[self retain]; // For the delegate callback ...
+    //[av release];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
   if (buttonIndex == [alertView firstOtherButtonIndex]) {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.apache.org/licenses/LICENSE-2.0.html"]];
   }
-  [self release];
+  //[self release];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) dealloc {
-	[_points release];
-  [instructionsLabel release];
-  [displayedMessage release];
-  [cancelButtonTitle release],
-	[super dealloc];
-}
+//- (void) dealloc {
+//	[_points release];
+//  [instructionsLabel release];
+//  [displayedMessage release];
+//  [cancelButtonTitle release],
+//	[super dealloc];
+//}
 
 
 - (void)drawRect:(CGRect)rect inContext:(CGContextRef)context {
@@ -204,7 +204,7 @@ static const CGFloat kLicenseButtonPadding = 10;
 	else {
     UIFont *font = [UIFont systemFontOfSize:18];
     CGSize constraint = CGSizeMake(rect.size.width  - 2 * kTextMargin, cropRect.origin.y);
-        CGRect displayRect = [self.displayedMessage boundingRectWithSize:constraint options:nil attributes:@{NSFontAttributeName : font} context:nil];
+        CGRect displayRect = [self.displayedMessage boundingRectWithSize:constraint options:NSStringDrawingTruncatesLastVisibleLine attributes:@{NSFontAttributeName : font} context:nil];
     //CGRect displayRect = CGRectMake((rect.size.width - displaySize.width) / 2 , cropRect.origin.y - displaySize.height, displaySize.width, displaySize.height);
         NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
         paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
@@ -252,8 +252,8 @@ static const CGFloat kLicenseButtonPadding = 10;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) setPoints:(NSMutableArray*)pnts {
-    [pnts retain];
-    [_points release];
+    //[pnts retain];
+    //[_points release];
     _points = pnts;
 	
     if (pnts != nil) {

@@ -178,7 +178,7 @@ string read_expected(string imagefilename) {
 
   return expected;
 }
-
+/*
 int main(int argc, char** argv) {
   if (argc <= 1) {
     cout << "Usage: " << argv[0] << " [OPTION]... <IMAGE>..." << endl
@@ -295,3 +295,4 @@ int main(int argc, char** argv) {
 
   return 0;
 }
+*/

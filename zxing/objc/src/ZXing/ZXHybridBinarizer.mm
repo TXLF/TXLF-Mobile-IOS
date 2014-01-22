@@ -22,7 +22,7 @@
 - (ZXHybridBinarizer*)initWithSource:(ZXLuminanceSource*)source {
   zxing::HybridBinarizer* hybrid =
     new zxing::HybridBinarizer(zxing::Ref<zxing::LuminanceSource>([source native]));
-  [super initWithNative:hybrid];
+  self = [super initWithNative:hybrid];
   return self;
 }
 

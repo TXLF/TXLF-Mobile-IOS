@@ -40,12 +40,12 @@
   if (colonRange.location == NSNotFound) {
     return [NSString stringWithFormat:@"http://%@", self];
   } else {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    //NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     NSString *part1 = [[self substringToIndex:colonRange.location] lowercaseString];
     NSString *part2 = [self substringFromIndex:colonRange.location];
     NSString *result = [[NSString alloc] initWithFormat:@"%@%@", part1,part2];
-    [pool release];
-    return [result autorelease];
+    //[pool release];
+    return result;
   }
 }
 
@@ -63,7 +63,7 @@
 + (ParsedResult *)parsedResultForString:(NSString *)s
                                  format:(BarcodeFormat)format {
   
-  NSAutoreleasePool *myPool = [[NSAutoreleasePool alloc] init];
+ // NSAutoreleasePool *myPool = [[NSAutoreleasePool alloc] init];
   ParsedResult *result = nil;
   
   NSRange prefixRange = [s rangeOfString:PREFIX options:NSCaseInsensitiveSearch];
@@ -78,10 +78,10 @@
     if (url != nil) {
       result = [[URIParsedResult alloc] initWithURLString:massaged URL:url];
     }
-    [url release];
+    //[url release];
   }
-  [myPool release];
-  return [result autorelease];
+  //[myPool release];
+  return result;
 }
 
 

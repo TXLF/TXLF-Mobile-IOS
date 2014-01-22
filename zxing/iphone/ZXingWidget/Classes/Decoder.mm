@@ -61,7 +61,7 @@ ZXingWidgetControllerCallback(Decoder* _decoder) : decoder(_decoder) {}
   if ([self.delegate respondsToSelector:@selector(decoder:didDecodeImage:usingSubset:withResult:)]) {
     [self.delegate decoder:self didDecodeImage:self.image usingSubset:self.subsetImage withResult:result];
   }
-  [result release];
+ // [result release];
 }
 
 - (void)failedToDecodeImage:(NSString *)reason {
@@ -153,7 +153,7 @@ ZXingWidgetControllerCallback(Decoder* _decoder) : decoder(_decoder) {}
 }  
 
 - (BOOL)decode:(ArrayRef<char>)subsetData {
-  NSAutoreleasePool* mainpool = [[NSAutoreleasePool alloc] init];
+  //NSAutoreleasePool* mainpool = [[NSAutoreleasePool alloc] init];
   TwoDDecoderResult *decoderResult = nil;
   BOOL returnCode = NO;
   { 
@@ -172,7 +172,7 @@ ZXingWidgetControllerCallback(Decoder* _decoder) : decoder(_decoder) {}
     for (int i = 0; !decoderResult && i < 4; i++) {
 #endif
       for (FormatReader *reader in formatReaders) {
-        NSAutoreleasePool *secondarypool = [[NSAutoreleasePool alloc] init];
+        //NSAutoreleasePool *secondarypool = [[NSAutoreleasePool alloc] init];
         NSMutableArray *points = nil;
         NSString *resultString = nil;
         try {
@@ -198,7 +198,7 @@ ZXingWidgetControllerCallback(Decoder* _decoder) : decoder(_decoder) {}
           }
           
           resultString = [[NSString alloc] initWithCString:cString encoding:NSUTF8StringEncoding];
-          if (decoderResult) [decoderResult release];
+          //if (decoderResult) [decoderResult release];
           decoderResult = [[TwoDDecoderResult alloc] initWithText:resultString points:points];
         } catch (ReaderException &rex) {
 #if ZXING_DEBUG
@@ -213,9 +213,9 @@ ZXingWidgetControllerCallback(Decoder* _decoder) : decoder(_decoder) {}
         } catch (...) {
           NSLog(@"Caught unknown exception!");
         }
-        [resultString release];
-        [points release];
-        [secondarypool release];
+        //[resultString release];
+        //[points release];
+        //[secondarypool release];
       }
       
 #ifdef TRY_ROTATIONS
@@ -235,7 +235,7 @@ ZXingWidgetControllerCallback(Decoder* _decoder) : decoder(_decoder) {}
       [self performSelectorOnMainThread:@selector(didDecodeImage:)
                              withObject:[decoderResult copy]
                           waitUntilDone:NO];
-      [decoderResult release];
+      //[decoderResult release];
       returnCode = YES;
     } else {
       [self performSelectorOnMainThread:@selector(failedToDecodeImage:)
@@ -248,7 +248,7 @@ ZXingWidgetControllerCallback(Decoder* _decoder) : decoder(_decoder) {}
 #if ZXING_DEBUG
   NSLog(@"finished decoding.");
 #endif
-  [mainpool release];
+  //[mainpool release];
 
   return returnCode;
 }
@@ -265,12 +265,12 @@ ZXingWidgetControllerCallback(Decoder* _decoder) : decoder(_decoder) {}
   return [self decode:subsetData];
 }
 
-- (void) dealloc {
-  delegate = nil;
-  [image release];
-  [subsetImage release];
-  [readers release];
-  [super dealloc];
-}
+//- (void) dealloc {
+  //delegate = nil;
+  //[image release];
+  //[subsetImage release];
+  //[readers release];
+  //[super dealloc];
+//}
 
 @end

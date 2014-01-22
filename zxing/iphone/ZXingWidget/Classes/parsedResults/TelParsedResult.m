@@ -50,9 +50,9 @@
   [actions addObject:[CallAction actionWithNumber:self.number]];
 }
 
-- (void) dealloc {
-  [number release];
-  [super dealloc];
-}
+//- (void) dealloc {
+//  [number release];
+//  [super dealloc];
+//}
 
 @end

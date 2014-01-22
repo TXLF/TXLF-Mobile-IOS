@@ -26,7 +26,7 @@
   size_t subsetWidth;
   size_t subsetHeight;
   size_t subsetBytesPerRow;
-  id<DecoderDelegate> delegate;
+  //id<DecoderDelegate> delegate;
 }
 
 @property(nonatomic, retain) UIImage *image;

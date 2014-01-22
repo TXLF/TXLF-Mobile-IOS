@@ -39,7 +39,7 @@
 }
 
 + (id)actionWithNumber:(NSString *)number {
-  return [[[self alloc] initWithNumber:number] autorelease];
+  return [[self alloc] initWithNumber:number];
 }
 
 - (NSString *)title {
@@ -59,9 +59,9 @@
 }
 
 
-- (void) dealloc {
-  [number release];
-  [super dealloc];
-}
+//- (void) dealloc {
+//  [number release];
+//  [super dealloc];
+//}
 
 @end

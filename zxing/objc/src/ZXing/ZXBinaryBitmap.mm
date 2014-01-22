@@ -30,9 +30,9 @@
   return native;
 }
 
-- (void)dealloc {
-  native = 0;
-  [super dealloc];
-}
+//- (void)dealloc {
+//  native = 0;
+//  [super dealloc];
+//}
 
 @end

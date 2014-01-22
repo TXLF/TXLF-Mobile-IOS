@@ -59,7 +59,7 @@
   if (cgimage) {
     CGImageRelease(cgimage);
   }
-  [super dealloc];
+  //[super dealloc];
 }
 
 @end

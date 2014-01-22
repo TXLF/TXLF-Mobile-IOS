@@ -16,7 +16,7 @@
  */
 
 #import <ZXing/ZXResult.h>
-#include <zxing/result.h>
+#include <zxing/Result.h>
 
 @interface ZXResultInternal : NSObject {
   zxing::Ref<zxing::Result> native;
@@ -45,10 +45,10 @@
   return self;
 }
 
-- (void)dealloc {
-  [state_ release];
-  [super dealloc];
-}
+//- (void)dealloc {
+//  [state_ release];
+//  [super dealloc];
+//}
 
 - (NSString*)text {
   return [NSString 

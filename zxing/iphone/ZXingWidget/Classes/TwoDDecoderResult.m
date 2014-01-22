@@ -28,7 +28,7 @@
 @synthesize points;
 
 + (id)resultWithText:(NSString *)text points:(NSArray *)points {
-  return [[[self alloc] initWithText:text points:points] autorelease];
+  return [[self alloc] initWithText:text points:points];
 }
 
 - (id)initWithText:(NSString *)t points:(NSArray *)p {
@@ -40,8 +40,8 @@
 }
 
 - (id)copyWithZone:(NSZone *)zone {
-    NSArray* newPoints = [[[NSArray alloc] initWithArray:points] autorelease];
-    NSString* newText = [[[NSString alloc] initWithString:text] autorelease];
+    NSArray* newPoints = [[NSArray alloc] initWithArray:points];
+    NSString* newText = [[NSString alloc] initWithString:text];
     
     return [[TwoDDecoderResult allocWithZone:zone] initWithText:newText points:newPoints];
 }
@@ -50,11 +50,11 @@
   return [self copyWithZone:nil];
 }
 
-- (void)dealloc {
-  [text release];
-  [points release];
-  [super dealloc];
-}
+//- (void)dealloc {
+  //[text release];
+  //[points release];
+  //[super dealloc];
+//}
 
 - (NSString *)description {
   return [NSString stringWithFormat:@"<%@: %p> %@", [self class], self, self.text];

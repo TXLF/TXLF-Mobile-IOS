@@ -54,14 +54,14 @@
   ZXingWidgetController *widController = [[ZXingWidgetController alloc] initWithDelegate:self showCancel:YES OneDMode:NO];
   MultiFormatReader* qrcodeReader = [[MultiFormatReader alloc] init];
   NSSet *readers = [[NSSet alloc ] initWithObjects:qrcodeReader,nil];
-  [qrcodeReader release];
+  //[qrcodeReader release];
   widController.readers = readers;
-  [readers release];
+  //[readers release];
   NSBundle *mainBundle = [NSBundle mainBundle];
   widController.soundToPlay =
   [NSURL fileURLWithPath:[mainBundle pathForResource:@"beep-beep" ofType:@"aiff"] isDirectory:NO];
-  [self presentModalViewController:widController animated:YES];
-  [widController release];
+   [self presentViewController:widController animated:YES completion:nil];
+  //[widController release];
 }
 
 - (void)messageReady:(id)sender {
@@ -69,13 +69,13 @@
   //[self presentModalViewController:messageController animated:YES];
   //TODO: change this
   [self.navigationController pushViewController:messageController animated:YES];
-  [messageController release];
+  //[messageController release];
 }
 
 - (void)messageFailed:(id)sender {
-  MessageViewController *messageController = sender;
+  //MessageViewController *messageController = sender;
   NSLog(@"Failed to load message!");
-  [messageController release];
+  //[messageController release];
 }
 
 - (void)performAction:(ResultAction *)action {
@@ -83,7 +83,7 @@
 }
 
 - (void)modalViewControllerWantsToBeDismissed:(UIViewController *)controller {
-  [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -99,16 +99,16 @@
 }
 
 
-- (void)dealloc {
-  [actions release];
-  [result release];
-  [super dealloc];
-}
+//- (void)dealloc {
+//  [actions release];
+//  [result release];
+//  [super dealloc];
+//}
 
 #pragma mark -
 #pragma mark ZXingDelegateMethods
 - (void)zxingController:(ZXingWidgetController*)controller didScanResult:(NSString *)resultString {
-  [self dismissModalViewControllerAnimated:YES];
+  [self dismissViewControllerAnimated:YES completion:nil];
 #if ZXING_DEBUG
   NSLog(@"result has %d actions", actions ? 0 : actions.count);
 #endif
@@ -121,7 +121,7 @@
   [[NSUserDefaults standardUserDefaults] synchronize];
 
   if (returnUrl != nil) {
-    resultString = (NSString*)
+    resultString = (__bridge NSString*)
         CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
                                                 (CFStringRef)resultString,
                                                 NULL,
@@ -131,7 +131,7 @@
     NSURL *ourURL =
         [NSURL URLWithString:[returnUrl stringByReplacingOccurrencesOfString:@"{CODE}" withString:resultString]];
 
-    CFRelease(resultString);
+    CFRelease((CFTypeRef)resultString);
 
     // NSLog(@"%@", ourURL);
 
@@ -140,11 +140,11 @@
   }
   
   ParsedResult *parsedResult = [UniversalResultParser parsedResultForString:resultString];
-  self.result = [parsedResult retain];
-  self.actions = [self.result.actions retain];
+  self.result = parsedResult;
+  self.actions = self.result.actions;
   ScanViewController *scanViewController = [[ScanViewController alloc] initWithResult:parsedResult forScan:scan];
   [self.navigationController pushViewController:scanViewController animated:NO];
-  [scanViewController release];
+  //[scanViewController release];
   [self performResultAction];
 }
 
@@ -165,7 +165,7 @@
 }
 
 - (void)zxingControllerDidCancel:(ZXingWidgetController*)controller {
-  [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
   NSString *returnUrl = [[NSUserDefaults standardUserDefaults] stringForKey:@"returnURL"];
   if (returnUrl != nil) {
     UIAlertView* alert = [[UIAlertView alloc]
@@ -175,7 +175,7 @@
                            cancelButtonTitle:@"Cancel"
                            otherButtonTitles:@"Return", nil];
     [alert show];
-    [alert release];
+    //[alert release];
   }
 }
 

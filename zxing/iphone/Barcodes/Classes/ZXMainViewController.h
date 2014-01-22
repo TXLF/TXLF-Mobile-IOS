@@ -17,8 +17,8 @@
 
 
 @interface ZXMainViewController : UIViewController <ZXingDelegate,UIActionSheetDelegate,ModalViewControllerDelegate,UIAlertViewDelegate> {
-  NSArray *actions;
-  ParsedResult *result;
+//  NSArray *actions;
+//  ParsedResult *result;
 }
 
 @property (nonatomic,assign) NSArray *actions;

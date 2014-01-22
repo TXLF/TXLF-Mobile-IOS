@@ -40,7 +40,7 @@
   SystemSoundID beepSound;
   BOOL showCancel;
   NSURL *soundToPlay;
-  id<ZXingDelegate> delegate;
+  //id<ZXingDelegate> delegate;
   BOOL wasCancelled;
   BOOL oneDMode;
 #if HAS_AVFF

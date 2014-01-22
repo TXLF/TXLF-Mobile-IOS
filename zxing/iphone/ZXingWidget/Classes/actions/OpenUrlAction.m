@@ -34,7 +34,7 @@
 }
 
 + (id)actionWithURL:(NSURL *)URL {
-  return [[[self alloc] initWithURL:URL] autorelease];
+  return [[self alloc] initWithURL:URL];
 }
 
 - (NSString *)title {
@@ -62,7 +62,7 @@
                                               cancelButtonTitle:NSLocalizedString(@"OpenURLAction cancel button title", @"Cancel") 
                                               otherButtonTitles:[self alertButtonTitle], nil];
     [alertView show];
-    [alertView release];
+    //[alertView release];
   } else {
     [self openURL];
   }

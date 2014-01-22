@@ -63,9 +63,8 @@ using zxing::Ref;
     normalizedProductID = s;
   }
 
-  return [[[ProductParsedResult alloc] initWithProductID:s
-                                     normalizedProductID:normalizedProductID]
-           autorelease];
+  return [[ProductParsedResult alloc] initWithProductID:s
+                                     normalizedProductID:normalizedProductID];
 }
 
 @end

@@ -25,14 +25,14 @@
 static NSMutableSet *sFormatReaders = nil;
 
 + (void)registerFormatReader:(FormatReader*)formatReader {
-  NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+  //NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
   @synchronized(self) {
     if (!sFormatReaders) {
       sFormatReaders = [[NSMutableSet alloc] init];
     }
     [sFormatReaders addObject:formatReader];
   }
-  [pool drain];
+  //[pool drain];
 }
 
 /*
@@ -53,10 +53,10 @@ static NSMutableSet *sFormatReaders = nil;
   return self;
 }
 
-- (void)dealloc {
-  delete reader_;
-  [super dealloc];
-}
+//- (void)dealloc {
+//  delete reader_;
+//  [super dealloc];
+//}
 
 - (zxing::Ref<zxing::Result>)decode:(zxing::Ref<zxing::BinaryBitmap>)grayImage {
   return reader_->decode(grayImage);

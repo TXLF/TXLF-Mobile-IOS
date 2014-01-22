@@ -36,19 +36,19 @@
     zxing::Ref<zxing::Result> result (reader->decode(
                                         zxing::Ref<zxing::BinaryBitmap>([bitmap native]),
                                         *[hints native]));
-    return [[[ZXResult alloc] initWithNative:result] autorelease];
+    return [[ZXResult alloc] initWithNative:result];
   } catch (zxing::ReaderException const& re) {
     NSString* s = [NSString stringWithCString:re.what() encoding:NSUTF8StringEncoding];
-    NSException* e = [[[ZXReaderException alloc] initWithName:@"ZXReaderException"
+    NSException* e = [[ZXReaderException alloc] initWithName:@"ZXReaderException"
                                                       reason:s
-                                                     userInfo:nil] autorelease];
+                                                     userInfo:nil];
     @throw e;
   } catch (zxing::IllegalArgumentException const& iae) {
     NSString* s = [NSString stringWithCString:iae.what() encoding:NSUTF8StringEncoding];
-    NSException* e = [[[ZXIllegalArgumentException alloc] 
+    NSException* e = [[ZXIllegalArgumentException alloc]
                         initWithName:@"ZXIllegalArgumntException"
                               reason:s
-                            userInfo:nil] autorelease];
+                            userInfo:nil];
     @throw e;
   }
   /* not reachable */

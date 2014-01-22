@@ -28,9 +28,9 @@
   return self;
 }
 
-- (void)dealloc {
-  delete native;
-  [super dealloc];
-}
+//- (void)dealloc {
+//  delete native;
+//  [super dealloc];
+//}
 
 @end

@@ -20,9 +20,9 @@
 
 @interface OverlayView : UIView {
 	NSMutableArray *_points;
-	UIButton *cancelButton;
+//	UIButton *cancelButton;
   UILabel *instructionsLabel;
-	id<CancelDelegate> delegate;
+//	id<CancelDelegate> delegate;
 	BOOL oneDMode;
   BOOL cancelEnabled;
   CGRect cropRect;

@@ -31,7 +31,7 @@
 //  SEL callbackSelectorFailure;
   NSURL *contentURL;
   IBOutlet UIWebView *webView;
-  id<ModalViewControllerDelegate> delegate;
+  //id<ModalViewControllerDelegate> delegate;
 }
 
 //@property (nonatomic, retain) id callbackTarget;

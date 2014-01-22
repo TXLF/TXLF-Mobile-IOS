@@ -37,10 +37,10 @@
   return self;
 }
 
-- (void)dealloc {
-  [stamp release];
-  [text release];
-  [super dealloc];
-}
+//- (void)dealloc {
+//  [stamp release];
+//  [text release];
+//  [super dealloc];
+//}
 
 @end

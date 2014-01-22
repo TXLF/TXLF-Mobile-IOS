@@ -39,19 +39,19 @@
 
   MultiFormatReader* reader = [[MultiFormatReader alloc] init];
   [readers addObject:reader];
-  [reader release];
+  //[reader release];
     
   widController.readers = readers;
-  [readers release];
+  //[readers release];
     
   NSBundle *mainBundle = [NSBundle mainBundle];
   widController.soundToPlay =
     [NSURL fileURLWithPath:[mainBundle pathForResource:@"beep-beep" ofType:@"aiff"] isDirectory:NO];
 
-  [self presentModalViewController:widController animated:YES];
-  // [self presentViewController:widController animated:YES completion:nil];
+  //[self presentModalViewController:widController animated:YES];
+   [self presentViewController:widController animated:YES completion:nil];
 
-  [widController release];
+  //[widController release];
 }
 
 #pragma mark -
@@ -63,24 +63,24 @@
     [resultsView setText:resultsToDisplay];
     [resultsView setNeedsDisplay];
   }
-  [self dismissModalViewControllerAnimated:NO];
-  // [self dismissViewControllerAnimated:NO completion:nil];
+  //[self dismissModalViewControllerAnimated:NO];
+   [self dismissViewControllerAnimated:NO completion:nil];
 }
 
 - (void)zxingControllerDidCancel:(ZXingWidgetController*)controller {
-  [self dismissModalViewControllerAnimated:NO];
-  // [self dismissViewControllerAnimated:YES completion:nil];
+  //[self dismissModalViewControllerAnimated:NO];
+   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)viewDidUnload {
   self.resultsView = nil;
 }
 
-- (void)dealloc {
-  [resultsView release];
-  [resultsToDisplay release];
-  [super dealloc];
-}
+//- (void)dealloc {
+//  [resultsView release];
+//  [resultsToDisplay release];
+//  [super dealloc];
+//}
 
 
 @end

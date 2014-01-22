@@ -82,19 +82,19 @@
   return self;
 }
 
-- (void)dealloc {
-  if (beepSound != (SystemSoundID)-1) {
-    AudioServicesDisposeSystemSoundID(beepSound);
-  }
+//- (void)dealloc {
+//  if (beepSound != (SystemSoundID)-1) {
+//    AudioServicesDisposeSystemSoundID(beepSound);
+//  }
   
-  [self stopCapture];
+//  [self stopCapture];
 
   //[result release];
   //[soundToPlay release];
   //[overlayView release];
   //[readers release];
   //[super dealloc];
-}
+//}
 
 - (void)cancelled {
   [self stopCapture];

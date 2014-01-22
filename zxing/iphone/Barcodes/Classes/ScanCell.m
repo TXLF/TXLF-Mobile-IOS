@@ -74,19 +74,19 @@ static NSString *_timeString(NSDate *date) {
     
     textView = [[UILabel alloc] initWithFrame:CGRectZero];
     textView.font = [UIFont boldSystemFontOfSize:[UIFont systemFontSize]];
-    textView.textAlignment = UITextAlignmentLeft;
+    textView.textAlignment = NSTextAlignmentLeft;
     textView.textColor = [UIColor blackColor];
     [self.contentView addSubview:textView];
     
     dateView = [[UILabel alloc] initWithFrame:CGRectZero];
     dateView.font = [UIFont systemFontOfSize:(2 * [UIFont systemFontSize]) / 3];
-    dateView.textAlignment = UITextAlignmentRight;
+    dateView.textAlignment = NSTextAlignmentRight;
     dateView.textColor = [UIColor grayColor];
     [self.contentView addSubview:dateView];
 
     timeView = [[UILabel alloc] initWithFrame:CGRectZero];
     timeView.font = [UIFont systemFontOfSize:(2 * [UIFont systemFontSize]) / 3];
-    timeView.textAlignment = UITextAlignmentRight;
+    timeView.textAlignment = NSTextAlignmentRight;
     timeView.textColor = [UIColor grayColor];
     [self.contentView addSubview:timeView];
   }
@@ -143,11 +143,11 @@ static NSString *_timeString(NSDate *date) {
 
 - (void)setScan:(Scan *)newScan {
   if (newScan != scan) {
-    [newScan retain];
-    [scan release];
+    //[newScan retain];
+    //[scan release];
     scan = newScan;
-    [result release];
-     result = [[UniversalResultParser parsedResultForString:[scan text]] retain];
+    //[result release];
+     result = [UniversalResultParser parsedResultForString:[scan text]];
 
     imageView.image = [result icon];
     textView.text = [result stringForDisplay];
@@ -162,15 +162,15 @@ static NSString *_timeString(NSDate *date) {
   return scan;
 }
 
-- (void)dealloc {
-  [imageView release];
-  [textView release];
-  [dateView release];
-  [timeView release];
-  [scan release];
-  [result release];
-  [super dealloc];
-}
+//- (void)dealloc {
+//  [imageView release];
+//  [textView release];
+//  [dateView release];
+//  [timeView release];
+//  [scan release];
+//  [result release];
+//  [super dealloc];
+//}
 
 
 @end

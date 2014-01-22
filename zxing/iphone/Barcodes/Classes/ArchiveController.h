@@ -27,7 +27,7 @@
   NSMutableArray *scans;
   NSMutableArray *results;
   NSDateFormatter *dateFormatter;
-  id<ModalViewControllerDelegate> delegate;
+  //id<ModalViewControllerDelegate> delegate;
 }
 
 @property (nonatomic, retain) NSMutableArray *scans;
