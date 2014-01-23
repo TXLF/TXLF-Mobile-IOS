@@ -26,17 +26,22 @@
 -(id)init {
     self = [super init];
     if(self)
-        allSessions = [TXLFSessionStore generateSessions];
+        [TXLFSessionStore allSessions:NO];
     return self;
 }
 
--(NSArray*) allSessions {
++(NSArray*) allSessions :(BOOL) regen {
+    static NSMutableArray* allSessions = nil;
+    // regen -> Refresh sesssions without having to restart the app
+    if(!allSessions || regen) {
+        allSessions = [self generateSessions];
+    }
     return allSessions;
 }
 
--(NSArray *) sessionSlots {
-    return sessionSlots;
-}
+//+(NSArray *) sessionSlots {
+//    return sessionSlots;
+//}
 
 +(NSData *) fetchSessions {
     //These need to be specified in a resource file or something
@@ -77,7 +82,7 @@
     NSArray* sessions = [TXLFSessionStore stripJSONObject:sessionDictionary :@"nodes"];
     NSMutableArray* sessionArray = [[NSMutableArray alloc] init];
     for(id singleSession in sessions) {
-        NSDictionary* sessionDict = [TXLFSessionStore stripJSONObject:singleSession :@"node"];
+        NSDictionary* sessionDict = [self stripJSONObject:singleSession :@"node"];
         NSString* stitle = [sessionDict objectForKey:@"title"];
         NSString* sslot = [sessionDict objectForKey:@"field_session_slot"];
         NSString* snid = [sessionDict objectForKey:@"nid"];
@@ -105,34 +110,64 @@
     return sessionArray;
 }
 
-+(NSMutableArray *) parseSessionDate :(NSString *) dates {
++(NSArray *) parseSessionDate :(NSString *) dates {
+    // May need to be updated handle sessions that spam multiple days
     NSArray* times = [dates componentsSeparatedByString:@" - "];
     NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init];
-    NSString* startTimeString = [[times objectAtIndex:0] stringByAppendingString:@" "];
-    startTimeString  = [startTimeString stringByAppendingString:[times objectAtIndex:1]];
-    NSString* endTimeString = [[times objectAtIndex:2] stringByAppendingString:@" "];
-    endTimeString = [endTimeString stringByAppendingString:[times objectAtIndex:3]];
-    NSDate* startTime = [dateFormat dateFromString:startTimeString];
-    NSDate* endTime = [dateFormat dateFromString:endTimeString];
+    NSDate* startDate = [NSDate date];
+    NSDate* startTime = [NSDate date];
+    NSDate* endDate = [NSDate date];
+    NSDate* endTime = [NSDate date];
+    // Needs to be implemented
+    NSString* DoW = @"SAT";
     
-    if(!startTime || !endTime) {
-        [dateFormat setDateFormat:@"EEE, MM/dd/yyyy h:mma"];
-        startTime = [dateFormat dateFromString:startTimeString];
-        endTime = [dateFormat dateFromString:endTimeString];
+    if(times.count > 0) {
+        startDate = [dateFormat dateFromString:[times objectAtIndex:0]];
+    }
+    if(times.count > 1) {
+        startTime = [dateFormat dateFromString:[times objectAtIndex:1]];
+    }
+    if(times.count > 2) {
+        endDate = [dateFormat dateFromString:[times objectAtIndex:2]];
+    }
+    if(times.count > 3) {
+        endTime = [dateFormat dateFromString:[times objectAtIndex:3]];
+    }
+    
+    //NSString* startTimeString = [[times objectAtIndex:0] stringByAppendingString:@" "];
+    //startTimeString  = [startTimeString stringByAppendingString:[times objectAtIndex:1]];
+    //NSString* endTimeString = [[times objectAtIndex:2] stringByAppendingString:@" "];
+    //endTimeString = [endTimeString stringByAppendingString:[times objectAtIndex:3]];
+    //NSDate* startTime = [dateFormat dateFromString:startTimeString];
+    //NSDate* endTime = [dateFormat dateFromString:endTimeString];
+    
+    if(!startDate || !startTime || !endDate || !endTime) {
+        //[dateFormat setDateFormat:@"EEE, MM/dd/yyyy h:mma"];
+        //startTime = [dateFormat dateFromString:startTimeString];
+        //endTime = [dateFormat dateFromString:endTimeString];
+        [dateFormat setDateFormat:@"EEE, MM/dd/yyyy"];
+        startDate = [dateFormat dateFromString:[times objectAtIndex:0]];
+        endDate = [dateFormat dateFromString:[times objectAtIndex:2]];
+       
+        [dateFormat setDateFormat:@"h:mma"];
+        startTime = [dateFormat dateFromString:[times objectAtIndex:1]];
+        endTime = [dateFormat dateFromString:[times objectAtIndex:3]];
     }
     
     // These are in GMT conversion to CST will need to occur somewhere
-    NSLog(@"Start Time: %@", startTime);
-    NSLog(@"End Time: %@", endTime);
     //[dateFormat SetDateFormat:@""];
-    NSMutableArray* start_end_time;
+    //NSMutableArray* start_end_time;
     // May need to isert object at Index
-    [start_end_time addObject:startTime];
-    [start_end_time addObject:endTime];
-    return start_end_time;
+    //[start_end_time insertObject:startTime atIndex:0];
+    //[start_end_time insertObject:endTime atIndex:1];
+    NSLog(@"S date:  %@ S time: %@", startDate, startTime);
+    return [NSArray arrayWithObjects:startDate, startTime, endDate, endTime, DoW, nil];
 }
 
-
++(void) guessSessionSplits {
+    
+    
+}
 
 
 

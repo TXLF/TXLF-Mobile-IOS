@@ -60,7 +60,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [[[TXLFSessionStore sharedStore] allSessions] count];
+    return [[TXLFSessionStore allSessions :NO] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -70,7 +70,7 @@
     //if (cell == nil) {
         TXLFSessionCell* cell = [[TXLFSessionCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     //}
-    TXLFSession* session = [[[TXLFSessionStore sharedStore] allSessions] objectAtIndex:[indexPath row]];
+    TXLFSession* session = [[TXLFSessionStore allSessions :NO] objectAtIndex:[indexPath row]];
     cell.textLabel.text = [session sessionName];
     [[cell sessionPresenter] setText:[[session sessionDateTime] description]];
     return cell;
@@ -79,7 +79,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     TXLFSessionDetailViewController *detailView = [[TXLFSessionDetailViewController alloc] init];
-    TXLFSession* session = [[[TXLFSessionStore sharedStore] allSessions] objectAtIndex:[indexPath row]];
+    TXLFSession* session = [[TXLFSessionStore allSessions :NO] objectAtIndex:[indexPath row]];
     [detailView setSession:session];
     [[self navigationController] pushViewController:detailView animated:YES];
 }

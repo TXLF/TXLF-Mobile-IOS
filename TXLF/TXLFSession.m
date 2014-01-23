@@ -66,10 +66,17 @@
 
 // This should include a field for the origonal JSON text
 // in case there is some special formating that would be useful to preserve
--(void)setsessionDateTime:(NSDate *) startTime
-                         :(NSDate *) endTime {
-    [sessionDateTime insertObject:startTime atIndex:0];
-    [sessionDateTime insertObject:endTime atIndex:1];
+//
+// Need to account for multiple start/end days for events spread across multiple days
+-(void)setsessionDateTime:(NSDate *) startDate
+                         :(NSDate *) startTime
+                         :(NSDate *) endDate
+                         :(NSDate *) endTime
+                         :(NSString *) DoW {
+    if(!sessionDateTime) {
+        // Need to make sure ordering is preserved or tuen into dictionary
+        sessionDateTime = [NSArray arrayWithObjects:startDate,startTime,endDate,endTime,DoW,nil];
+    }
 }
 
 -(void)setsessionDocumentation:(NSString *) url {
@@ -92,7 +99,7 @@
     return sessionLocation;
 }
 
--(NSMutableArray *)sessionDateTime {
+-(NSArray *)sessionDateTime {
     return sessionDateTime;
 }
 
@@ -114,7 +121,7 @@
             [self setsessionLocation:@"500 East Cesar Chavez, Austin, TX, 78701" :@"Austin Convention Center - Building 1" :@"1" :@"101" :@"Lecture Hall" :[NSNumber numberWithFloat:85.6] :[NSNumber numberWithFloat:85.6] :@"No Notes"];
         }
         if(!sessionDateTime) {
-            [self setsessionDateTime:[NSDate date] :[NSDate date]];
+            [self setsessionDateTime:[NSDate date] :[NSDate date] :[NSDate date] :[NSDate date] :@"SAT"];
         }
         if(!sessionDocumentation) {
             [self setsessionDocumentation:@"http://texaslinuxfest.org"];
@@ -123,10 +130,32 @@
     return self;
 }
 
--(id) initWithTitleTime:(NSString *) title :(NSMutableArray *) time {
+-(id) initWithTitleTime:(NSString *) title :(NSArray *) time {
     self = [self init];
     [self setsessionName:title];
-    [self setsessionDateTime:[time objectAtIndex:0] :[time objectAtIndex:1]];
+    NSDate* time0;
+    NSDate* time1;
+    NSDate* time2;
+    NSDate* time3;
+    NSString* time4;
+    
+    NSUInteger count = [time count];
+    if(count < 1 || ! (time0 = [time objectAtIndex:0])) {
+        time0 = [NSDate date];
+    }
+    if(count < 2 || ! (time1 = [time objectAtIndex:1])) {
+        time1 = [NSDate date];
+    }
+    if(count < 3 || ! (time2 = [time objectAtIndex:2])) {
+        time2 = [NSDate date];
+    }
+    if(count < 4 || ! (time3 = [time objectAtIndex:3])) {
+        time3 = [NSDate date];
+    }
+    if(count < 5 || ! (time4 = [time objectAtIndex:4])) {
+        time4 = @"SAT";
+    }
+    [self setsessionDateTime:time0 :time1 :time2 :time3 :time4];
     return self;
 }
 

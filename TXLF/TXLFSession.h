@@ -15,7 +15,7 @@
     
     NSMutableArray  *sessionPresenter; //First Name, Last Name, Company, Title, Email Address, Phone Number, Notes
     NSMutableArray  *sessionLocation; //Addresss, Building, Floor, Room #, Room name, Notes
-    NSMutableArray  *sessionDateTime;
+    NSArray  *sessionDateTime;
     NSString *sessionDocumentation; //URL to slides
 }
 
@@ -45,8 +45,11 @@
                          :(NSNumber *) gpsY
                          :(NSString *) notes;
 
--(void)setsessionDateTime:(NSDate *) startTime
-                         :(NSDate *) endTime;
+-(void)setsessionDateTime:(NSDate *) startdate
+                         :(NSDate *) startTime
+                         :(NSDate *) endDate
+                         :(NSDate *) endTime
+                         :(NSString *) DoW;
 
 -(void)setsessionDocumentation:(NSString *) url;
 

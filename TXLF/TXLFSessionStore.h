@@ -11,14 +11,15 @@
 @class TXLFSession;
 
 @interface TXLFSessionStore : NSObject {
-    NSMutableArray *allSessions;
-    NSMutableArray *sessionSlots;
+
 }
+
+//   @property NSArray* allSessions;
 
 +(TXLFSessionStore *) sharedStore;
 
--(NSArray *) allSessions;
--(NSArray *) sessionSlots;
++(NSArray *) allSessions:(BOOL) regen;
+//+(NSArray *) sessionSlots;
 
 +(NSData *) fetchSessions;
 +(NSMutableArray *) generateSessions;
