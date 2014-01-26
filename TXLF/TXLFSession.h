@@ -49,7 +49,8 @@
                          :(NSDate *) startTime
                          :(NSDate *) endDate
                          :(NSDate *) endTime
-                         :(NSString *) DoW;
+                         :(NSString *) DoW
+                         :(NSNumber *) slot;
 
 -(void)setsessionDocumentation:(NSString *) url;
 
@@ -59,7 +60,7 @@
 -(NSString *)sessionAbstract;
 -(NSMutableArray *)sessionPresenter;
 -(NSMutableArray *)sessionLocation;
--(NSDate *)sessionDateTime;
+-(NSArray *)sessionDateTime;
 -(NSString *)sessionDocumentation;
 
 

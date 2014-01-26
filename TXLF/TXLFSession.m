@@ -72,10 +72,11 @@
                          :(NSDate *) startTime
                          :(NSDate *) endDate
                          :(NSDate *) endTime
-                         :(NSString *) DoW {
+                         :(NSString *) DoW
+                         :(NSNumber *) slot {
     if(!sessionDateTime) {
         // Need to make sure ordering is preserved or tuen into dictionary
-        sessionDateTime = [NSArray arrayWithObjects:startDate,startTime,endDate,endTime,DoW,nil];
+        sessionDateTime = [NSArray arrayWithObjects:startDate,startTime,endDate,endTime,DoW,slot,nil];
     }
 }
 
@@ -121,7 +122,7 @@
             [self setsessionLocation:@"500 East Cesar Chavez, Austin, TX, 78701" :@"Austin Convention Center - Building 1" :@"1" :@"101" :@"Lecture Hall" :[NSNumber numberWithFloat:85.6] :[NSNumber numberWithFloat:85.6] :@"No Notes"];
         }
         if(!sessionDateTime) {
-            [self setsessionDateTime:[NSDate date] :[NSDate date] :[NSDate date] :[NSDate date] :@"SAT"];
+            [self setsessionDateTime:[NSDate date] :[NSDate date] :[NSDate date] :[NSDate date] :@"SAT" :[NSNumber numberWithInteger:0]];
         }
         if(!sessionDocumentation) {
             [self setsessionDocumentation:@"http://texaslinuxfest.org"];
@@ -138,24 +139,28 @@
     NSDate* time2;
     NSDate* time3;
     NSString* time4;
+    NSNumber* time5;
     
     NSUInteger count = [time count];
-    if(count < 1 || ! (time0 = [time objectAtIndex:0])) {
+    if (count < 1 || ! (time0 = [time objectAtIndex:0])) {
         time0 = [NSDate date];
     }
-    if(count < 2 || ! (time1 = [time objectAtIndex:1])) {
+    if (count < 2 || ! (time1 = [time objectAtIndex:1])) {
         time1 = [NSDate date];
     }
-    if(count < 3 || ! (time2 = [time objectAtIndex:2])) {
+    if (count < 3 || ! (time2 = [time objectAtIndex:2])) {
         time2 = [NSDate date];
     }
-    if(count < 4 || ! (time3 = [time objectAtIndex:3])) {
+    if (count < 4 || ! (time3 = [time objectAtIndex:3])) {
         time3 = [NSDate date];
     }
-    if(count < 5 || ! (time4 = [time objectAtIndex:4])) {
+    if (count < 5 || ! (time4 = [time objectAtIndex:4])) {
         time4 = @"SAT";
     }
-    [self setsessionDateTime:time0 :time1 :time2 :time3 :time4];
+    if (count < 6 || ! (time5 = [time objectAtIndex:5])) {
+        time5 = [NSNumber numberWithInteger:0];
+    }
+    [self setsessionDateTime:time0 :time1 :time2 :time3 :time4 :time5];
     return self;
 }
 
