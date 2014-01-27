@@ -74,10 +74,8 @@
                          :(NSDate *) endTime
                          :(NSString *) DoW
                          :(NSNumber *) slot {
-    if(!sessionDateTime) {
-        // Need to make sure ordering is preserved or tuen into dictionary
+        // Need to make sure ordering is preserved or turn into dictionary
         sessionDateTime = [NSArray arrayWithObjects:startDate,startTime,endDate,endTime,DoW,slot,nil];
-    }
 }
 
 -(void)setsessionDocumentation:(NSString *) url {
@@ -134,12 +132,12 @@
 -(id) initWithTitleTime:(NSString *) title :(NSArray *) time {
     self = [self init];
     [self setsessionName:title];
-    NSDate* time0;
-    NSDate* time1;
-    NSDate* time2;
-    NSDate* time3;
-    NSString* time4;
-    NSNumber* time5;
+    NSDate* time0 = [NSDate date];
+    NSDate* time1 = [NSDate date];
+    NSDate* time2 = [NSDate date];
+    NSDate* time3 = [NSDate date];
+    NSString* time4 = @"SAT";
+    NSNumber* time5 = 0;
     
     NSUInteger count = [time count];
     if (count < 1 || ! (time0 = [time objectAtIndex:0])) {

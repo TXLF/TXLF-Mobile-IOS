@@ -60,6 +60,7 @@
         
     } else {
         sessionJSON = [NSData dataWithContentsOfFile:localCachePath];
+        NSLog(@"Session information loaded from local cache.");
     }
     return sessionJSON;
 }
@@ -83,7 +84,7 @@
     NSMutableArray* sessionArray = [[NSMutableArray alloc] init];
     for(id singleSession in sessions) {
         NSDictionary* sessionDict = [self stripJSONObject:singleSession :@"node"];
-        NSString* stitle = [sessionDict objectForKey:@"title"];
+        NSString* stitle = [self cleanJSONstrings:[sessionDict objectForKey:@"title"]];
         NSString* sslot = [sessionDict objectForKey:@"field_session_slot"];
         NSString* snid = [sessionDict objectForKey:@"nid"];
         NSString* sroom = [sessionDict objectForKey:@"field_session_room"];
@@ -106,8 +107,9 @@
         [session setsessionAbstract:sbody];
         [session setsessionExperience:sexperience];
         [sessionArray addObject:session];
-        NSLog(@"%@", session.sessionName);
-        //NSLog(@"%@", [[session sessionDateTime] objectAtIndex:5]);
+        //NSLog(@"%@", session.sessionName);
+        //NSLog(@"%ld", (long)[[[session sessionDateTime] objectAtIndex:5] integerValue]);
+        //NSLog(@"%@", [[session sessionDateTime] objectAtIndex:2]);
     }
     return sessionArray;
 }
@@ -167,18 +169,44 @@
     //[start_end_time insertObject:startTime atIndex:0];
     //[start_end_time insertObject:endTime atIndex:1];
     //NSLog(@"S date:  %@ S time: %@", startDate, startTime);
-    // These need to be specified in a resource file and/or generated from the JSON data available
-    NSDate* slot1 = [NSDate dateWithTimeIntervalSince1970:1370095200]; // JUN_1_2013 09:00
-    NSDate* slot2 = [NSDate dateWithTimeIntervalSince1970:1370098800];
-    NSDate* slot3 = [NSDate dateWithTimeIntervalSince1970:1370102400];
-    NSDate* slot4 = [NSDate dateWithTimeIntervalSince1970:1370104000];
-    NSDate* slot5 = [NSDate dateWithTimeIntervalSince1970:1370107600];
-    NSDate* slot6 = [NSDate dateWithTimeIntervalSince1970:1370111200];
-    NSDate* slot7 = [NSDate dateWithTimeIntervalSince1970:1370114800];
-    NSDate* slot8 = [NSDate dateWithTimeIntervalSince1970:1370118400];
-    NSDate* slot9 = [NSDate dateWithTimeIntervalSince1970:1370122000];
-    NSDate* slot10 = [NSDate dateWithTimeIntervalSince1970:1370125600];// JUN_1_2013 18:00
-    if ([startTime timeIntervalSinceDate:slot1] <= 0) {
+    // These need to be specified in a resource file and/or generated from the JSON data available and/or looped
+    NSArray* slots = [NSArray arrayWithObjects:
+                      [NSDate dateWithTimeIntervalSince1970:1370001600],// MAY_31_2013 07:00 CST
+                      [NSDate dateWithTimeIntervalSince1970:1370005200],
+                      [NSDate dateWithTimeIntervalSince1970:1370008800],
+                      [NSDate dateWithTimeIntervalSince1970:1370012400],
+                      [NSDate dateWithTimeIntervalSince1970:1370016000],
+                      [NSDate dateWithTimeIntervalSince1970:1370019600],
+                      [NSDate dateWithTimeIntervalSince1970:1370023200],
+                      [NSDate dateWithTimeIntervalSince1970:1370026800],
+                      [NSDate dateWithTimeIntervalSince1970:1370030400],
+                      [NSDate dateWithTimeIntervalSince1970:1370034000],
+                      [NSDate dateWithTimeIntervalSince1970:1370037600],
+                      [NSDate dateWithTimeIntervalSince1970:1370041200],
+                      [NSDate dateWithTimeIntervalSince1970:1370044800],// MAY_31_2013 19:00 CST
+                      [NSDate dateWithTimeIntervalSince1970:1370088000],// JUN_01_2013 07:00 CST
+                      [NSDate dateWithTimeIntervalSince1970:1370091600],
+                      [NSDate dateWithTimeIntervalSince1970:1370095200],
+                      [NSDate dateWithTimeIntervalSince1970:1370098800],
+                      [NSDate dateWithTimeIntervalSince1970:1370102400],
+                      [NSDate dateWithTimeIntervalSince1970:1370106000],
+                      [NSDate dateWithTimeIntervalSince1970:1370109600],
+                      [NSDate dateWithTimeIntervalSince1970:1370113200],
+                      [NSDate dateWithTimeIntervalSince1970:1370116800],
+                      [NSDate dateWithTimeIntervalSince1970:1370120400],
+                      [NSDate dateWithTimeIntervalSince1970:1370124000],
+                      [NSDate dateWithTimeIntervalSince1970:1370127600],
+                      [NSDate dateWithTimeIntervalSince1970:1370131200], nil]; // JUN_01_2013 19:00 CST
+    
+    for (NSInteger i = 0; i < slots.count; i++) {
+        if ([startTime timeIntervalSinceDate:[slots objectAtIndex:i]] <= 0) {
+            slot = [NSNumber numberWithInteger:i];
+            //NSLog(@"Slot: %@ - %@", slot, startTime);
+            break;
+        }
+    }
+ /*
+    if ([startTime timeIntervalSinceDate:[slots objectAtIndex:0]] <= 0) {
         slot = [NSNumber numberWithInteger:1];
         NSLog(@"Slot: %@ - %@", slot, startTime);
     } else if ([startTime timeIntervalSinceDate:slot2] <= 0) {
@@ -212,12 +240,21 @@
     } else {
         NSLog(@"Unable to determine session: %@", startTime);
     }
+  */
     return [NSArray arrayWithObjects:startDate, startTime, endDate, endTime, DoW, slot, nil];
 }
 
 +(void) guessSessionSplits {
     
     
+}
+
+// ToDo check if there is an API URL escape function that can do this
++(NSString *) cleanJSONstrings:(NSString *) toClean {
+    NSString* cleaned = [toClean stringByReplacingOccurrencesOfString:@"&#039;" withString:@"'"];
+    cleaned = [cleaned stringByReplacingOccurrencesOfString:@"&amp;" withString:@"&"];
+    cleaned = [cleaned stringByReplacingOccurrencesOfString:@"&quot;" withString:@"\""];
+    return cleaned;
 }
 
 

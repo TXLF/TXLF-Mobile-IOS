@@ -10,7 +10,9 @@
 
 @interface TXLFSessionCell : UITableViewCell
 
-@property (nonatomic, strong) IBOutlet UILabel* sessionName;
-@property (nonatomic, strong) IBOutlet UILabel* sessionPresenter;
+//@property (nonatomic, strong) IBOutlet UILabel* textLabel;
+//@property (nonatomic, strong) IBOutlet UILabel* detailTextLabel;
+//@property (weak, nonatomic) IBOutlet UIView *cellView;
+
 
 @end

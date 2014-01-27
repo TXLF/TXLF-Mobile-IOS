@@ -10,13 +10,18 @@
 
 @implementation TXLFSessionCell
 
-@synthesize sessionName;
-@synthesize sessionPresenter;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier];
     if (self) {
+        self.textLabel.numberOfLines = 0;
+        self.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        self.textLabel.font = [self.textLabel.font fontWithSize:10.0];
+        
+        self.detailTextLabel.numberOfLines = 0;
+        self.detailTextLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        self.detailTextLabel.font = [self.detailTextLabel.font fontWithSize:8.0];
     }
     return self;
 }
