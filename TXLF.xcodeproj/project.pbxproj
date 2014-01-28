@@ -662,7 +662,6 @@
 		5E91EC4418676E0B00EB6431 /* icon_check-in.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E91EC4318676E0B00EB6431 /* icon_check-in.png */; };
 		5EA82C4D186683B800B318FF /* TXLFSessionDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EA82C4B186683B800B318FF /* TXLFSessionDetailViewController.m */; };
 		5EA82C4E186683B800B318FF /* TXLFSessionDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EA82C4C186683B800B318FF /* TXLFSessionDetailViewController.xib */; };
-		5EA82C5018668BC800B318FF /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EA82C4F18668BC800B318FF /* iAd.framework */; };
 		5EA82C5818669D2500B318FF /* icon_venue.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EA82C5718669D2500B318FF /* icon_venue.png */; };
 		5EA82C5A18669EB300B318FF /* icon_scan.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EA82C5918669EB300B318FF /* icon_scan.png */; };
 		5EA82C5C1866A01A00B318FF /* icon_session.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EA82C5B1866A01A00B318FF /* icon_session.png */; };
@@ -1808,7 +1807,6 @@
 				5E0AE59B186BB7DE00179A86 /* CoreMedia.framework in Frameworks */,
 				5E0AE599186BB7C100179A86 /* CoreVideo.framework in Frameworks */,
 				5E0AE597186BB78000179A86 /* AudioToolbox.framework in Frameworks */,
-				5EA82C5018668BC800B318FF /* iAd.framework in Frameworks */,
 				5E7647191862BC620030AFB6 /* AVFoundation.framework in Frameworks */,
 				5ECC26F2181C7673004C9F44 /* CoreGraphics.framework in Frameworks */,
 				5ECC26F4181C7673004C9F44 /* UIKit.framework in Frameworks */,

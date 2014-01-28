@@ -100,12 +100,13 @@
         }
         return (NSComparisonResult)NSOrderedSame;
     }];
-    NSLog(@"Number of rows for slot %@ : %@", [uniqueSlotsSorted objectAtIndex:section], [slotCount valueForKey:[[uniqueSlotsSorted objectAtIndex:section] stringValue]]);
+    //NSLog(@"Number of rows for slot %@ : %@", [uniqueSlotsSorted objectAtIndex:section], [slotCount valueForKey:[[uniqueSlotsSorted objectAtIndex:section] stringValue]]);
     return [[slotCount valueForKey:[[uniqueSlotsSorted objectAtIndex:section] stringValue]] integerValue];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     static NSString *CellIdentifier = @"sessionCell";
     //TXLFSessionCell* cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     //if (cell == nil) {
@@ -144,9 +145,22 @@
 
     
     
+    // Yeah, so again, this whole logic & the data strucctures need to be organized/optimized
+    // it's silly to re-do this for every table row
+    NSInteger* viewBy = 0;
+    NSNumber* slotID = [uniqueSlotsSorted objectAtIndex:[indexPath section]];
+    NSMutableArray* sessionsForSection = [[NSMutableArray alloc] init];
+    for (NSInteger i = 0 ; i < [sessions count]; i++) {
+        if([[[[sessions objectAtIndex:i] sessionDateTime] objectAtIndex:5] integerValue] == [slotID integerValue]) {
+            [sessionsForSection addObject:[sessions objectAtIndex:i]];
+        }
+        
+    }
     
     
-    TXLFSession* session = [[TXLFSessionStore allSessions :NO] objectAtIndex:[indexPath row]];
+    //TXLFSession* session = [[TXLFSessionStore allSessions :NO] objectAtIndex:[indexPath row]];
+    //NSLog(@"indexPath row: %ld - Number of Session: %@", (long)[indexPath row], [slotCount valueForKey:[slotID stringValue]]);
+    TXLFSession* session = [sessionsForSection objectAtIndex:[indexPath row]];
     cell.textLabel.text = [session sessionName];
     NSString* subtitle = [[session sessionPresenter] objectAtIndex:0];
     subtitle = [subtitle stringByAppendingString:@" " ];
