@@ -168,6 +168,23 @@
     NSString* subtitle_1 = [NSDateFormatter localizedStringFromDate:[[session sessionDateTime] objectAtIndex:1] dateStyle:NSDateFormatterNoStyle timeStyle: NSDateFormatterShortStyle];
     subtitle = [subtitle stringByAppendingString:@" " ];
     cell.detailTextLabel.text = [subtitle stringByAppendingString:subtitle_1];
+    
+    NSString* track = [[session sessionLocation] objectAtIndex:2];
+    //NSLog(@"Track: %@", track);
+    // This is not general enough, again it needs to be in a downloadaled resource file or generated from JSON
+    // Soo much clean-up to do
+    if ([track  isEqual: @"Track A - Room 101"]) {
+        cell.contentView.backgroundColor = [UIColor greenColor];
+    } else if([track  isEqual: @"Track C - Room 102"]) {
+        cell.contentView.backgroundColor = [UIColor yellowColor];
+    } else if([track  isEqual: @"Track C - Room 105"]) {
+        cell.contentView.backgroundColor = [UIColor brownColor];
+    } else if([track  isEqual: @"Track D - Room 106"]) {
+        cell.contentView.backgroundColor = [UIColor cyanColor];
+    } else if([track  isEqual: @"Track E - Room 103"]) {
+        cell.contentView.backgroundColor = [UIColor magentaColor];
+    }
+    
     return cell;
 }
 
@@ -177,6 +194,66 @@
     TXLFSession* session = [[TXLFSessionStore allSessions :NO] objectAtIndex:[indexPath row]];
     [detailView setSession:session];
     [[self navigationController] pushViewController:detailView animated:YES];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    NSString *sectionName;
+    switch (section)
+    {
+        case 0:
+            sectionName = NSLocalizedString(@"Slot - 1", @"Slot - 1");
+            break;
+        case 1:
+            sectionName = NSLocalizedString(@"Slot - 2", @"Slot - 2");
+            break;
+        case 2:
+            sectionName = NSLocalizedString(@"Slot - 3", @"Slot - 3");
+            break;
+        case 3:
+            sectionName = NSLocalizedString(@"Slot - 4", @"Slot - 4");
+            break;
+        case 4:
+            sectionName = NSLocalizedString(@"Slot - 5", @"Slot - 5");
+            break;
+        case 5:
+            sectionName = NSLocalizedString(@"Slot - 6", @"Slot - 6");
+            break;
+        case 6:
+            sectionName = NSLocalizedString(@"Slot - 7", @"Slot - 7");
+            break;
+        case 7:
+            sectionName = NSLocalizedString(@"Slot - 8", @"Slot - 8");
+            break;
+        case 8:
+            sectionName = NSLocalizedString(@"Slot - 9", @"Slot - 9");
+            break;
+        case 9:
+            sectionName = NSLocalizedString(@"Slot - 10", @"Slot - 10");
+            break;
+        case 10:
+            sectionName = NSLocalizedString(@"Slot - 11", @"Slot - 11");
+            break;
+        case 11:
+            sectionName = NSLocalizedString(@"Slot - 12", @"Slot - 12");
+            break;
+        case 12:
+            sectionName = NSLocalizedString(@"Slot - 13", @"Slot - 13");
+            break;
+        case 13:
+            sectionName = NSLocalizedString(@"Slot - 14", @"Slot - 14");
+            break;
+        case 14:
+            sectionName = NSLocalizedString(@"Slot - 15", @"Slot - 15");
+            break;
+        case 15:
+            sectionName = NSLocalizedString(@"Slot - 16", @"Slot - 16");
+            break;
+        default:
+            sectionName = @"A Slot";
+            break;
+    }
+    return sectionName;
 }
 
 
