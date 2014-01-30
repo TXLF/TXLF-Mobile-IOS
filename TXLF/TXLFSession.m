@@ -109,6 +109,7 @@
 -(id) init {
     self = [super init];
     sessionPresenter = [[NSMutableArray alloc] init];
+    sessionLocation = [[NSMutableArray alloc] init];
     if(self) {
         if(!sessionName) {
             [self setsessionName:@"Test Session"];

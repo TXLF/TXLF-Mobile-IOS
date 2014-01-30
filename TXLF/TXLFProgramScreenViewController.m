@@ -169,13 +169,13 @@
     subtitle = [subtitle stringByAppendingString:@" " ];
     cell.detailTextLabel.text = [subtitle stringByAppendingString:subtitle_1];
     
-    NSString* track = [[session sessionLocation] objectAtIndex:2];
+    NSString* track = [[session sessionLocation] objectAtIndex:3];
     //NSLog(@"Track: %@", track);
     // This is not general enough, again it needs to be in a downloadaled resource file or generated from JSON
     // Soo much clean-up to do
     if ([track  isEqual: @"Track A - Room 101"]) {
         cell.contentView.backgroundColor = [UIColor greenColor];
-    } else if([track  isEqual: @"Track C - Room 102"]) {
+    } else if([track  isEqual: @"Track B - Room 102"]) {
         cell.contentView.backgroundColor = [UIColor yellowColor];
     } else if([track  isEqual: @"Track C - Room 105"]) {
         cell.contentView.backgroundColor = [UIColor brownColor];
@@ -190,8 +190,55 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    // This is duplicated code and should be put in method/optimized/etc.
+    NSArray* sessions = [TXLFSessionStore allSessions:NO];
+    NSMutableArray* uniqueSlots = [[NSMutableArray alloc] init];
+    NSMutableDictionary* slotCount = [[NSMutableDictionary alloc] init];
+    //while (currentObject = [[sessions objectEnumerator] nextObject]) {
+    for(NSInteger i = 0; i < sessions.count; i++) {
+        NSNumber* slot = [[[sessions objectAtIndex:i] sessionDateTime] objectAtIndex:5];
+        if (![uniqueSlots containsObject:slot]) {
+            [uniqueSlots addObject:slot];
+            [slotCount setValue:[NSNumber numberWithInt:1] forKey:[slot stringValue]];
+        } else {
+            NSInteger c = [[slotCount valueForKey:[slot stringValue]] integerValue];
+            c++;
+            [slotCount setValue:[NSNumber numberWithInt:c] forKey:[slot stringValue]];
+        }
+    }
+    
+    NSArray *uniqueSlotsSorted = [uniqueSlots sortedArrayUsingComparator: ^NSComparisonResult(id obj1, id obj2) {
+        
+        if ([obj1 integerValue] > [obj2 integerValue]) {
+            return (NSComparisonResult)NSOrderedDescending;
+        }
+        
+        if ([obj1 integerValue] < [obj2 integerValue]) {
+            return (NSComparisonResult)NSOrderedAscending;
+        }
+        return (NSComparisonResult)NSOrderedSame;
+    }];
+    
+    
+    
+    // Yeah, so again, this whole logic & the data strucctures need to be organized/optimized
+    // it's silly to re-do this for every table row
+    NSInteger* viewBy = 0;
+    NSNumber* slotID = [uniqueSlotsSorted objectAtIndex:[indexPath section]];
+    NSMutableArray* sessionsForSection = [[NSMutableArray alloc] init];
+    for (NSInteger i = 0 ; i < [sessions count]; i++) {
+        if([[[[sessions objectAtIndex:i] sessionDateTime] objectAtIndex:5] integerValue] == [slotID integerValue]) {
+            [sessionsForSection addObject:[sessions objectAtIndex:i]];
+        }
+        
+    }
+
+    
+    
+    
     TXLFSessionDetailViewController *detailView = [[TXLFSessionDetailViewController alloc] init];
-    TXLFSession* session = [[TXLFSessionStore allSessions :NO] objectAtIndex:[indexPath row]];
+    TXLFSession* session = [sessionsForSection objectAtIndex:[indexPath row]];
     [detailView setSession:session];
     [[self navigationController] pushViewController:detailView animated:YES];
 }

@@ -103,9 +103,9 @@
         [session setsessionPresenter:sfname :slname :scompany :stitle :@"N/A" :@"N/A" :sbio
                                             :[UIImage imageWithContentsOfFile:@"/net/inni.odlenixon.com/mnt/NI/home/george/src/TXLF/TXLF/icon_tux.png"]
                                             :[NSURL URLWithString:swebsite] :@"N/A"];
-        [session setsessionLocation:@"one drive" :@"Austin Convention Center" :@"N/A" :sroom :@"N/A" :[[NSNumber alloc] init] :[[NSNumber alloc] init] :@"N/A"];
-        NSString* track = [[session sessionLocation] objectAtIndex:3];
-        NSLog(@"Track: %@", track);
+        
+        [session setsessionLocation:@"one drive" :@"Austin Convention Center" :@"N/A" :sroom :@"N/A" :[NSNumber numberWithInteger:0] :[NSNumber numberWithInteger:0] :@"N/A"];
+    
 
         [session setsessionAbstract:sbody];
         [session setsessionExperience:sexperience];
