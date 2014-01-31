@@ -31,20 +31,35 @@
 }
 
 +(NSArray*) allSessions :(BOOL) regen {
-    static NSMutableArray* allSessions = nil;
+    static NSArray* allSessions = nil;
     // regen -> Refresh sesssions without having to restart the app
     if(!allSessions || regen) {
         allSessions = [self generateSessions];
+        NSLog(@"Sessions generated");
     }
     return allSessions;
 }
 
-//+(NSArray *) sessionSlots {
-//    return sessionSlots;
-//}
++(NSDictionary *) allSlots {
+    static NSDictionary* allSlots = nil;
+    if(!allSlots) {
+        allSlots = [self generateSlots];
+        NSLog(@"Slots generated");
+    }
+    return allSlots;
+}
+
++(NSDictionary *) allTracks {
+    static NSDictionary* allTracks = nil;
+    if(!allTracks) {
+        allTracks = [self generateTracks];
+        NSLog(@"Slots generated");
+    }
+    return allTracks;
+}
 
 +(NSData *) fetchSessions {
-    //These need to be specified in a resource file or something
+    //These URLs need to be specified in a resource file or something
     NSString *localCachePath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)
                                  objectAtIndex:0] stringByAppendingPathComponent:@"session-schedule_mobile.json"];
     //NSURL *url = [NSURL URLWithString:@"http://2013.texaslinuxfest.org/session-schedule_mobile"];
@@ -81,6 +96,8 @@
     //Probably need some error handling or something
     //The typing for sessions propably needs to be refined
     NSArray* sessions = [TXLFSessionStore stripJSONObject:sessionDictionary :@"nodes"];
+    NSDictionary* sessionsDict = [TXLFSessionStore stripJSONObject:sessionDictionary :@"nodes"];
+    
     NSMutableArray* sessionArray = [[NSMutableArray alloc] init];
     for(id singleSession in sessions) {
         NSDictionary* sessionDict = [self stripJSONObject:singleSession :@"node"];
@@ -115,6 +132,18 @@
         //NSLog(@"%@", [[session sessionDateTime] objectAtIndex:2]);
     }
     return sessionArray;
+}
+
+// This is generated more effeciently initially via GenerateSessions
+// and should nominally not need to be called
++(NSDictionary *) generateSlots {
+    return [[NSDictionary alloc] init];
+}
+
+// This is generated more effeciently initially via GenerateSessions
+// and should nominally not need to be called
++(NSDictionary *) generateTracks {
+    return [[NSDictionary alloc] init];
 }
 
 +(NSArray *) parseSessionDate :(NSString *) dates {

@@ -174,15 +174,15 @@
     // This is not general enough, again it needs to be in a downloadaled resource file or generated from JSON
     // Soo much clean-up to do
     if ([track  isEqual: @"Track A - Room 101"]) {
-        cell.contentView.backgroundColor = [UIColor greenColor];
+        cell.contentView.backgroundColor = [UIColor redColor];
     } else if([track  isEqual: @"Track B - Room 102"]) {
-        cell.contentView.backgroundColor = [UIColor yellowColor];
+        cell.contentView.backgroundColor = [UIColor orangeColor];
     } else if([track  isEqual: @"Track C - Room 105"]) {
-        cell.contentView.backgroundColor = [UIColor brownColor];
+        cell.contentView.backgroundColor = [UIColor yellowColor];
     } else if([track  isEqual: @"Track D - Room 106"]) {
-        cell.contentView.backgroundColor = [UIColor cyanColor];
+        cell.contentView.backgroundColor = [UIColor greenColor];
     } else if([track  isEqual: @"Track E - Room 103"]) {
-        cell.contentView.backgroundColor = [UIColor magentaColor];
+        cell.contentView.backgroundColor = [UIColor blueColor];
     }
     
     return cell;

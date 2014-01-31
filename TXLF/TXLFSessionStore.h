@@ -14,12 +14,15 @@
 
 }
 
-//   @property NSArray* allSessions;
+//@property NSArray* allSessions;
+//@property NSDictionary* allSlots;
+//@property NSDictionary* allTracks;
 
 +(TXLFSessionStore *) sharedStore;
 
 +(NSArray *) allSessions:(BOOL) regen;
-//+(NSArray *) sessionSlots;
++(NSDictionary *) allSlots;
++(NSDictionary *) allTracks;
 
 +(NSData *) fetchSessions;
 +(NSMutableArray *) generateSessions;
