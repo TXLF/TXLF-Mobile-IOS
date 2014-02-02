@@ -21,12 +21,12 @@
 +(TXLFSessionStore *) sharedStore;
 
 +(NSArray *) allSessions:(BOOL) regen;
-+(NSDictionary *) allSlots;
-+(NSDictionary *) allTracks;
++(NSArray *) allSlots;
++(NSArray *) allTracks;
 
 +(NSData *) fetchSessions;
-+(NSMutableArray *) generateSessions;
-+(id) stripJSONObject:(NSDictionary *) dict :(NSString *) objectName;
-+(NSMutableArray *) parseSessionDate:(NSString *) dates;
+//+(NSMutableArray *) generateSessions;
+//+(NSMutableArrary *) generateSlots;
+//+(id) stripJSONObject:(NSDictionary *) dict :(NSString *) objectName;
 
 @end

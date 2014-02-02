@@ -40,8 +40,8 @@
     return allSessions;
 }
 
-+(NSDictionary *) allSlots {
-    static NSDictionary* allSlots = nil;
++(NSArray *) allSlots {
+    static NSArray* allSlots = nil;
     if(!allSlots) {
         allSlots = [self generateSlots];
         NSLog(@"Slots generated");
@@ -49,11 +49,11 @@
     return allSlots;
 }
 
-+(NSDictionary *) allTracks {
-    static NSDictionary* allTracks = nil;
++(NSArray *) allTracks {
+    static NSArray* allTracks = nil;
     if(!allTracks) {
         allTracks = [self generateTracks];
-        NSLog(@"Slots generated");
+        NSLog(@"Tracks generated");
     }
     return allTracks;
 }
@@ -93,202 +93,45 @@
     NSData* sessionJSON = [TXLFSessionStore fetchSessions];
     NSError* errorObj = [[NSError alloc] initWithCoder:nil];
     NSDictionary* sessionDictionary = [NSJSONSerialization JSONObjectWithData:sessionJSON options:0 error:&errorObj];
-    //Probably need some error handling or something
-    //The typing for sessions propably needs to be refined
     NSArray* sessions = [TXLFSessionStore stripJSONObject:sessionDictionary :@"nodes"];
-    NSDictionary* sessionsDict = [TXLFSessionStore stripJSONObject:sessionDictionary :@"nodes"];
-    
     NSMutableArray* sessionArray = [[NSMutableArray alloc] init];
     for(id singleSession in sessions) {
         NSDictionary* sessionDict = [self stripJSONObject:singleSession :@"node"];
-        NSString* stitle = [self cleanJSONstrings:[sessionDict objectForKey:@"title"]];
-        NSString* sslot = [sessionDict objectForKey:@"field_session_slot"];
-        NSString* snid = [sessionDict objectForKey:@"nid"];
-        NSString* sroom = [sessionDict objectForKey:@"field_session_room"];
-        NSString* spath = [sessionDict objectForKey:@"path"];
-        NSString* sbody = [sessionDict objectForKey:@"body"];
-        NSString* sexperience = [sessionDict objectForKey:@"field_experience"];
-        NSString* surl = [sessionDict objectForKey:@"uri"];
-        NSString* sbio = [sessionDict objectForKey:@"field_profile_bio"];
-        NSString* spic = [sessionDict objectForKey:@"picture"];
-        NSString* scompany = [sessionDict objectForKey:@"field_profile_company"];
-        NSString* swebsite = [sessionDict objectForKey:@"field_profile_website"];
-        NSString* sfname = [sessionDict objectForKey:@"field_profile_first_name"];
-        NSString* slname = [sessionDict objectForKey:@"field_profile_last_name"];
-        NSString* suid_1 = [sessionDict objectForKey:@"uid_1"];
-        TXLFSession* session = [[TXLFSession alloc] initWithTitleTime:stitle :[self parseSessionDate:sslot]]; //Current date as placeholder
-        [session setsessionPresenter:sfname :slname :scompany :stitle :@"N/A" :@"N/A" :sbio
-                                            :[UIImage imageWithContentsOfFile:@"/net/inni.odlenixon.com/mnt/NI/home/george/src/TXLF/TXLF/icon_tux.png"]
-                                            :[NSURL URLWithString:swebsite] :@"N/A"];
-        
-        [session setsessionLocation:@"one drive" :@"Austin Convention Center" :@"N/A" :sroom :@"N/A" :[NSNumber numberWithInteger:0] :[NSNumber numberWithInteger:0] :@"N/A"];
-    
-
-        [session setsessionAbstract:sbody];
-        [session setsessionExperience:sexperience];
+        TXLFSession* session = [[TXLFSession alloc] initWithStringsDict:sessionDict];
         [sessionArray addObject:session];
-        //NSLog(@"%@", session.sessionName);
-        //NSLog(@"%ld", (long)[[[session sessionDateTime] objectAtIndex:5] integerValue]);
-        //NSLog(@"%@", [[session sessionDateTime] objectAtIndex:2]);
     }
     return sessionArray;
 }
 
-// This is generated more effeciently initially via GenerateSessions
-// and should nominally not need to be called
-+(NSDictionary *) generateSlots {
-    return [[NSDictionary alloc] init];
-}
-
-// This is generated more effeciently initially via GenerateSessions
-// and should nominally not need to be called
-+(NSDictionary *) generateTracks {
-    return [[NSDictionary alloc] init];
-}
-
-+(NSArray *) parseSessionDate :(NSString *) dates {
-    // May need to be updated handle sessions that spam multiple days
-    // Also breaking up the start/end times into dates and times is probably pointless
-    // when using NSDate and the storage mechanism
-    // so this need lots of cleanup
-    NSArray* times = [dates componentsSeparatedByString:@" - "];
-    NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init];
-    NSDate* startDate = [NSDate date];
-    NSDate* startTime = [NSDate date];
-    NSDate* endDate = [NSDate date];
-    NSDate* endTime = [NSDate date];
-    // Needs to be implemented
-    NSString* DoW = @"SAT";
-    NSNumber* slot = [NSNumber numberWithInteger:0];
-    
-    if(times.count > 0) {
-        startDate = [dateFormat dateFromString:[times objectAtIndex:0]];
-    }
-    if(times.count > 1) {
-        startTime = [dateFormat dateFromString:[times objectAtIndex:1]];
-    }
-    if(times.count > 2) {
-        endDate = [dateFormat dateFromString:[times objectAtIndex:2]];
-    }
-    if(times.count > 3) {
-        endTime = [dateFormat dateFromString:[times objectAtIndex:3]];
-    }
-    
-    NSString* startTimeString = [[times objectAtIndex:0] stringByAppendingString:@" "];
-    startTimeString  = [startTimeString stringByAppendingString:[times objectAtIndex:1]];
-    NSString* endTimeString = [[times objectAtIndex:2] stringByAppendingString:@" "];
-    endTimeString = [endTimeString stringByAppendingString:[times objectAtIndex:3]];
-    startTime = [dateFormat dateFromString:startTimeString];
-    endTime = [dateFormat dateFromString:endTimeString];
-    
-    if(!startDate || !startTime || !endDate || !endTime) {
-        [dateFormat setDateFormat:@"EEE, MM/dd/yyyy h:mma"];
-        startTime = [dateFormat dateFromString:startTimeString];
-        endTime = [dateFormat dateFromString:endTimeString];
-        [dateFormat setDateFormat:@"EEE, MM/dd/yyyy"];
-        startDate = [dateFormat dateFromString:[times objectAtIndex:0]];
-        endDate = [dateFormat dateFromString:[times objectAtIndex:2]];
-       
-        //[dateFormat setDateFormat:@"h:mma"];
-        //startTime = [dateFormat dateFromString:[times objectAtIndex:1]];
-        //endTime = [dateFormat dateFromString:[times objectAtIndex:3]];
-    }
-    
-    // These are in GMT conversion to CST will need to occur somewhere
-    //[dateFormat SetDateFormat:@""];
-    //NSMutableArray* start_end_time;
-    // May need to isert object at Index
-    //[start_end_time insertObject:startTime atIndex:0];
-    //[start_end_time insertObject:endTime atIndex:1];
-    //NSLog(@"S date:  %@ S time: %@", startDate, startTime);
-    // These need to be specified in a resource file and/or generated from the JSON data available and/or looped
-    NSArray* slots = [NSArray arrayWithObjects:
-                      [NSDate dateWithTimeIntervalSince1970:1370001600],// MAY_31_2013 07:00 CST
-                      [NSDate dateWithTimeIntervalSince1970:1370005200],
-                      [NSDate dateWithTimeIntervalSince1970:1370008800],
-                      [NSDate dateWithTimeIntervalSince1970:1370012400],
-                      [NSDate dateWithTimeIntervalSince1970:1370016000],
-                      [NSDate dateWithTimeIntervalSince1970:1370019600],
-                      [NSDate dateWithTimeIntervalSince1970:1370023200],
-                      [NSDate dateWithTimeIntervalSince1970:1370026800],
-                      [NSDate dateWithTimeIntervalSince1970:1370030400],
-                      [NSDate dateWithTimeIntervalSince1970:1370034000],
-                      [NSDate dateWithTimeIntervalSince1970:1370037600],
-                      [NSDate dateWithTimeIntervalSince1970:1370041200],
-                      [NSDate dateWithTimeIntervalSince1970:1370044800],// MAY_31_2013 19:00 CST
-                      [NSDate dateWithTimeIntervalSince1970:1370088000],// JUN_01_2013 07:00 CST
-                      [NSDate dateWithTimeIntervalSince1970:1370091600],
-                      [NSDate dateWithTimeIntervalSince1970:1370095200],
-                      [NSDate dateWithTimeIntervalSince1970:1370098800],
-                      [NSDate dateWithTimeIntervalSince1970:1370102400],
-                      [NSDate dateWithTimeIntervalSince1970:1370106000],
-                      [NSDate dateWithTimeIntervalSince1970:1370109600],
-                      [NSDate dateWithTimeIntervalSince1970:1370113200],
-                      [NSDate dateWithTimeIntervalSince1970:1370116800],
-                      [NSDate dateWithTimeIntervalSince1970:1370120400],
-                      [NSDate dateWithTimeIntervalSince1970:1370124000],
-                      [NSDate dateWithTimeIntervalSince1970:1370127600],
-                      [NSDate dateWithTimeIntervalSince1970:1370131200], nil]; // JUN_01_2013 19:00 CST
-    
-    for (NSInteger i = 0; i < slots.count; i++) {
-        if ([startTime timeIntervalSinceDate:[slots objectAtIndex:i]] <= 0) {
-            slot = [NSNumber numberWithInteger:i];
-            //NSLog(@"Slot: %@ - %@", slot, startTime);
-            break;
++(NSArray *) generateSlots {
+    NSMutableArray *allSlotsArray = [[NSMutableArray alloc] init];
+    NSArray *sessions = [TXLFSessionStore allSessions:NO];
+    for (id session in sessions) {
+        NSDate *startTime = [[session sessionSlot] objectForKey:@"startTime"];
+        // Unique Insertion sort
+        int n = allSlotsArray.count;
+        if (n < 1) {
+            [allSlotsArray addObject:startTime];
+        } else {
+            while (--n && [startTime compare:[allSlotsArray objectAtIndex:n]] == NSOrderedAscending);
+        }
+        if([startTime compare:[allSlotsArray objectAtIndex:n]] == NSOrderedDescending) {
+            [allSlotsArray  insertObject:startTime atIndex:n+1];
+        } else if (n == 0 && [startTime compare:[allSlotsArray objectAtIndex:n]] != NSOrderedSame) {
+            [allSlotsArray  insertObject:startTime atIndex:n];
         }
     }
- /*
-    if ([startTime timeIntervalSinceDate:[slots objectAtIndex:0]] <= 0) {
-        slot = [NSNumber numberWithInteger:1];
-        NSLog(@"Slot: %@ - %@", slot, startTime);
-    } else if ([startTime timeIntervalSinceDate:slot2] <= 0) {
-        slot = [NSNumber numberWithInteger:2];
-        NSLog(@"Slot: %@ - %@", slot, startTime);
-    } else if ([startTime timeIntervalSinceDate:slot3] <= 0) {
-        slot = [NSNumber numberWithInteger:3];
-        NSLog(@"Slot: %@", slot);
-        NSLog(@"Slot: %@ - %@", slot, startTime);
-    } else if ([startTime timeIntervalSinceDate:slot4] <= 0) {
-        slot = [NSNumber numberWithInteger:4];
-        NSLog(@"Slot: %@ - %@", slot, startTime);
-    } else if ([startTime timeIntervalSinceDate:slot5] <= 0) {
-        slot = [NSNumber numberWithInteger:5];
-        NSLog(@"Slot: %@ - %@", slot, startTime);
-    } else if ([startTime timeIntervalSinceDate:slot6] <= 0) {
-        slot = [NSNumber numberWithInteger:6];
-        NSLog(@"Slot: %@ - %@", slot, startTime);
-    } else if ([startTime timeIntervalSinceDate:slot7] <= 0) {
-        slot = [NSNumber numberWithInteger:7];
-        NSLog(@"Slot: %@ - %@", slot, startTime);
-    } else if ([startTime timeIntervalSinceDate:slot8] <= 0) {
-        slot = [NSNumber numberWithInteger:8];
-        NSLog(@"Slot: %@ - %@", slot, startTime);
-    } else if ([startTime timeIntervalSinceDate:slot9] <= 0) {
-        slot = [NSNumber numberWithInteger:9];
-        NSLog(@"Slot: %@ - %@", slot, startTime);
-    } else if ([startTime timeIntervalSinceDate:slot10] <= 0) {
-        slot = [NSNumber numberWithInteger:10];
-        NSLog(@"Slot: %@ - %@", slot, startTime);
-    } else {
-        NSLog(@"Unable to determine session: %@", startTime);
+    return allSlotsArray;
+}
+
++(NSArray *) generateTracks {
+    NSMutableArray *allTracksArray = [[NSMutableArray alloc] init];
+    for (id session in [TXLFSessionStore allSessions:NO]) {
+        NSString *track = [[[session sessionSlot] objectForKey:@"sessionLocation"] objectForKey:@"roomNumber"];
+        if (![allTracksArray containsObject:track]) {
+            [allTracksArray addObject:track];
+        }
     }
-  */
-    return [NSArray arrayWithObjects:startDate, startTime, endDate, endTime, DoW, slot, nil];
+    return allTracksArray;
 }
-
-+(void) guessSessionSplits {
-    
-    
-}
-
-// ToDo check if there is an API URL escape function that can do this
-+(NSString *) cleanJSONstrings:(NSString *) toClean {
-    NSString* cleaned = [toClean stringByReplacingOccurrencesOfString:@"&#039;" withString:@"'"];
-    cleaned = [cleaned stringByReplacingOccurrencesOfString:@"&amp;" withString:@"&"];
-    cleaned = [cleaned stringByReplacingOccurrencesOfString:@"&quot;" withString:@"\""];
-    return cleaned;
-}
-
-
-
 @end

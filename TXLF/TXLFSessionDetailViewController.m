@@ -31,22 +31,22 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    NSMutableArray* presenter = [session sessionPresenter];
-    NSString* name = [presenter objectAtIndex:0];
+    NSDictionary* presenter = [session sessionPresenter];
+    NSString* name = [presenter objectForKey:@"firstName"];
     name = [name stringByAppendingString:@" "];
-    name = [name stringByAppendingString:[presenter objectAtIndex:1]];
+    name = [name stringByAppendingString:[presenter objectForKey:@"lastName"]];
     [dPresenter setText:name];
     
-    NSString* biography = [presenter objectAtIndex:6];
+    NSString* biography = [presenter objectForKey:@"bio"];
     [bio setText:biography ];
     
-    NSString* session_title = [presenter objectAtIndex:3];
+    NSString* session_title = [session sessionTitle];
     [dtitle setText:session_title];
     
-    UIImage* ppic = [presenter objectAtIndex:7];
+    UIImage* ppic = [presenter objectForKey:@"picture"];
     [pic setImage:ppic];
     
-    NSString* session_abstract = [session sessionAbstract];
+    NSString* session_abstract = [[session sessionPresentation] objectForKey:@"abstract"];
     [abstract setText:session_abstract];
     
 }
