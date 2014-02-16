@@ -127,11 +127,11 @@
 +(NSArray *) generateTracks {
     NSMutableArray *allTracksArray = [[NSMutableArray alloc] init];
     for (id session in [TXLFSessionStore allSessions:NO]) {
-        NSString *track = [[[session sessionSlot] objectForKey:@"sessionLocation"] objectForKey:@"roomNumber"];
+        NSString *track = [[session sessionLocation] objectForKey:@"roomNumber"];
         if (![allTracksArray containsObject:track]) {
             [allTracksArray addObject:track];
         }
     }
-    return allTracksArray;
+    return [allTracksArray sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
 }
 @end

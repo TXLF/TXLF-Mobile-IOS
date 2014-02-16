@@ -35,17 +35,17 @@
 {
     // Return the number of sections.
 
-    // if sorting by slots
-    return [[TXLFSessionStore allSlots] count];
-    // If sorting by tracks
-    //return [[TXLFSessionStore allTracks] count];
-    // If sorting by Favs
+    /* if sorting by slots
+    return [[TXLFSessionStore allSlots] count]; */
+    /* If sorting by tracks */
+    return [[TXLFSessionStore allTracks] count];
+    /* If sorting by Favs */
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    // if sorting by slots
+    /* if sorting by slots
     NSArray *sessions = [TXLFSessionStore allSessions: NO];
     NSInteger j = 0;
     for(NSInteger i = 0; i < sessions.count; i++) {
@@ -53,19 +53,18 @@
         if ([slot isEqualToDate:[[TXLFSessionStore allSlots] objectAtIndex:section]]) {
             j++;
         }
+    } */
+    
+    /*if sorting by tracks */
+    NSArray *sessions = [TXLFSessionStore allSessions: NO];
+    NSInteger j = 0;
+    for(NSInteger i = 0; i < sessions.count; i++) {
+        NSString *track = [[[sessions objectAtIndex:i] sessionLocation] objectForKey:@"roomNumber"];
+        if ([track isEqualToString:[[TXLFSessionStore allTracks] objectAtIndex:section]]) {
+            j++;
+        }
     }
     return j;
-    // if sorting by tracks
-    //NSArray *sessions = [TXLFSessionStore allSessions: NO];
-    //NSInteger j = 0;
-    //for(NSInteger i = 0; i < sessions.count; i++) {
-    //    NSString *track = [[[[sessions objectAtIndex:i] sessionLocation] objectForKey:@"address"] objectForKey:@"roomNumber"];
-   //     if ([track isEqualToString:[[TXLFSessionStore allTracks] objectAtIndex:section]]) {
-   //         j++;
-   //     }
-   // }
-   // return j;
-
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -75,13 +74,31 @@
     TXLFSessionCell *cell = [[TXLFSessionCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     NSArray *sessions = [TXLFSessionStore allSessions:NO];
     NSMutableArray *sessionsForSection = [[NSMutableArray alloc] init];
+    NSString *ttrack = [[TXLFSessionStore allTracks] objectAtIndex:[indexPath section]];
+    // TODO - need to optimize, this loop is called for each row
     for(NSInteger i = 0; i < sessions.count; i++) {
-        // if sorting by slots
         NSDate* slot = [[[sessions objectAtIndex:i] sessionSlot] objectForKey:@"startTime"];
+        /* if sorting by slots
         if ([slot isEqualToDate:[[TXLFSessionStore allSlots] objectAtIndex:[indexPath section]]]) {
             [sessionsForSection addObject:[sessions objectAtIndex:i]];
+        } */
+        /* if sorting by tracks */
+        NSString *strack = [[[sessions objectAtIndex:i] sessionLocation] objectForKey:@"roomNumber"];
+        if ([strack isEqualToString:ttrack]) {
+            //Insertion Sort - TODO maybe better to use some sort of built-in sorting?
+            int n = sessionsForSection.count;
+            if (n < 1) {
+                [sessionsForSection addObject:[sessions objectAtIndex:i]];
+            } else {
+                while (--n && [slot compare:[[[sessionsForSection objectAtIndex:n] sessionSlot] objectForKey:@"startTime"]] == NSOrderedAscending);
+            }
+            if([slot compare:[[[sessionsForSection objectAtIndex:n] sessionSlot] objectForKey:@"startTime"]] == NSOrderedDescending) {
+                [sessionsForSection  insertObject:[sessions objectAtIndex:i] atIndex:n+1];
+            } else {
+                // This should handle both duplicates (e.g. bad input or concurrent sessions) and items that should be inserted at the beginning of the array
+                [sessionsForSection  insertObject:[sessions objectAtIndex:i] atIndex:n];
+            }
         }
-        
     }
 
     
@@ -89,8 +106,15 @@
     cell.textLabel.text = [session sessionTitle];
     NSString* subtitle = [[session sessionPresenter] objectForKey:@"firstName"];
     subtitle = [subtitle stringByAppendingString:@" " ];
-    cell.detailTextLabel.text = [subtitle stringByAppendingString:[[session sessionPresenter] objectForKey:@"lastName"]];
-
+    subtitle = [subtitle stringByAppendingString:[[session sessionPresenter] objectForKey:@"lastName"]];
+    subtitle = [subtitle stringByAppendingString:@" : " ];
+    /* if sorting by slots
+    cell.detailTextLabel.text = [subtitle stringByAppendingString:[[session sessionLocation] objectForKey:@"roomNumber"]]; */
+    /* if sorting by tracks */
+    // TODO set in resource file?
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"EEE - h:mma"];
+    cell.detailTextLabel.text = [subtitle stringByAppendingString:[dateFormat stringFromDate:[[session sessionSlot] objectForKey:@"startTime"]]];
     
     NSString* track = [[session sessionLocation] objectForKey:@"roomNumber"];
     if ([track isEqualToString:@"Amphitheatre"]) {
@@ -131,11 +155,12 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    // If Sorting by slots
+    /* If Sorting by slots
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"EEE - h:mma"];
-    return [dateFormat stringFromDate:[[TXLFSessionStore allSlots] objectAtIndex:section]];
+    return [dateFormat stringFromDate:[[TXLFSessionStore allSlots] objectAtIndex:section]]; */
     // If Sorting by Track
+    return [[TXLFSessionStore allTracks] objectAtIndex:section];
     
 }
 
