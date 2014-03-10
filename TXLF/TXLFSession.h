@@ -37,6 +37,7 @@
 //                              => sessionPresenter.position        presenter's position/title in company
 //                              => sessionPresenter.title           e.g. Dr.,Mr.,Mz.,Honorable
 // "uid_1"                      => sessionUid                       currently unused
+//                              => favorite                         Whether the user has marked as favorite 1/0
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #import <Foundation/Foundation.h>
@@ -52,6 +53,7 @@
 @property (nonatomic,strong) NSDictionary *sessionPresentation;
 @property (nonatomic,strong) NSDictionary *sessionPresenter;
 @property (nonatomic,strong) NSNumber *sessionUid;
+@property (nonatomic) BOOL favorite;
 
 // TODO - check convention orders of class/instance methods
 
@@ -64,8 +66,8 @@
 +(NSDictionary *) parseSessionLocation:(NSString *) descriptionString;
 +(NSDictionary *) parseSessionLocationWithDict:(NSDictionary *) descriptionDict;
 +(NSDictionary *) parseSessionPresentation:(NSString *) siteUrl :(NSString *) abstract :(NSString *) experience :(NSString *) files;
-+(NSDictionary *) parseSessionPresentationWithDict:(NSDictionary *) presentationDict;
 // TODO add parseSessionPresenter that takes string arguments
 +(NSDictionary *) parseSessionPresenterWithDict:(NSDictionary *) presenterDict;
+-(BOOL) toggleFavorite;
 
 @end

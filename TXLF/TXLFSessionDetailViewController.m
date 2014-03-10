@@ -20,6 +20,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [fav addTarget:session
+                 action:@selector(toggleFavorite)
+       forControlEvents:UIControlEventValueChanged];
 }
 
 - (void)didReceiveMemoryWarning
@@ -43,13 +46,40 @@
     NSString* session_title = [session sessionTitle];
     [dtitle setText:session_title];
     
-    UIImage* ppic = [presenter objectForKey:@"picture"];
+    NSData *imageData = [NSData dataWithContentsOfURL:[presenter objectForKey:@"picture"]];
+    UIImage *ppic = [UIImage imageWithData:imageData];
     [pic setImage:ppic];
     
-    NSString* session_abstract = [[session sessionPresentation] objectForKey:@"abstract"];
-    [abstract setText:session_abstract];
+    [abstract setText:[[session sessionPresentation] objectForKey:@"abstract"]];
     
+    int experience = [[[session sessionPresentation] objectForKey:@"experience"] intValue];
+    switch (experience) {
+        case 1:
+            dexperience.progressTintColor = [UIColor greenColor];
+            break;
+        case 2:
+            dexperience.progressTintColor = [UIColor blueColor];
+            break;
+        case 3:
+            dexperience.progressTintColor = [UIColor purpleColor];
+            break;
+        case 4:
+            dexperience.progressTintColor = [UIColor yellowColor];
+            break;
+        case 5:
+            dexperience.progressTintColor = [UIColor orangeColor];
+            break;
+        case 6:
+            dexperience.progressTintColor = [UIColor redColor];
+            break;
+        default:
+            dexperience.progressTintColor = [UIColor brownColor];
+            break;
+    }
+    
+    dexperience.progress = (float)experience/6;
+    
+    fav.on = [session favorite];
 }
-
 
 @end

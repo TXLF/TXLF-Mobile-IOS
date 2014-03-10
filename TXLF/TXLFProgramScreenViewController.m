@@ -17,10 +17,17 @@
 
 @implementation TXLFProgramScreenViewController
 
+@synthesize sortByControl;
+@synthesize sessionTable;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
      [TXLFSessionStore sharedStore];
+    [sortByControl addTarget:sessionTable
+                      action:@selector(reloadData)
+            forControlEvents:UIControlEventValueChanged];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -34,35 +41,66 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-
-    /* if sorting by slots
-    return [[TXLFSessionStore allSlots] count]; */
-    /* If sorting by tracks */
-    return [[TXLFSessionStore allTracks] count];
-    /* If sorting by Favs */
+    NSInteger sortBy = [sortByControl selectedSegmentIndex];
+    switch (sortBy) {
+        case 0:
+            /* if sorting by slots */
+             return [[TXLFSessionStore allSlots] count];
+            break;
+        case 1:
+            /* If sorting by tracks */
+            return [[TXLFSessionStore allTracks] count];
+            break;
+        case 2:
+            /* If sorting by Favs */
+            return 1;
+            break;
+        default:
+            NSLog(@"There has been an error");
+            break;
+    }
+    // TODO return something reasonable
+    return [[TXLFSessionStore allSlots] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    /* if sorting by slots
     NSArray *sessions = [TXLFSessionStore allSessions: NO];
+    NSInteger sortBy = [sortByControl selectedSegmentIndex];
     NSInteger j = 0;
-    for(NSInteger i = 0; i < sessions.count; i++) {
-        NSDate* slot = [[[sessions objectAtIndex:i] sessionSlot] objectForKey:@"startTime"];
-        if ([slot isEqualToDate:[[TXLFSessionStore allSlots] objectAtIndex:section]]) {
-            j++;
-        }
-    } */
-    
-    /*if sorting by tracks */
-    NSArray *sessions = [TXLFSessionStore allSessions: NO];
-    NSInteger j = 0;
-    for(NSInteger i = 0; i < sessions.count; i++) {
-        NSString *track = [[[sessions objectAtIndex:i] sessionLocation] objectForKey:@"roomNumber"];
-        if ([track isEqualToString:[[TXLFSessionStore allTracks] objectAtIndex:section]]) {
-            j++;
-        }
+    switch (sortBy) {
+        case 0:
+            /* if sorting by slots */
+            for(NSInteger i = 0; i < sessions.count; i++) {
+                NSDate* slot = [[[sessions objectAtIndex:i] sessionSlot] objectForKey:@"startTime"];
+                if ([slot isEqualToDate:[[TXLFSessionStore allSlots] objectAtIndex:section]]) {
+                    j++;
+                }
+            }
+
+            break;
+        case 1:
+            /*if sorting by tracks */
+            for(NSInteger i = 0; i < sessions.count; i++) {
+                NSString *track = [[[sessions objectAtIndex:i] sessionLocation] objectForKey:@"roomNumber"];
+                if ([track isEqualToString:[[TXLFSessionStore allTracks] objectAtIndex:section]]) {
+                    j++;
+                }
+            }
+            break;
+        case 2:
+            /* if sorting by Favs */
+            for (id session in sessions) {
+                if([session favorite]) {
+                    j++;
+                }
+            }
+            break;
+        default:
+            NSLog(@"There has been an error");
+            sortByControl.selectedSegmentIndex = 0;
+            break;
     }
     return j;
 }
@@ -74,47 +112,87 @@
     TXLFSessionCell *cell = [[TXLFSessionCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     NSArray *sessions = [TXLFSessionStore allSessions:NO];
     NSMutableArray *sessionsForSection = [[NSMutableArray alloc] init];
-    NSString *ttrack = [[TXLFSessionStore allTracks] objectAtIndex:[indexPath section]];
+    NSInteger sortBy = [sortByControl selectedSegmentIndex];
     // TODO - need to optimize, this loop is called for each row
     for(NSInteger i = 0; i < sessions.count; i++) {
         NSDate* slot = [[[sessions objectAtIndex:i] sessionSlot] objectForKey:@"startTime"];
-        /* if sorting by slots
-        if ([slot isEqualToDate:[[TXLFSessionStore allSlots] objectAtIndex:[indexPath section]]]) {
-            [sessionsForSection addObject:[sessions objectAtIndex:i]];
-        } */
-        /* if sorting by tracks */
-        NSString *strack = [[[sessions objectAtIndex:i] sessionLocation] objectForKey:@"roomNumber"];
-        if ([strack isEqualToString:ttrack]) {
-            //Insertion Sort - TODO maybe better to use some sort of built-in sorting?
-            int n = sessionsForSection.count;
-            if (n < 1) {
+        if(sortBy == 0) {
+            /* if sorting by slots */
+            if ([slot isEqualToDate:[[TXLFSessionStore allSlots] objectAtIndex:[indexPath section]]]) {
                 [sessionsForSection addObject:[sessions objectAtIndex:i]];
-            } else {
-                while (--n && [slot compare:[[[sessionsForSection objectAtIndex:n] sessionSlot] objectForKey:@"startTime"]] == NSOrderedAscending);
             }
-            if([slot compare:[[[sessionsForSection objectAtIndex:n] sessionSlot] objectForKey:@"startTime"]] == NSOrderedDescending) {
-                [sessionsForSection  insertObject:[sessions objectAtIndex:i] atIndex:n+1];
-            } else {
-                // This should handle both duplicates (e.g. bad input or concurrent sessions) and items that should be inserted at the beginning of the array
-                [sessionsForSection  insertObject:[sessions objectAtIndex:i] atIndex:n];
+        } else if (sortBy == 1) {
+            /* if sorting by tracks */
+            NSString *strack = [[[sessions objectAtIndex:i] sessionLocation] objectForKey:@"roomNumber"];
+            NSString *ttrack = [[TXLFSessionStore allTracks] objectAtIndex:[indexPath section]];
+            if ([strack isEqualToString:ttrack]) {
+                //Insertion Sort - TODO maybe better to use some sort of built-in sorting?
+                int n = (int)sessionsForSection.count;
+                if (n < 1) {
+                    [sessionsForSection addObject:[sessions objectAtIndex:i]];
+                } else {
+                    while (--n && [slot compare:[[[sessionsForSection objectAtIndex:n] sessionSlot] objectForKey:@"startTime"]] == NSOrderedAscending);
+                }
+                if([slot compare:[[[sessionsForSection objectAtIndex:n] sessionSlot] objectForKey:@"startTime"]] == NSOrderedDescending) {
+                    [sessionsForSection  insertObject:[sessions objectAtIndex:i] atIndex:n+1];
+                } else {
+                    // This should handle both duplicates (e.g. bad input or concurrent sessions) and items that should be inserted at the beginning of the array
+                    [sessionsForSection  insertObject:[sessions objectAtIndex:i] atIndex:n];
+                }
             }
+        } else if (sortBy == 2) {
+            /* if sorting by favs */
+            if ([[sessions objectAtIndex:i] favorite]) {
+                int n = (int)sessionsForSection.count;
+                if (n < 1) {
+                    [sessionsForSection addObject:[sessions objectAtIndex:i]];
+                } else {
+                    NSDate *sslot = [[[sessionsForSection objectAtIndex:0] sessionSlot] objectForKey:@"startTime"];
+                    while (--n && [sslot compare:[[[sessionsForSection objectAtIndex:n] sessionSlot] objectForKey:@"startTime"]] == NSOrderedAscending);
+                }
+                NSDate *sslot = [[[sessionsForSection objectAtIndex:0] sessionSlot] objectForKey:@"startTime"];
+                if([sslot compare:[[[sessionsForSection objectAtIndex:n] sessionSlot] objectForKey:@"startTime"]] == NSOrderedDescending) {
+                    [sessionsForSection  insertObject:[sessions objectAtIndex:i] atIndex:n+1];
+                } else {
+                    // This should handle both duplicates (e.g. bad input or concurrent sessions) and items that should be inserted at the beginning of the array
+                    [sessionsForSection  insertObject:[sessions objectAtIndex:i] atIndex:n];
+                }
+            }
+        } else {
+            NSLog(@"There has been an error");
+            sortByControl.selectedSegmentIndex = 0;
         }
     }
 
-    
     TXLFSession* session = [sessionsForSection objectAtIndex:[indexPath row]];
     cell.textLabel.text = [session sessionTitle];
     NSString* subtitle = [[session sessionPresenter] objectForKey:@"firstName"];
     subtitle = [subtitle stringByAppendingString:@" " ];
     subtitle = [subtitle stringByAppendingString:[[session sessionPresenter] objectForKey:@"lastName"]];
     subtitle = [subtitle stringByAppendingString:@" : " ];
-    /* if sorting by slots
-    cell.detailTextLabel.text = [subtitle stringByAppendingString:[[session sessionLocation] objectForKey:@"roomNumber"]]; */
-    /* if sorting by tracks */
-    // TODO set in resource file?
+    NSString *slotsTitle = [subtitle stringByAppendingString:[[session sessionLocation] objectForKey:@"roomNumber"]];
+    slotsTitle = [slotsTitle stringByAppendingString:@" "];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"EEE - h:mma"];
-    cell.detailTextLabel.text = [subtitle stringByAppendingString:[dateFormat stringFromDate:[[session sessionSlot] objectForKey:@"startTime"]]];
+    switch (sortBy) {
+        case 0:
+            /* if sorting by slots */
+             cell.detailTextLabel.text = slotsTitle;
+            break;
+        case 1:
+            /* if sorting by Tracks */
+            [dateFormat setDateFormat:@"EEE - h:mma"];
+            cell.detailTextLabel.text = [subtitle stringByAppendingString:[dateFormat stringFromDate:[[session sessionSlot] objectForKey:@"startTime"]]];
+            break;
+        case 2:
+            /* if sorting by Favs */
+            [dateFormat setDateFormat:@"EEE - h:mma"];
+            cell.detailTextLabel.text = [slotsTitle stringByAppendingString:[dateFormat stringFromDate:[[session sessionSlot] objectForKey:@"startTime"]]];
+            break;
+        default:
+            NSLog(@"There has been an error");
+            sortByControl.selectedSegmentIndex = 0;
+            break;
+    }
     
     NSString* track = [[session sessionLocation] objectForKey:@"roomNumber"];
     if ([track isEqualToString:@"Amphitheatre"]) {
@@ -136,15 +214,58 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSInteger sortBy = [sortByControl selectedSegmentIndex];
     NSArray *sessions = [TXLFSessionStore allSessions:NO];
     NSMutableArray *sessionsForSection = [[NSMutableArray alloc] init];
     for(NSInteger i = 0; i < sessions.count; i++) {
-        // if sorting by slots
-        NSDate* slot = [[[sessions objectAtIndex:i] sessionSlot] objectForKey:@"startTime"];
-        if ([slot isEqualToDate:[[TXLFSessionStore allSlots] objectAtIndex:[indexPath section]]]) {
-            [sessionsForSection addObject:[sessions objectAtIndex:i]];
+         NSDate* slot = [[[sessions objectAtIndex:i] sessionSlot] objectForKey:@"startTime"];
+        if (sortBy == 0) {
+            // if sorting by slots
+            if ([slot isEqualToDate:[[TXLFSessionStore allSlots] objectAtIndex:[indexPath section]]]) {
+                [sessionsForSection addObject:[sessions objectAtIndex:i]];
+            }
+        } else if (sortBy == 1) {
+            /* if sorting by tracks */
+            // TODO duplicate code, need to optimize/streamline
+            NSString *strack = [[[sessions objectAtIndex:i] sessionLocation] objectForKey:@"roomNumber"];
+            NSString *ttrack = [[TXLFSessionStore allTracks] objectAtIndex:[indexPath section]];
+            if ([strack isEqualToString:ttrack]) {
+                //Insertion Sort - TODO maybe better to use some sort of built-in sorting?
+                int n = (int)sessionsForSection.count;
+                if (n < 1) {
+                    [sessionsForSection addObject:[sessions objectAtIndex:i]];
+                } else {
+                    while (--n && [slot compare:[[[sessionsForSection objectAtIndex:n] sessionSlot] objectForKey:@"startTime"]] == NSOrderedAscending);
+                }
+                if([slot compare:[[[sessionsForSection objectAtIndex:n] sessionSlot] objectForKey:@"startTime"]] == NSOrderedDescending) {
+                    [sessionsForSection  insertObject:[sessions objectAtIndex:i] atIndex:n+1];
+                } else {
+                    // This should handle both duplicates (e.g. bad input or concurrent sessions) and items that should be inserted at the beginning of the array
+                    [sessionsForSection  insertObject:[sessions objectAtIndex:i] atIndex:n];
+                }
+            }
+        } else if (sortBy == 2) {
+            /* if sorting by favs */
+            if ([[sessions objectAtIndex:i] favorite]) {
+                int n = (int)sessionsForSection.count;
+                if (n < 1) {
+                    [sessionsForSection addObject:[sessions objectAtIndex:i]];
+                } else {
+                    NSDate *sslot = [[[sessionsForSection objectAtIndex:0] sessionSlot] objectForKey:@"startTime"];
+                    while (--n && [sslot compare:[[[sessionsForSection objectAtIndex:n] sessionSlot] objectForKey:@"startTime"]] == NSOrderedAscending);
+                }
+                NSDate *sslot = [[[sessionsForSection objectAtIndex:0] sessionSlot] objectForKey:@"startTime"];
+                if([sslot compare:[[[sessionsForSection objectAtIndex:n] sessionSlot] objectForKey:@"startTime"]] == NSOrderedDescending) {
+                    [sessionsForSection  insertObject:[sessions objectAtIndex:i] atIndex:n+1];
+                } else {
+                    // This should handle both duplicates (e.g. bad input or concurrent sessions) and items that should be inserted at the beginning of the array
+                    [sessionsForSection  insertObject:[sessions objectAtIndex:i] atIndex:n];
+                }
+            }
+        } else {
+            NSLog(@"There has been an error");
+            sortByControl.selectedSegmentIndex = 0;
         }
-        
     }
 
     TXLFSessionDetailViewController *detailView = [[TXLFSessionDetailViewController alloc] init];
@@ -155,15 +276,28 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    /* If Sorting by slots
+    NSInteger sortBy = [sortByControl selectedSegmentIndex];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"EEE - h:mma"];
-    return [dateFormat stringFromDate:[[TXLFSessionStore allSlots] objectAtIndex:section]]; */
-    // If Sorting by Track
-    return [[TXLFSessionStore allTracks] objectAtIndex:section];
-    
+    switch (sortBy) {
+        case 0:
+            /* if sorting by slots */
+            [dateFormat setDateFormat:@"EEE - h:mma"];
+            return [dateFormat stringFromDate:[[TXLFSessionStore allSlots] objectAtIndex:section]];
+            break;
+        case 1:
+            /* if sorting by tracks */
+            return [[TXLFSessionStore allTracks] objectAtIndex:section];
+            break;
+        case 2:
+            /* if sorting by favorites */
+            return @"Favorite Sessions";
+            break;
+        default:
+            NSLog(@"There has been an error");
+            sortByControl.selectedSegmentIndex = 0;
+            break;
+    }
+    return @"";
 }
-
-
 
 @end

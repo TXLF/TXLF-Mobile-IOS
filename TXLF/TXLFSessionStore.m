@@ -62,8 +62,8 @@
     //These URLs need to be specified in a resource file or something
     NSString *localCachePath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)
                                  objectAtIndex:0] stringByAppendingPathComponent:@"session-schedule_mobile.json"];
-    //NSURL *url = [NSURL URLWithString:@"http://2013.texaslinuxfest.org/session-schedule_mobile"];
-    NSURL *url = [NSURL URLWithString:@"http://inni.odlenixon.com/session-schedule_mobile"];
+    NSURL *url = [NSURL URLWithString:@"http://2013.texaslinuxfest.org/session-schedule_mobile"];
+    //NSURL *url = [NSURL URLWithString:@"http://inni.odlenixon.com/session-schedule_mobile"];
     NSString* tempString = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
     //There is an extra "sessions(...)" around the JSON for some reason, probably needs sanitation too
     NSRange subRange = {9, [tempString length] - 10};
@@ -134,4 +134,5 @@
     }
     return [allTracksArray sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
 }
+
 @end

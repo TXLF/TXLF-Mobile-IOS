@@ -12,4 +12,7 @@
 @interface TXLFProgramScreenViewController : UITableViewController {
 }
 
+@property (weak, nonatomic) IBOutlet UISegmentedControl *sortByControl;
+@property (strong, nonatomic) IBOutlet UITableView *sessionTable;
+
 @end

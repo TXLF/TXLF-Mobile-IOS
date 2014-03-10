@@ -18,6 +18,7 @@
 @synthesize sessionPresentation;
 @synthesize sessionPresenter;
 @synthesize sessionUid;
+@synthesize favorite;
 
 
 -(id) initWithStringsDict:(NSDictionary *) valueDictionary {
@@ -52,31 +53,28 @@
     if (! (field_session_room && (self.sessionLocation = [TXLFSession parseSessionLocation:field_session_room]))) {
         self.sessionLocation = [TXLFSession parseSessionLocation:@"Room Unknown"];
     }
-    if (!path) {
+    if (!path ||  ! [path compare:@""]) {
         path = @"http://http://texaslinuxfest.org";
     }
-    if (!body) {
-        body = [self.sessionTitle stringByAppendingString:@"summary."];
+    if (!body || ! [body compare:@""]) {
+        body = [self.sessionTitle stringByAppendingString:@" summary."];
     }
-    if (!field_experience) {
+    if (!field_experience || ! [field_experience compare:@""]) {
         field_experience = @"Unkown";
     }
-    if (!uri) {
+    if (!uri ||  ! [uri compare:@""]) {
         uri = @"http://http://texaslinuxfest.org";
     }
-    self.sessionPresentation = [TXLFSession parseSessionPresentationWithDict:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                                              path, @"siteURL",
-                                                                              body, @"abstract",
-                                                                              field_experience, @"experience",
-                                                                              uri, @"files", nil]];
+    self.sessionPresentation = [TXLFSession parseSessionPresentation: path :[TXLFSession parseSessionTitle:body] :field_experience :uri];
+    
     if (!field_profile_bio) {
         field_profile_bio = @"Presenter Bio";
     }
     if (!field_profile_company) {
         field_profile_company = @"Presenter Comany";
     }
-    if (!picture) {
-        picture = @"http://icons.iconarchive.com/icons/fatcow/farm-fresh/32/user-silhouette-icon.png";
+    if (!picture ||  ! [picture compare:@""]) {
+        picture = @"http://2013.texaslinuxfest.org/sites/default/files/styles/thumbnail/public/pictures/picture-223-1369188113.jpg?itok=qj23EcUZ";
     }
     if (!field_profile_website) {
         field_profile_website = @"http://http://texaslinuxfest.org";
@@ -98,6 +96,7 @@
     if (! (uid_1 && (self.sessionNid = [TXLFSession parseSessionNid:uid_1]))) {
         self.sessionUid = [NSNumber numberWithInt:0];
     }
+    self.favorite = FALSE;
     return self;
 }
 
@@ -277,13 +276,7 @@
                                                       [NSURL URLWithString:files], @"files", nil];
     
 }
-            
-+(NSDictionary *) parseSessionPresentationWithDict:(NSDictionary *) presentationDict {
-    return [TXLFSession parseSessionPresentation:[presentationDict objectForKey:@"siteUrl"]
-                                                :[presentationDict objectForKey:@"abstract"]
-                                                :[presentationDict objectForKey:@"experience"]
-                                                :[presentationDict objectForKey:@"files"]];
-}
+
 
 +(NSDictionary *) parseSessionPresenterWithDict:(NSDictionary *) presenterDict {
     // TODO - see if ther are some API object for email addrsses and phone #'s
@@ -323,6 +316,11 @@
                                                       phone, @"phone",
                                                       position, @"position",
                                                       title, @"title", nil];
+}
+
+-(BOOL) toggleFavorite {
+    self.favorite = !self.favorite;
+    return self.favorite;
 }
 
 
