@@ -15,12 +15,13 @@
 
 @implementation TXLFSessionDetailViewController
 @synthesize session;
+@synthesize sessionTable;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [fav addTarget:session
+    [fav addTarget:self
                  action:@selector(toggleFavorite)
        forControlEvents:UIControlEventValueChanged];
 }
@@ -80,6 +81,11 @@
     dexperience.progress = (float)experience/6;
     
     fav.on = [session favorite];
+}
+
+-(void) toggleFavorite {
+    [session toggleFavorite];
+    [sessionTable reloadData];
 }
 
 @end

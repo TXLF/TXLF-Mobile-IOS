@@ -666,6 +666,7 @@
 		5EA82C5A18669EB300B318FF /* icon_scan.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EA82C5918669EB300B318FF /* icon_scan.png */; };
 		5EA82C5C1866A01A00B318FF /* icon_session.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EA82C5B1866A01A00B318FF /* icon_session.png */; };
 		5EA82C5F1866CCF500B318FF /* icon_tux.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EA82C5E1866CCF500B318FF /* icon_tux.png */; };
+		5EB4B82F18CEAB55008CB756 /* fav.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EB4B82E18CEAB55008CB756 /* fav.png */; };
 		5ECC26F0181C7673004C9F44 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ECC26EF181C7673004C9F44 /* Foundation.framework */; };
 		5ECC26F2181C7673004C9F44 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ECC26F1181C7673004C9F44 /* CoreGraphics.framework */; };
 		5ECC26F4181C7673004C9F44 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ECC26F3181C7673004C9F44 /* UIKit.framework */; };
@@ -1766,6 +1767,7 @@
 		5EA82C5918669EB300B318FF /* icon_scan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_scan.png; path = Logo/icon_scan.png; sourceTree = "<group>"; };
 		5EA82C5B1866A01A00B318FF /* icon_session.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_session.png; path = Logo/icon_session.png; sourceTree = "<group>"; };
 		5EA82C5E1866CCF500B318FF /* icon_tux.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_tux.png; path = TXLF/icon_tux.png; sourceTree = "<group>"; };
+		5EB4B82E18CEAB55008CB756 /* fav.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fav.png; path = Logo/fav.png; sourceTree = "<group>"; };
 		5ECC26EC181C7673004C9F44 /* TXLF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TXLF.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5ECC26EF181C7673004C9F44 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5ECC26F1181C7673004C9F44 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -3622,6 +3624,7 @@
 		5EA82C5D1866A13A00B318FF /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				5EB4B82E18CEAB55008CB756 /* fav.png */,
 				5E91EC4318676E0B00EB6431 /* icon_check-in.png */,
 				5EA82C5E1866CCF500B318FF /* icon_tux.png */,
 				5EA82C5B1866A01A00B318FF /* icon_session.png */,
@@ -4104,6 +4107,7 @@
 				5E30BD4E1877CA9000F98EEA /* Protector.Plo in Resources */,
 				5E30BD6E1877CA9000F98EEA /* TextTestResult.Plo in Resources */,
 				5E38BA4C186BE2AB00A21B6C /* BoolOption.py in Resources */,
+				5EB4B82F18CEAB55008CB756 /* fav.png in Resources */,
 				5E38BA89186BE2AB00A21B6C /* icl.py in Resources */,
 				5E30BD6A1877CA9000F98EEA /* SynchronizedObject.Plo in Resources */,
 				5E30BBEA1877CA8F00F98EEA /* config.log in Resources */,

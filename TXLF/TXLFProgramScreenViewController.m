@@ -209,6 +209,11 @@
         cell.contentView.backgroundColor = [[UIColor alloc] initWithRed:0.39 green:0.78 blue:0.76 alpha:0.7];
     }
     
+    //if ([session favorite]) {
+    //    UIImageView *favIcon = [[UIImageView alloc] initWithImage:[UIImage imageWithContentsOfFile:@"Icons/fav.png"]];
+    //    cell.imageView = favIcon;
+    //}
+    
     return cell;
 }
 
@@ -271,6 +276,7 @@
     TXLFSessionDetailViewController *detailView = [[TXLFSessionDetailViewController alloc] init];
     TXLFSession* session = [sessionsForSection objectAtIndex:[indexPath row]];
     [detailView setSession:session];
+    [detailView setSessionTable:sessionTable];
     [[self navigationController] pushViewController:detailView animated:YES];
 }
 

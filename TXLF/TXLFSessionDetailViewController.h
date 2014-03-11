@@ -21,5 +21,6 @@
 }
 
 @property (nonatomic, strong) TXLFSession *session;
+@property (nonatomic, strong) UITableView *sessionTable;
 
 @end
