@@ -28,6 +28,10 @@ The manual and changelog are in the header file "lodepng.h"
 Rename this file to lodepng.cpp to use it for C++, or to lodepng.c to use it for C.
 */
 
+/*
+ * Modified by G. Nixon for TXLF March 2014
+ */
+
 #include "lodepng.h"
 
 #include <stdio.h>

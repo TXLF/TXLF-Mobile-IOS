@@ -15,6 +15,10 @@
  * limitations under the License.
  */
 
+/*
+ * Modified by G. Nixon for TXLF March 2014
+ */
+
 #import <ZXing/ZXReader.h>
 #include <zxing/common/IllegalArgumentException.h>
 #include <zxing/ReaderException.h>

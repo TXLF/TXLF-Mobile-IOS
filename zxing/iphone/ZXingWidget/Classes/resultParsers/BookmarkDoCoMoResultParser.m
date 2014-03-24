@@ -19,6 +19,10 @@
  * limitations under the License.
  */
 
+/*
+ * Modified by G. Nixon for TXLF March 2014
+ */
+
 #import "BookmarkDoCoMoResultParser.h"
 #import "URIParsedResult.h"
 #import "CBarcodeFormat.h"

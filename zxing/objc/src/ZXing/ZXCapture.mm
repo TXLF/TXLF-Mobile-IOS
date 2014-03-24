@@ -15,6 +15,10 @@
  * limitations under the License.
  */
 
+/*
+ * Modified by G. Nixon for TXLF March 2014
+ */
+
 #include <ZXing/ZXCapture.h>
 
 #if !TARGET_IPHONE_SIMULATOR
@@ -137,7 +141,7 @@ static bool isIPad();
         ZXQT(defaultInputDeviceWithMediaType:) ZXMediaTypeVideo];
   }
 
-  capture_device = [zxd retain];
+  //capture_device = [zxd retain];
 
   return zxd;
 }
@@ -156,16 +160,16 @@ static bool isIPad();
         if ([capture_device isOpen]) {
           [capture_device close];
         }});
-    [capture_device release];
+    //[capture_device release];
   }
   
-  capture_device = [device retain];
+  //capture_device = [device retain];
 }
 	
 - (void)replaceInput {
   if (session && input) {
     [session removeInput:input];
-    [input release];
+    //[input release];
     input = nil;
   }
 
@@ -176,7 +180,7 @@ static bool isIPad();
     input =
       [ZXCaptureDeviceInput deviceInputWithDevice:zxd
                                        ZXAV(error:nil)];
-    [input retain];
+    //[input retain];
   }
   
   if (input) {
@@ -308,10 +312,10 @@ static bool isIPad();
 
 - (void)setLuminance:(BOOL)on {
   if (on && !luminance) {
-    [luminance release];
-    luminance = [[CALayer layer] retain];
+   // [luminance release];
+   // luminance = [[CALayer layer] retain];
   } else if (!on && luminance) {
-    [luminance release];
+    //[luminance release];
     luminance = nil;
   }
 }
@@ -322,10 +326,10 @@ static bool isIPad();
 
 - (void)setBinary:(BOOL)on {
   if (on && !binary) {
-    [binary release];
-    binary = [[CALayer layer] retain];
+    //[binary release];
+    //binary = [[CALayer layer] retain];
   } else if (!on && binary) {
-    [binary release];
+    //[binary release];
     binary = nil;
   }
 }
@@ -426,14 +430,14 @@ static bool isIPad();
   if (output && session) {
     [session removeOutput:output];
   }
-  [captureToFilename release];
-  [binary release];
-  [luminance release];
-  [output release];
-  [input release];
-  [layer release];
-  [session release];
-  [super dealloc];
+  //[captureToFilename release];
+  //[binary release];
+  //[luminance release];
+  //[output release];
+  //[input release];
+  //[layer release];
+  //[session release];
+  //[super dealloc];
 }
 
 - (void)captureOutput:(ZXCaptureOutput*)captureOutput
@@ -474,7 +478,7 @@ ZXAV(didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer)
 
   (void)sampleBuffer;
 
-  NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+  //NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
   
   (void)captureOutput;
   (void)connection;
@@ -499,15 +503,14 @@ ZXAV(didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer)
 #endif
 
   ZXCGImageLuminanceSource* source
-    = [[[ZXCGImageLuminanceSource alloc]
-         initWithBuffer:videoFrame]
-        autorelease];
+    = [[ZXCGImageLuminanceSource alloc]
+         initWithBuffer:videoFrame];
 
   if (luminance) {
     CGImageRef image = source.image;
     CGImageRetain(image);
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0), dispatch_get_main_queue(), ^{
-        luminance.contents = (id)image;
+        luminance.contents = (__bridge id)image;
         CGImageRelease(image);
       });
   }
@@ -516,28 +519,28 @@ ZXAV(didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer)
 
     // compiler issue?
     ZXHybridBinarizer* binarizer = [ZXHybridBinarizer alloc];
-    [[binarizer initWithSource:source] autorelease];
+    [binarizer initWithSource:source];
 
     if (binary) {
       CGImageRef image = binarizer.createImage;
       dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0), dispatch_get_main_queue(), ^{
-          binary.contents = (id)image;
+          binary.contents = (__bridge id)image;
           CGImageRelease(image);
         });
     }
 
     if (delegate) {
 
-      ZXDecodeHints* hints = [[[ZXDecodeHints alloc] init] autorelease];
+      ZXDecodeHints* hints = [[ZXDecodeHints alloc] init];
       ZXBinaryBitmap* bitmap = 
-        [[[ZXBinaryBitmap alloc] initWithBinarizer:binarizer] autorelease];
+        [[ZXBinaryBitmap alloc] initWithBinarizer:binarizer];
 
       @try {
         ZXReader* reader = nil;
         if (ZX_MULTI_READER) {
-          reader = [[[ZXMultiFormatReader alloc] init] autorelease];
+          reader = [[ZXMultiFormatReader alloc] init];
         } else {
-          reader = [[[ZXQRCodeReader alloc] init] autorelease];
+          reader = [[ZXQRCodeReader alloc] init];
         }
         // NSLog(@"started decode");
         ZXResult* result = [reader decode:bitmap hints:hints];
@@ -556,7 +559,7 @@ ZXAV(didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer)
     // NSLog(@"finished frame");
   }
 
-  [pool drain];
+  //[pool drain];
 }
 
 - (BOOL)hasFront {
@@ -603,7 +606,7 @@ ZXAV(didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer)
   if (camera  != camera_) {
     camera = camera_;
     capture_device_index = -1;
-    [capture_device release];
+    //[capture_device release];
     capture_device = 0;
     if (running) {
       [self replaceInput];

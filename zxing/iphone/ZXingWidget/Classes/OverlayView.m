@@ -16,6 +16,10 @@
  * limitations under the License.
  */
 
+/*
+ * Modified by G. Nixon for TXLF March 2014
+ */
+
 #import "OverlayView.h"
 
 static const CGFloat kPadding = 10;

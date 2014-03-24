@@ -22,7 +22,7 @@
 {
     self = [super initWithCoder:decoder];
     if(self) {
-          [self setText:@"Texas Linux Festival 2014"];
+          [self setText:@"Texas Linux Festival - Alpha"];
     }
     return self;
 }

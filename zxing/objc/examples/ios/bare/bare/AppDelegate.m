@@ -6,6 +6,10 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
+/*
+ * Modified by G. Nixon for TXLF March 2014
+ */
+
 #import "AppDelegate.h"
 
 #import "ViewController.h"

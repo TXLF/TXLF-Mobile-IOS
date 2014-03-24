@@ -6,6 +6,10 @@
 //  Copyright 2011 ZXing Authors. All rights reserved.
 //
 
+/*
+ * Modified by G. Nixon for TXLF March 2014
+ */
+
 #import <SenTestingKit/SenTestingKit.h>
 #import <UIKit/UIKit.h>
 #import "EmailAddressResultParser.h"

@@ -19,7 +19,9 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     // Move to init and add to resource file
-    NSURL *regUrl = [NSURL URLWithString:@"https://register.texaslinuxfest.org/reg6/checkin/"];
+    NSString *localFilePath = [[NSBundle mainBundle] pathForResource:@"register" ofType:@"html"];
+    //NSURL *regUrl = [NSURL URLWithString:@"https://register.texaslinuxfest.org/reg6/checkin/"];
+    NSURL *regUrl = [NSURL fileURLWithPath:localFilePath];
     [regPage loadRequest:[[NSURLRequest alloc] initWithURL:regUrl]];
 }
 

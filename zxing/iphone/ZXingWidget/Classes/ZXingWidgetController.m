@@ -15,6 +15,10 @@
  * limitations under the License.
  */
 
+/*
+ * Modified by G. Nixon for TXLF March 2014
+ */
+
 #import "ZXingWidgetController.h"
 #import "Decoder.h"
 #import "NSString+HTML.h"
@@ -323,7 +327,7 @@
   NSNumber* value = [NSNumber numberWithUnsignedInt:kCVPixelFormatType_32BGRA]; 
   NSDictionary* videoSettings = [NSDictionary dictionaryWithObject:value forKey:key]; 
   [captureOutput setVideoSettings:videoSettings]; 
-  self.captureSession = [[[AVCaptureSession alloc] init] autorelease];
+  self.captureSession = [[AVCaptureSession alloc] init];
 
   NSString* preset = 0;
 
@@ -335,7 +339,7 @@
   [self.captureSession addInput:captureInput];
   [self.captureSession addOutput:captureOutput];
 
-  [captureOutput release];
+  //[captureOutput release];
 
   if (!self.prevLayer) {
     self.prevLayer = [AVCaptureVideoPreviewLayer layerWithSession:self.captureSession];
@@ -438,7 +442,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     capture = newImage;
   }
 
-  UIImage* scrn = [[[UIImage alloc] initWithCGImage:capture] autorelease];
+  UIImage* scrn = [[UIImage alloc] initWithCGImage:capture];
 
   CGImageRelease(capture);
 
@@ -448,7 +452,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 
   decoding = [d decodeImage:scrn] == YES ? NO : YES;
 
-  [d release];
+  //[d release];
 
   if (decoding) {
 
@@ -456,14 +460,14 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     d.readers = readers;
     d.delegate = self;
 
-    scrn = [[[UIImage alloc] initWithCGImage:scrn.CGImage
+    scrn = [[UIImage alloc] initWithCGImage:scrn.CGImage
                                        scale:1.0
-                                 orientation:UIImageOrientationLeft] autorelease];
+                                 orientation:UIImageOrientationLeft];
 
     // NSLog(@"^ %@ %f", NSStringFromCGSize([scrn size]), scrn.scale);
     decoding = [d decodeImage:scrn] == YES ? NO : YES;
 
-    [d release];
+    //[d release];
   }
 
 }

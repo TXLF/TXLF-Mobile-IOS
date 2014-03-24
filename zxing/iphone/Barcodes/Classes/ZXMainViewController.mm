@@ -7,6 +7,10 @@
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
+/*
+ * Modified by G. Nixon for TXLF March 2014
+ */
+
 #import "ZXMainViewController.h"
 #import <MultiFormatReader.h>
 #import <UniversalResultParser.h>

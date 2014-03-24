@@ -15,6 +15,10 @@
  * limitations under the License.
  */
 
+/*
+ * Modified by G. Nixon for TXLF March 2014
+ */
+
 #import "ViewController.h"
 #import <QuartzCore/QuartzCore.h> // seems not included by default in the sim
 #import <ZXing/ZXCapture.h>

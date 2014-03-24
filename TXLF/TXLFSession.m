@@ -133,6 +133,7 @@
 }
 +(NSDictionary *) parseSessionSlot:(NSString *) start :(NSString *) end {
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"]];
     // Relying on autoconversion
     NSDate *startTime = [dateFormat dateFromString:start];
     NSDate *endTime = [dateFormat dateFromString:end];
@@ -140,7 +141,7 @@
     // If autocoversion doesn't work, specify format
     // TODO - specify format in resource file?
     // TODO - what happens when autoconversion works, but isn't what we want?
-    if(!startTime || !endTime) {
+    if( startTime == nil || endTime == nil) {
         [dateFormat setDateFormat:@"EEE, MM/dd/yyyy h:mma"];
         startTime = [dateFormat dateFromString:start];
         endTime = [dateFormat dateFromString:end];
