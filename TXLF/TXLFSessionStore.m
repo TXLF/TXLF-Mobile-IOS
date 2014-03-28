@@ -109,7 +109,7 @@
     for (id session in sessions) {
         NSDate *startTime = [[session sessionSlot] objectForKey:@"startTime"];
         // Unique Insertion sort
-        int n = allSlotsArray.count;
+        NSUInteger n = allSlotsArray.count;
         if (n < 1) {
             [allSlotsArray addObject:startTime];
         } else {
@@ -133,6 +133,18 @@
         }
     }
     return [allTracksArray sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
+}
+
++(void) updateFavs:(TXLFSession *)session :(BOOL)faved{
+    static NSMutableArray* favs = nil;
+    if(!favs) {
+        favs = [[NSMutableArray alloc] init];
+    }
+    if (
+        [favs addObject:session];
+        NSLog(@"Favs Saved");
+    }
+    return allSessions;
 }
 
 @end

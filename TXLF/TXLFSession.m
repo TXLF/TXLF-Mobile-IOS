@@ -151,7 +151,7 @@
 }
 
 +(NSNumber *) parseSessionNid:(NSString *) nid {
-    return [NSNumber numberWithInt:[nid integerValue]];
+    return [NSNumber numberWithLong:[nid integerValue]];
 }
 
 +(NSDictionary *) parseSessionLocation:(NSString *) descriptionString {

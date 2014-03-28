@@ -28,5 +28,6 @@
 //+(NSMutableArray *) generateSessions;
 //+(NSMutableArrary *) generateSlots;
 //+(id) stripJSONObject:(NSDictionary *) dict :(NSString *) objectName;
++(void) updateFavs:(TXLFSession *) session :(BOOL) faved;
 
 @end
