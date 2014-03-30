@@ -38,6 +38,7 @@
 //                              => sessionPresenter.title           e.g. Dr.,Mr.,Mz.,Honorable
 // "uid_1"                      => sessionUid                       currently unused
 //                              => favorite                         Whether the user has marked as favorite 1/0
+//                              => sid                               nid is not unique and uid_1 might noe be either
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #import <Foundation/Foundation.h>
@@ -53,6 +54,7 @@
 @property (nonatomic,strong) NSDictionary *sessionPresentation;
 @property (nonatomic,strong) NSDictionary *sessionPresenter;
 @property (nonatomic,strong) NSNumber *sessionUid;
+@property (nonatomic) NSUInteger sid;
 @property (nonatomic) BOOL favorite;
 
 // TODO - check convention orders of class/instance methods

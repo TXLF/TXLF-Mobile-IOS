@@ -27,6 +27,7 @@
     [sortByControl addTarget:sessionTable
                       action:@selector(reloadData)
             forControlEvents:UIControlEventValueChanged];
+    [TXLFSessionStore setTable:sessionTable];
     
 }
 

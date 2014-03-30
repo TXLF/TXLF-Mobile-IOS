@@ -27,15 +27,19 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    NSURL *regUrl = [NSURL URLWithString:@"http://inni.odlenixon.com/sponsors.html"];
-    [sponPage loadRequest:[[NSURLRequest alloc] initWithURL:regUrl]];
-
+    //NSURL *regUrl = [NSURL URLWithString:@"http://texaslinuxfest.com/sponsors"];
+    //[sponPage loadRequest:[[NSURLRequest alloc] initWithURL:regUrl]];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+-(void)viewDidAppear:(BOOL)animated {
+    [scrollView setContentSize:imageView.image.size];
 }
 
 /*

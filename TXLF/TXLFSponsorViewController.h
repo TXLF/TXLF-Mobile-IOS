@@ -11,6 +11,11 @@
 @interface TXLFSponsorViewController : UIViewController {
     
     __weak IBOutlet UIWebView *sponPage;
+    
+
+    __weak IBOutlet UIScrollView *scrollView;
+    
+    __weak IBOutlet UIImageView *imageView;
 }
 
 @end

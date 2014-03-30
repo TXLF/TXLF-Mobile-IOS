@@ -8,6 +8,7 @@
 
 
 #import "TXLFSession.h"
+#import "TXLFSessionStore.h"
 
 @implementation TXLFSession
 
@@ -93,10 +94,31 @@
                                                                         field_profile_first_name, @"firstName",
                                                                         field_profile_last_name, @"lastName", nil]];
     
-    if (! (uid_1 && (self.sessionNid = [TXLFSession parseSessionNid:uid_1]))) {
+    if (! (uid_1 && (self.sessionUid = [TXLFSession parseSessionNid:uid_1]))) {
         self.sessionUid = [NSNumber numberWithInt:0];
     }
     self.favorite = FALSE;
+    NSString *temp_string = [[[self.sessionNid stringValue] stringByAppendingString:
+                              [self.sessionUid stringValue]] stringByAppendingString:
+                             self.sessionTitle];
+    self.sid = [temp_string hash];
+    //TODO put this is property list downloadable from Web
+    NSString *localFavsCachePath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)
+                                     objectAtIndex:0] stringByAppendingPathComponent:@"fav_sessions"];
+    NSError* errorObj = [[NSError alloc] initWithCoder:nil];
+    NSData *plist = [NSData dataWithContentsOfFile:localFavsCachePath];
+    if (plist) {
+        //NSDictionary *temp = (NSDictionary *)[NSPropertyListSerialization
+        //                                      propertyListWithData:plistXML
+        //                                      options:NSPropertyListImmutable
+        //                                      format:NULL
+        //                                      error:&errorObj];
+        NSDictionary *tempDict = [NSJSONSerialization JSONObjectWithData:plist options:0 error:&errorObj];
+        if([tempDict objectForKey:[[NSNumber numberWithUnsignedInteger:self.sid] stringValue]]) {
+            self.favorite = TRUE;
+            NSLog(@"Fav Found");
+        }
+    }
     return self;
 }
 
@@ -151,7 +173,7 @@
 }
 
 +(NSNumber *) parseSessionNid:(NSString *) nid {
-    return [NSNumber numberWithLong:[nid integerValue]];
+    return [NSNumber numberWithInteger:[nid integerValue]];
 }
 
 +(NSDictionary *) parseSessionLocation:(NSString *) descriptionString {
@@ -321,6 +343,7 @@
 
 -(BOOL) toggleFavorite {
     self.favorite = !self.favorite;
+    [TXLFSessionStore updateFavs:self :self.favorite];
     return self.favorite;
 }
 

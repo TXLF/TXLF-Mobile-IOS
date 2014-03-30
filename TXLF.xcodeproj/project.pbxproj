@@ -11,8 +11,6 @@
 		5E0AE597186BB78000179A86 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E0AE596186BB78000179A86 /* AudioToolbox.framework */; };
 		5E0AE599186BB7C100179A86 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E0AE598186BB7C100179A86 /* CoreVideo.framework */; };
 		5E0AE59B186BB7DE00179A86 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E0AE59A186BB7DE00179A86 /* CoreMedia.framework */; };
-		5E0AE59E186BB7F700179A86 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E0AE59C186BB7F700179A86 /* AddressBook.framework */; };
-		5E0AE59F186BB7F700179A86 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E0AE59D186BB7F700179A86 /* AddressBookUI.framework */; };
 		5E0AEB2D186BC27500179A86 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E0AE5A0186BB81900179A86 /* libiconv.dylib */; };
 		5E21010B187BAC5C00ABF9A1 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E21010A187BAC5C00ABF9A1 /* ImageIO.framework */; };
 		5E210112187BAEA800ABF9A1 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E210111187BAEA800ABF9A1 /* libsqlite3.dylib */; };
@@ -21,13 +19,11 @@
 		5E341A991831CEB6001B23EC /* TXLFSessionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E341A981831CEB6001B23EC /* TXLFSessionCell.m */; };
 		5E3E49D818D604F700A31C84 /* register.html in Resources */ = {isa = PBXBuildFile; fileRef = 5E3E49D718D604F700A31C84 /* register.html */; };
 		5E3E49E318D60B3A00A31C84 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5E3E49E218D60B3900A31C84 /* LICENSE.txt */; };
-		5E3E49E618D60B9B00A31C84 /* cppnit_LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5E3E49E518D60B9B00A31C84 /* cppnit_LICENSE.txt */; };
-		5E3E49E818D60C1000A31C84 /* zxing_LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5E3E49E718D60C1000A31C84 /* zxing_LICENSE.txt */; };
 		5E5E491618D61F530045FAFA /* icons_LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5E5E491518D61F530045FAFA /* icons_LICENSE.txt */; };
-		5E5E492218D647DD0045FAFA /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E5E492118D647DD0045FAFA /* SenTestingKit.framework */; };
 		5E7647171862AB360030AFB6 /* TXLFTopBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E7647161862AB360030AFB6 /* TXLFTopBanner.m */; };
 		5E7647191862BC620030AFB6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E7647181862BC620030AFB6 /* AVFoundation.framework */; };
 		5E76471C186656000030AFB6 /* TXLFTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E76471B186656000030AFB6 /* TXLFTabBarController.m */; };
+		5E8A24D918E882F8005EF434 /* sponsors.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E8A24D818E882F8005EF434 /* sponsors.png */; };
 		5E91EC3F18676A5700EB6431 /* TXLFRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E91EC3E18676A5700EB6431 /* TXLFRegisterViewController.m */; };
 		5E91EC4418676E0B00EB6431 /* icon_check-in.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E91EC4318676E0B00EB6431 /* icon_check-in.png */; };
 		5EA82C4D186683B800B318FF /* TXLFSessionDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EA82C4B186683B800B318FF /* TXLFSessionDetailViewController.m */; };
@@ -72,8 +68,6 @@
 		5E0AE596186BB78000179A86 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		5E0AE598186BB7C100179A86 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		5E0AE59A186BB7DE00179A86 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
-		5E0AE59C186BB7F700179A86 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
-		5E0AE59D186BB7F700179A86 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		5E0AE5A0186BB81900179A86 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
 		5E21010A187BAC5C00ABF9A1 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		5E210111187BAEA800ABF9A1 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
@@ -84,15 +78,13 @@
 		5E341A981831CEB6001B23EC /* TXLFSessionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXLFSessionCell.m; sourceTree = "<group>"; };
 		5E3E49D718D604F700A31C84 /* register.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = register.html; path = TXLF/register.html; sourceTree = "<group>"; };
 		5E3E49E218D60B3900A31C84 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
-		5E3E49E518D60B9B00A31C84 /* cppnit_LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cppnit_LICENSE.txt; sourceTree = "<group>"; };
-		5E3E49E718D60C1000A31C84 /* zxing_LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = zxing_LICENSE.txt; sourceTree = "<group>"; };
 		5E5E491518D61F530045FAFA /* icons_LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = icons_LICENSE.txt; path = ../../../../../../../../Users/george/Documents/icons_LICENSE.txt; sourceTree = "<group>"; };
-		5E5E492118D647DD0045FAFA /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/Developer/Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		5E7647151862AB360030AFB6 /* TXLFTopBanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXLFTopBanner.h; sourceTree = "<group>"; };
 		5E7647161862AB360030AFB6 /* TXLFTopBanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXLFTopBanner.m; sourceTree = "<group>"; };
 		5E7647181862BC620030AFB6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		5E76471A186656000030AFB6 /* TXLFTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXLFTabBarController.h; sourceTree = "<group>"; };
 		5E76471B186656000030AFB6 /* TXLFTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXLFTabBarController.m; sourceTree = "<group>"; };
+		5E8A24D818E882F8005EF434 /* sponsors.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sponsors.png; path = ScreenShots/sponsors.png; sourceTree = SOURCE_ROOT; };
 		5E91EC3D18676A5700EB6431 /* TXLFRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXLFRegisterViewController.h; sourceTree = "<group>"; };
 		5E91EC3E18676A5700EB6431 /* TXLFRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXLFRegisterViewController.m; sourceTree = "<group>"; };
 		5E91EC4318676E0B00EB6431 /* icon_check-in.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_check-in.png"; path = "Logo/icon_check-in.png"; sourceTree = "<group>"; };
@@ -138,9 +130,6 @@
 				5E210112187BAEA800ABF9A1 /* libsqlite3.dylib in Frameworks */,
 				5E21010B187BAC5C00ABF9A1 /* ImageIO.framework in Frameworks */,
 				5E0AEB2D186BC27500179A86 /* libiconv.dylib in Frameworks */,
-				5E0AE59E186BB7F700179A86 /* AddressBook.framework in Frameworks */,
-				5E5E492218D647DD0045FAFA /* SenTestingKit.framework in Frameworks */,
-				5E0AE59F186BB7F700179A86 /* AddressBookUI.framework in Frameworks */,
 				5E0AE59B186BB7DE00179A86 /* CoreMedia.framework in Frameworks */,
 				5E0AE599186BB7C100179A86 /* CoreVideo.framework in Frameworks */,
 				5E0AE597186BB78000179A86 /* AudioToolbox.framework in Frameworks */,
@@ -177,6 +166,7 @@
 		5E30B93C18E4BDF500118085 /* Sponsors */ = {
 			isa = PBXGroup;
 			children = (
+				5E8A24D818E882F8005EF434 /* sponsors.png */,
 				5E30B93918E4BDEE00118085 /* TXLFSponsorViewController.h */,
 				5E30B93A18E4BDEE00118085 /* TXLFSponsorViewController.m */,
 			);
@@ -202,8 +192,6 @@
 			children = (
 				5E3E49E218D60B3900A31C84 /* LICENSE.txt */,
 				5E5E491518D61F530045FAFA /* icons_LICENSE.txt */,
-				5E3E49E518D60B9B00A31C84 /* cppnit_LICENSE.txt */,
-				5E3E49E718D60C1000A31C84 /* zxing_LICENSE.txt */,
 			);
 			name = LICENSES;
 			sourceTree = "<group>";
@@ -257,12 +245,9 @@
 		5ECC26EE181C7673004C9F44 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				5E5E492118D647DD0045FAFA /* SenTestingKit.framework */,
 				5E210111187BAEA800ABF9A1 /* libsqlite3.dylib */,
 				5E21010A187BAC5C00ABF9A1 /* ImageIO.framework */,
 				5E0AE5A0186BB81900179A86 /* libiconv.dylib */,
-				5E0AE59C186BB7F700179A86 /* AddressBook.framework */,
-				5E0AE59D186BB7F700179A86 /* AddressBookUI.framework */,
 				5E0AE59A186BB7DE00179A86 /* CoreMedia.framework */,
 				5E0AE598186BB7C100179A86 /* CoreVideo.framework */,
 				5E0AE596186BB78000179A86 /* AudioToolbox.framework */,
@@ -438,16 +423,15 @@
 				5EA82C5F1866CCF500B318FF /* icon_tux.png in Resources */,
 				5EA82C5818669D2500B318FF /* icon_venue.png in Resources */,
 				5E30B94418E4C2DF00118085 /* icon_sponsors.png in Resources */,
-				5E3E49E618D60B9B00A31C84 /* cppnit_LICENSE.txt in Resources */,
 				5ECC270E181C7674004C9F44 /* Images.xcassets in Resources */,
 				5ECC26FA181C7673004C9F44 /* InfoPlist.strings in Resources */,
 				5EB4B82F18CEAB55008CB756 /* fav.png in Resources */,
 				5EA82C5A18669EB300B318FF /* icon_scan.png in Resources */,
 				5ECC270C181C7674004C9F44 /* Main.storyboard in Resources */,
 				5EA82C5C1866A01A00B318FF /* icon_session.png in Resources */,
+				5E8A24D918E882F8005EF434 /* sponsors.png in Resources */,
 				5EA82C4E186683B800B318FF /* TXLFSessionDetailViewController.xib in Resources */,
 				5E3E49D818D604F700A31C84 /* register.html in Resources */,
-				5E3E49E818D60C1000A31C84 /* zxing_LICENSE.txt in Resources */,
 				5E5E491618D61F530045FAFA /* icons_LICENSE.txt in Resources */,
 				5E91EC4418676E0B00EB6431 /* icon_check-in.png in Resources */,
 			);
@@ -612,8 +596,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(DEVELOPER_DIR)/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/Developer/Library/Frameworks",
@@ -637,7 +621,7 @@
 				INFOPLIST_FILE = "TXLF/TXLF-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "4166F945-6FCC-4954-8859-163E463D4CDE";
+				PROVISIONING_PROFILE = "F333C269-ABE2-453B-9D74-B7ED91067E03";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;

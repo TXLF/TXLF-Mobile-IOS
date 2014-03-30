@@ -7,13 +7,14 @@
 //
 
 #import "TXLFAppDelegate.h"
+#import "TXLFSessionStore.h"
 
 @implementation TXLFAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    
+    [TXLFSessionStore fetchSessions];
     return YES;
 }
 

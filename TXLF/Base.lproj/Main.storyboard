@@ -16,22 +16,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3YA-5C-8Zn" customClass="TXLFTopBanner">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3YA-5C-8Zn" customClass="TXLFTopBanner">
                                 <rect key="frame" x="0.0" y="20" width="320" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.17242249727171088" green="0.32631147708067409" blue="0.89370329483695654" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="jKj-Rg-d82"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="WDf-Ez-HL5">
-                                <rect key="frame" x="0.0" y="115" width="320" height="301"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="WDf-Ez-HL5">
+                                <rect key="frame" x="0.0" y="122" width="320" height="291"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </mapView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="320" translatesAutoresizingMaskIntoConstraints="NO" id="G61-0R-qPM">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="320" translatesAutoresizingMaskIntoConstraints="NO" id="G61-0R-qPM">
                                 <rect key="frame" x="0.0" y="52" width="320" height="62"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="62" id="7DC-dJ-Imb"/>
+                                </constraints>
                                 <string key="text">Austin Convention Center
 500 E Cesar Chavez
 Austin, TX 78701</string>
@@ -39,17 +45,20 @@ Austin, TX 78701</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Parking" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QG3-uH-GtK">
-                                <rect key="frame" x="0.0" y="424" width="320" height="21"/>
+                                <rect key="frame" x="0.0" y="428" width="320" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="vNp-Tv-UFf"/>
+                                    <constraint firstAttribute="height" constant="21" id="bKX-6e-1Ef"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="320" translatesAutoresizingMaskIntoConstraints="NO" id="3Lr-8v-4zu">
-                                <rect key="frame" x="0.0" y="453" width="320" height="62"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="320" translatesAutoresizingMaskIntoConstraints="NO" id="3Lr-8v-4zu">
+                                <rect key="frame" x="0.0" y="457" width="320" height="62"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="62" id="gex-m3-O4o"/>
+                                </constraints>
                                 <string key="text">2nd Street Garage
 201 East 2nd Street
 Entrances on Brazos and San Jacinto</string>
@@ -59,21 +68,22 @@ Entrances on Brazos and San Jacinto</string>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="QG3-uH-GtK" firstAttribute="leading" secondItem="G61-0R-qPM" secondAttribute="leading" id="71c-RD-ZsY"/>
-                            <constraint firstItem="zLx-4J-jcN" firstAttribute="top" secondItem="3Lr-8v-4zu" secondAttribute="bottom" constant="4" id="BxV-n6-KtZ"/>
-                            <constraint firstItem="QG3-uH-GtK" firstAttribute="leading" secondItem="ghS-to-pR1" secondAttribute="leading" id="EXM-5A-l6a"/>
-                            <constraint firstItem="QG3-uH-GtK" firstAttribute="leading" secondItem="3YA-5C-8Zn" secondAttribute="leading" id="Idd-Ed-96t"/>
-                            <constraint firstAttribute="bottom" secondItem="QG3-uH-GtK" secondAttribute="bottom" constant="123" id="Mhx-Dm-WT6"/>
-                            <constraint firstItem="QG3-uH-GtK" firstAttribute="trailing" secondItem="G61-0R-qPM" secondAttribute="trailing" id="NRK-Lx-pdb"/>
-                            <constraint firstItem="3Lr-8v-4zu" firstAttribute="top" secondItem="QG3-uH-GtK" secondAttribute="bottom" constant="8" symbolic="YES" id="Od1-lF-KlB"/>
-                            <constraint firstItem="QG3-uH-GtK" firstAttribute="leading" secondItem="WDf-Ez-HL5" secondAttribute="leading" id="OlI-bF-Ouo"/>
-                            <constraint firstItem="QG3-uH-GtK" firstAttribute="top" secondItem="WDf-Ez-HL5" secondAttribute="bottom" constant="8" symbolic="YES" id="QZ2-Cs-7Sv"/>
-                            <constraint firstItem="QG3-uH-GtK" firstAttribute="top" secondItem="WDf-Ez-HL5" secondAttribute="bottom" constant="8" id="Slp-ck-VWT"/>
-                            <constraint firstAttribute="trailing" secondItem="3Lr-8v-4zu" secondAttribute="trailing" constant="-9" id="T63-e9-VCn"/>
-                            <constraint firstAttribute="trailing" secondItem="QG3-uH-GtK" secondAttribute="trailing" id="f5a-5B-IRR"/>
-                            <constraint firstItem="QG3-uH-GtK" firstAttribute="trailing" secondItem="3YA-5C-8Zn" secondAttribute="trailing" id="fgq-nM-YiQ"/>
-                            <constraint firstItem="QG3-uH-GtK" firstAttribute="trailing" secondItem="WDf-Ez-HL5" secondAttribute="trailing" id="j67-X3-FA0"/>
-                            <constraint firstItem="3Lr-8v-4zu" firstAttribute="leading" secondItem="ghS-to-pR1" secondAttribute="leading" constant="9" id="uHL-mL-FrW"/>
+                            <constraint firstItem="3Lr-8v-4zu" firstAttribute="leading" secondItem="QG3-uH-GtK" secondAttribute="leading" id="0gg-8T-8kA"/>
+                            <constraint firstItem="3YA-5C-8Zn" firstAttribute="top" secondItem="ghS-to-pR1" secondAttribute="top" constant="20" symbolic="YES" id="1VL-Ur-k9w"/>
+                            <constraint firstItem="WDf-Ez-HL5" firstAttribute="top" secondItem="G61-0R-qPM" secondAttribute="bottom" constant="8" symbolic="YES" id="4Mj-a1-vaK"/>
+                            <constraint firstAttribute="centerX" secondItem="3Lr-8v-4zu" secondAttribute="centerX" id="7Bs-vL-01Z"/>
+                            <constraint firstAttribute="centerX" secondItem="G61-0R-qPM" secondAttribute="centerX" id="8DQ-oi-FtA"/>
+                            <constraint firstItem="zLx-4J-jcN" firstAttribute="top" secondItem="3Lr-8v-4zu" secondAttribute="bottom" id="Jk3-WE-qAi"/>
+                            <constraint firstAttribute="centerX" secondItem="QG3-uH-GtK" secondAttribute="centerX" id="Jqb-g9-tK3"/>
+                            <constraint firstItem="3Lr-8v-4zu" firstAttribute="leading" secondItem="ghS-to-pR1" secondAttribute="leading" id="TUf-0c-3dJ"/>
+                            <constraint firstItem="3Lr-8v-4zu" firstAttribute="top" secondItem="QG3-uH-GtK" secondAttribute="bottom" constant="8" symbolic="YES" id="aRv-uB-mIm"/>
+                            <constraint firstAttribute="centerX" secondItem="3YA-5C-8Zn" secondAttribute="centerX" id="jQU-vR-Vib"/>
+                            <constraint firstItem="G61-0R-qPM" firstAttribute="leading" secondItem="WDf-Ez-HL5" secondAttribute="leading" id="miR-i4-2kJ"/>
+                            <constraint firstAttribute="centerX" secondItem="WDf-Ez-HL5" secondAttribute="centerX" id="qpR-jP-rWh"/>
+                            <constraint firstItem="3YA-5C-8Zn" firstAttribute="bottom" secondItem="G61-0R-qPM" secondAttribute="top" id="uHj-I9-LSG"/>
+                            <constraint firstItem="G61-0R-qPM" firstAttribute="leading" secondItem="3YA-5C-8Zn" secondAttribute="leading" id="w6a-9Y-Wj4"/>
+                            <constraint firstItem="QG3-uH-GtK" firstAttribute="top" secondItem="WDf-Ez-HL5" secondAttribute="bottom" constant="15" id="xIe-tV-E95"/>
+                            <constraint firstItem="WDf-Ez-HL5" firstAttribute="leading" secondItem="QG3-uH-GtK" secondAttribute="leading" id="z8n-yu-tji"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Venue" image="icon_venue.png" id="M3R-dY-OGA"/>
@@ -104,7 +114,7 @@ Entrances on Brazos and San Jacinto</string>
                             </segments>
                         </segmentedControl>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="KmL-hf-Xo5" detailTextLabel="9q7-gh-jFE" style="IBUITableViewCellStyleSubtitle" id="id7-ud-qTW" userLabel="Session Cell" customClass="TXLFSessionCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="sessionCell" textLabel="KmL-hf-Xo5" detailTextLabel="9q7-gh-jFE" style="IBUITableViewCellStyleSubtitle" id="id7-ud-qTW" userLabel="Session Cell" customClass="TXLFSessionCell">
                                 <rect key="frame" x="0.0" y="149" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="id7-ud-qTW" id="G5q-3p-62X">
@@ -242,23 +252,28 @@ Entrances on Brazos and San Jacinto</string>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="26E-ua-dzW">
-                                <rect key="frame" x="0.0" y="52" width="320" height="463"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" bounces="NO" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ogM-ge-dcP">
+                                <rect key="frame" x="20" y="57" width="280" height="391"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <dataDetectorType key="dataDetectorTypes"/>
-                            </webView>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="sponsors.png" translatesAutoresizingMaskIntoConstraints="NO" id="xhy-eY-gqm">
+                                        <rect key="frame" x="20" y="0.0" width="244" height="1858"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Sponsors" image="icon_sponsors.png" id="ypS-fU-9JW"/>
                     <connections>
-                        <outlet property="sponPage" destination="26E-ua-dzW" id="XV2-2q-kpf"/>
+                        <outlet property="imageView" destination="xhy-eY-gqm" id="Z1o-M0-Pr6"/>
+                        <outlet property="scrollView" destination="ogM-ge-dcP" id="Ch7-ie-hDO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9v5-js-sLy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="769" y="1846"/>
+            <point key="canvasLocation" x="769" y="1858"/>
         </scene>
     </scenes>
     <resources>
@@ -266,6 +281,7 @@ Entrances on Brazos and San Jacinto</string>
         <image name="icon_session.png" width="32" height="32"/>
         <image name="icon_sponsors.png" width="32" height="32"/>
         <image name="icon_venue.png" width="32" height="32"/>
+        <image name="sponsors.png" width="244" height="1858"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

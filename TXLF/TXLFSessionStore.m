@@ -12,6 +12,9 @@
 
 @implementation TXLFSessionStore
 
+static NSString *dirtyJSON;
+static UITableView *sessionTable;
+
 +(TXLFSessionStore*) sharedStore {
     static TXLFSessionStore* sharedStore = nil;
     if(!sharedStore)
@@ -25,8 +28,9 @@
 
 -(id)init {
     self = [super init];
-    if(self)
+    if(self) {
         [TXLFSessionStore allSessions:NO];
+    }
     return self;
 }
 
@@ -35,6 +39,9 @@
     // regen -> Refresh sesssions without having to restart the app
     if(!allSessions || regen) {
         allSessions = [self generateSessions];
+        [sessionTable reloadData];
+        [sessionTable setNeedsDisplay];
+        
         NSLog(@"Sessions generated");
     }
     return allSessions;
@@ -58,24 +65,43 @@
     return allTracks;
 }
 
-+(NSData *) fetchSessions {
-    //These URLs need to be specified in a resource file or something
++(void) fetchSessions {
+    NSLog(@"Attempting to pull remote Session Data");
+    NSURL *url = [NSURL URLWithString:@"http://2013.texaslinuxfest.org/session-schedule_mobile"];
+    NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *net_session = [NSURLSession sessionWithConfiguration:config delegate:nil delegateQueue:nil];
+    NSURLRequest *req = [NSURLRequest requestWithURL:url];
+    NSURLSessionDataTask *dataTask = [net_session dataTaskWithRequest:req completionHandler:
+                                      ^(NSData *data, NSURLResponse *response, NSError *error) {
+                                          dirtyJSON = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                                          NSLog(@"Remote Session Data pulled");
+                                          [TXLFSessionStore allSessions:TRUE];
+                                      }];
+    [dataTask resume];
+    
+    //NSString* tempString = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
+}
+
++(NSData *) prepSessions {
+    // TODO These URLs need to be specified in a resource file
     NSString *localCachePath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)
                                  objectAtIndex:0] stringByAppendingPathComponent:@"session-schedule_mobile.json"];
-    NSURL *url = [NSURL URLWithString:@"http://2013.texaslinuxfest.org/session-schedule_mobile"];
-    //NSURL *url = [NSURL URLWithString:@"http://inni.odlenixon.com/session-schedule_mobile"];
-    NSString* tempString = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
     //There is an extra "sessions(...)" around the JSON for some reason, probably needs sanitation too
-    NSRange subRange = {9, [tempString length] - 10};
-    NSString* sessionJSONString = [tempString substringWithRange:subRange];
-    NSData *sessionJSON = [sessionJSONString dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *sessionJSON;
+    if([dirtyJSON length] > 18) {
+        NSRange subRange = {9, [dirtyJSON length] - 10};
+        NSString* sessionJSONString = [dirtyJSON substringWithRange:subRange];
+        sessionJSON = [sessionJSONString dataUsingEncoding:NSUTF8StringEncoding];
+    }
     if(sessionJSON) {
         [sessionJSON writeToFile:localCachePath atomically:YES];
         NSLog(@"Session information cached locally.");
         
     } else {
         sessionJSON = [NSData dataWithContentsOfFile:localCachePath];
-        NSLog(@"Session information loaded from local cache.");
+        if(sessionJSON) {
+            NSLog(@"Session information loaded from local cache.");
+        }
     }
     return sessionJSON;
 }
@@ -90,11 +116,16 @@
 }
 
 +(NSArray *) generateSessions {
-    NSData* sessionJSON = [TXLFSessionStore fetchSessions];
+    NSData *sessionJSON = [TXLFSessionStore prepSessions];
+    NSMutableArray* sessionArray = [[NSMutableArray alloc] init];
     NSError* errorObj = [[NSError alloc] initWithCoder:nil];
+    if (!sessionJSON) {
+        TXLFSession* session = [[TXLFSession alloc] initWithStringsDict:@{@"empty_key" : @"empty_value"}];
+        [sessionArray addObject:session];
+        return sessionArray;
+    }
     NSDictionary* sessionDictionary = [NSJSONSerialization JSONObjectWithData:sessionJSON options:0 error:&errorObj];
     NSArray* sessions = [TXLFSessionStore stripJSONObject:sessionDictionary :@"nodes"];
-    NSMutableArray* sessionArray = [[NSMutableArray alloc] init];
     for(id singleSession in sessions) {
         NSDictionary* sessionDict = [self stripJSONObject:singleSession :@"node"];
         TXLFSession* session = [[TXLFSession alloc] initWithStringsDict:sessionDict];
@@ -136,15 +167,45 @@
 }
 
 +(void) updateFavs:(TXLFSession *)session :(BOOL)faved{
-    static NSMutableArray* favs = nil;
-    if(!favs) {
-        favs = [[NSMutableArray alloc] init];
+    static NSMutableDictionary* favs_dict = nil;
+    NSError* errorObj = [[NSError alloc] initWithCoder:nil];
+    //TODO put this is property list downloadable from Web
+    NSString *localFavsCachePath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)
+                                 objectAtIndex:0] stringByAppendingPathComponent:@"fav_sessions"];
+    if(!favs_dict) {
+        NSData *plistXML = [NSData dataWithContentsOfFile:localFavsCachePath];;
+        if (plistXML) {
+            //favs_dict = (NSMutableDictionary *)[NSPropertyListSerialization
+            //                                      propertyListWithData:plistXML
+            //                                      options:NSPropertyListImmutable
+            //                                      format:NULL
+            //                                      error:&errorObj];
+            NSDictionary *temp_dict = [NSJSONSerialization JSONObjectWithData:plistXML options:0 error:&errorObj];
+            favs_dict = [NSMutableDictionary dictionaryWithDictionary:temp_dict];
+            NSLog(@"Favorites Read during update");
+        } else {
+            favs_dict = [[NSMutableDictionary alloc] init];
+        }
     }
-    if (
-        [favs addObject:session];
+    
+    [favs_dict removeObjectForKey:[[NSNumber numberWithUnsignedInteger:session.sid] stringValue]];
+    if (faved) {
+        [favs_dict setValue:@"YES" forKey:[[NSNumber numberWithUnsignedInteger:session.sid] stringValue]];
+    }
+    
+    if (favs_dict) {
+        NSData *tempData = [NSJSONSerialization dataWithJSONObject:favs_dict options:0 error:&errorObj];
+    
+        //This should probably only be written when the application exits
+        [tempData writeToFile:localFavsCachePath atomically:YES];
         NSLog(@"Favs Saved");
+    } else {
+        NSLog(@"Error writing Favs");
     }
-    return allSessions;
+}
+
++(void) setTable:(UITableView *) table {
+    sessionTable = table;
 }
 
 @end

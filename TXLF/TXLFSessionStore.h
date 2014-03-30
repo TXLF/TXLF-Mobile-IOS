@@ -24,10 +24,13 @@
 +(NSArray *) allSlots;
 +(NSArray *) allTracks;
 
-+(NSData *) fetchSessions;
++(void) fetchSessions;
++(NSData *) prepSessions;
 //+(NSMutableArray *) generateSessions;
 //+(NSMutableArrary *) generateSlots;
 //+(id) stripJSONObject:(NSDictionary *) dict :(NSString *) objectName;
 +(void) updateFavs:(TXLFSession *) session :(BOOL) faved;
+
++(void) setTable:(UITableView *) table;
 
 @end
