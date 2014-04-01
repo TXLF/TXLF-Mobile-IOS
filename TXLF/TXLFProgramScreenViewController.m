@@ -133,12 +133,12 @@
                     [sessionsForSection addObject:[sessions objectAtIndex:i]];
                 } else {
                     while (--n && [slot compare:[[[sessionsForSection objectAtIndex:n] sessionSlot] objectForKey:@"startTime"]] == NSOrderedAscending);
-                }
-                if([slot compare:[[[sessionsForSection objectAtIndex:n] sessionSlot] objectForKey:@"startTime"]] == NSOrderedDescending) {
-                    [sessionsForSection  insertObject:[sessions objectAtIndex:i] atIndex:n+1];
-                } else {
-                    // This should handle both duplicates (e.g. bad input or concurrent sessions) and items that should be inserted at the beginning of the array
-                    [sessionsForSection  insertObject:[sessions objectAtIndex:i] atIndex:n];
+                    if([slot compare:[[[sessionsForSection objectAtIndex:n] sessionSlot] objectForKey:@"startTime"]] == NSOrderedDescending) {
+                        [sessionsForSection  insertObject:[sessions objectAtIndex:i] atIndex:n+1];
+                    } else {
+                        // This should handle both duplicates (e.g. bad input or concurrent sessions) and items that should be inserted at the beginning of the array
+                        [sessionsForSection  insertObject:[sessions objectAtIndex:i] atIndex:n];
+                    }
                 }
             }
         } else if (sortBy == 2) {
@@ -148,15 +148,14 @@
                 if (n < 1) {
                     [sessionsForSection addObject:[sessions objectAtIndex:i]];
                 } else {
-                    NSDate *sslot = [[[sessionsForSection objectAtIndex:0] sessionSlot] objectForKey:@"startTime"];
+                    NSDate *sslot = [[[sessions objectAtIndex:i] sessionSlot] objectForKey:@"startTime"];
                     while (--n && [sslot compare:[[[sessionsForSection objectAtIndex:n] sessionSlot] objectForKey:@"startTime"]] == NSOrderedAscending);
-                }
-                NSDate *sslot = [[[sessionsForSection objectAtIndex:0] sessionSlot] objectForKey:@"startTime"];
-                if([sslot compare:[[[sessionsForSection objectAtIndex:n] sessionSlot] objectForKey:@"startTime"]] == NSOrderedDescending) {
-                    [sessionsForSection  insertObject:[sessions objectAtIndex:i] atIndex:n+1];
-                } else {
-                    // This should handle both duplicates (e.g. bad input or concurrent sessions) and items that should be inserted at the beginning of the array
-                    [sessionsForSection  insertObject:[sessions objectAtIndex:i] atIndex:n];
+                    if([sslot compare:[[[sessionsForSection objectAtIndex:n] sessionSlot] objectForKey:@"startTime"]] == NSOrderedDescending) {
+                        [sessionsForSection  insertObject:[sessions objectAtIndex:i] atIndex:n+1];
+                    } else {
+                        // This should handle both duplicates (e.g. bad input or concurrent sessions) and items that should be inserted at the beginning of the array
+                        [sessionsForSection  insertObject:[sessions objectAtIndex:i] atIndex:n];
+                    }
                 }
             }
         } else {
@@ -242,12 +241,13 @@
                     [sessionsForSection addObject:[sessions objectAtIndex:i]];
                 } else {
                     while (--n && [slot compare:[[[sessionsForSection objectAtIndex:n] sessionSlot] objectForKey:@"startTime"]] == NSOrderedAscending);
-                }
-                if([slot compare:[[[sessionsForSection objectAtIndex:n] sessionSlot] objectForKey:@"startTime"]] == NSOrderedDescending) {
-                    [sessionsForSection  insertObject:[sessions objectAtIndex:i] atIndex:n+1];
-                } else {
-                    // This should handle both duplicates (e.g. bad input or concurrent sessions) and items that should be inserted at the beginning of the array
-                    [sessionsForSection  insertObject:[sessions objectAtIndex:i] atIndex:n];
+
+                    if([slot compare:[[[sessionsForSection objectAtIndex:n] sessionSlot] objectForKey:@"startTime"]] == NSOrderedDescending) {
+                        [sessionsForSection  insertObject:[sessions objectAtIndex:i] atIndex:n+1];
+                    } else {
+                        // This should handle both duplicates (e.g. bad input or concurrent sessions) and items that should be inserted at the beginning of the array
+                        [sessionsForSection  insertObject:[sessions objectAtIndex:i] atIndex:n];
+                    }
                 }
             }
         } else if (sortBy == 2) {
@@ -259,13 +259,13 @@
                 } else {
                     NSDate *sslot = [[[sessionsForSection objectAtIndex:0] sessionSlot] objectForKey:@"startTime"];
                     while (--n && [sslot compare:[[[sessionsForSection objectAtIndex:n] sessionSlot] objectForKey:@"startTime"]] == NSOrderedAscending);
-                }
-                NSDate *sslot = [[[sessionsForSection objectAtIndex:0] sessionSlot] objectForKey:@"startTime"];
-                if([sslot compare:[[[sessionsForSection objectAtIndex:n] sessionSlot] objectForKey:@"startTime"]] == NSOrderedDescending) {
-                    [sessionsForSection  insertObject:[sessions objectAtIndex:i] atIndex:n+1];
-                } else {
-                    // This should handle both duplicates (e.g. bad input or concurrent sessions) and items that should be inserted at the beginning of the array
-                    [sessionsForSection  insertObject:[sessions objectAtIndex:i] atIndex:n];
+                    
+                    if([sslot compare:[[[sessionsForSection objectAtIndex:n] sessionSlot] objectForKey:@"startTime"]] == NSOrderedDescending) {
+                        [sessionsForSection  insertObject:[sessions objectAtIndex:i] atIndex:n+1];
+                    } else {
+                        // This should handle both duplicates (e.g. bad input or concurrent sessions) and items that should be inserted at the beginning of the array
+                        [sessionsForSection  insertObject:[sessions objectAtIndex:i] atIndex:n];
+                    }
                 }
             }
         } else {
