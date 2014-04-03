@@ -13,6 +13,8 @@
     IBOutlet MKMapView *map;
     CLLocationManager *locationManager;
     CLLocationCoordinate2D venueLocation;
+    CLLocationCoordinate2D secondPark;
+    CLLocationCoordinate2D fifthPark;
 }
 
 @end

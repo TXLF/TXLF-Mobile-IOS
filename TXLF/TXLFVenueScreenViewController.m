@@ -18,6 +18,8 @@
         locationManager = [[CLLocationManager alloc] init];
         [locationManager setDelegate:self];
         venueLocation = CLLocationCoordinate2DMake(30.26384,-97.73958);
+        secondPark = CLLocationCoordinate2DMake(30.263338, -97.742437);
+        fifthPark = CLLocationCoordinate2DMake(30.264939, -97.737283);
     }
     return self;
 }
@@ -27,6 +29,19 @@
     [super viewDidLoad];
     MKCoordinateRegion region = MKCoordinateRegionMake(venueLocation, MKCoordinateSpanMake(0.01, 0.01));
     [map setRegion:region animated:YES];
+    MKPointAnnotation *conventionCenter = [[MKPointAnnotation alloc] init];
+    MKPointAnnotation *secondParkPoint = [[MKPointAnnotation alloc] init];
+    MKPointAnnotation *fifthParkPoint = [[MKPointAnnotation alloc] init];
+    conventionCenter.coordinate = venueLocation;
+    conventionCenter.title = @"Convention Center";
+    secondParkPoint.coordinate = secondPark;
+    secondParkPoint.title = @"Park";
+    fifthParkPoint.coordinate = fifthPark;
+    fifthParkPoint.title = @"Park";
+    
+    [map addAnnotation:conventionCenter];
+    [map addAnnotation:secondParkPoint];
+    [map addAnnotation:fifthParkPoint];
 
 }
 
