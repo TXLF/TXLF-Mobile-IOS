@@ -257,7 +257,7 @@
                 if (n < 1) {
                     [sessionsForSection addObject:[sessions objectAtIndex:i]];
                 } else {
-                    NSDate *sslot = [[[sessionsForSection objectAtIndex:0] sessionSlot] objectForKey:@"startTime"];
+                    NSDate *sslot = [[[sessions objectAtIndex:i] sessionSlot] objectForKey:@"startTime"];
                     while (--n && [sslot compare:[[[sessionsForSection objectAtIndex:n] sessionSlot] objectForKey:@"startTime"]] == NSOrderedAscending);
                     
                     if([sslot compare:[[[sessionsForSection objectAtIndex:n] sessionSlot] objectForKey:@"startTime"]] == NSOrderedDescending) {
