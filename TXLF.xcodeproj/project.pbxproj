@@ -50,6 +50,7 @@
 		5ECC272E181C82FF004C9F44 /* TXLFVenueScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ECC272D181C82FF004C9F44 /* TXLFVenueScreenViewController.m */; };
 		5ECC2731181CABFC004C9F44 /* TXLFProgramScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ECC2730181CABFC004C9F44 /* TXLFProgramScreenViewController.m */; };
 		5ECC2738181CB336004C9F44 /* TXLFSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ECC2737181CB336004C9F44 /* TXLFSession.m */; };
+		5EE4A6EC1A33A9D200B049D2 /* TXLFScanIDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EE4A6EB1A33A9D200B049D2 /* TXLFScanIDViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,6 +121,8 @@
 		5ECC2730181CABFC004C9F44 /* TXLFProgramScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXLFProgramScreenViewController.m; sourceTree = "<group>"; };
 		5ECC2736181CB336004C9F44 /* TXLFSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXLFSession.h; sourceTree = "<group>"; };
 		5ECC2737181CB336004C9F44 /* TXLFSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXLFSession.m; sourceTree = "<group>"; };
+		5EE4A6EA1A33A9D200B049D2 /* TXLFScanIDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXLFScanIDViewController.h; sourceTree = "<group>"; };
+		5EE4A6EB1A33A9D200B049D2 /* TXLFScanIDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXLFScanIDViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -312,9 +315,10 @@
 				5E7647161862AB360030AFB6 /* TXLFTopBanner.m */,
 				5E76471A186656000030AFB6 /* TXLFTabBarController.h */,
 				5E76471B186656000030AFB6 /* TXLFTabBarController.m */,
-				5E91EC4018676A6200EB6431 /* Register */,
 				5E00C17E1862A6900030E510 /* Venue */,
 				5E341A961831CCE3001B23EC /* Program */,
+				5EE4A6E91A33A62900B049D2 /* ScanID */,
+				5E91EC4018676A6200EB6431 /* Register */,
 				5E30B93C18E4BDF500118085 /* Sponsors */,
 			);
 			name = Views/Screens;
@@ -329,6 +333,15 @@
 				5E0587CB18288DA80080B553 /* TXLFSessionStore.m */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		5EE4A6E91A33A62900B049D2 /* ScanID */ = {
+			isa = PBXGroup;
+			children = (
+				5EE4A6EA1A33A9D200B049D2 /* TXLFScanIDViewController.h */,
+				5EE4A6EB1A33A9D200B049D2 /* TXLFScanIDViewController.m */,
+			);
+			name = ScanID;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -454,6 +467,7 @@
 			files = (
 				5ECC2700181C7674004C9F44 /* TXLFAppDelegate.m in Sources */,
 				5E91EC3F18676A5700EB6431 /* TXLFRegisterViewController.m in Sources */,
+				5EE4A6EC1A33A9D200B049D2 /* TXLFScanIDViewController.m in Sources */,
 				5E0587CC18288DA80080B553 /* TXLFSessionStore.m in Sources */,
 				5E30B93B18E4BDEE00118085 /* TXLFSponsorViewController.m in Sources */,
 				5E7647171862AB360030AFB6 /* TXLFTopBanner.m in Sources */,
@@ -619,9 +633,10 @@
 					"cppunit/include/**",
 				);
 				INFOPLIST_FILE = "TXLF/TXLF-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "F333C269-ABE2-453B-9D74-B7ED91067E03";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -652,9 +667,10 @@
 					"cppunit/include/**",
 				);
 				INFOPLIST_FILE = "TXLF/TXLF-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "4166F945-6FCC-4954-8859-163E463D4CDE";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

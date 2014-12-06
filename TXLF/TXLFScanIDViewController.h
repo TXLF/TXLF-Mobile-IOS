@@ -7,8 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ZXingWidgetController.h"
+#import <AVFoundation/AVFoundation.h>
 
-@interface TXLFScanIDViewController : ZXingWidgetController
+@interface TXLFScanIDViewController : UIViewController <AVCaptureMetadataOutputObjectsDelegate>
 
+@property (weak, nonatomic) IBOutlet UIView* scanPreview;
+@property (nonatomic, strong) AVCaptureSession *captureSession;
+@property (nonatomic, strong) AVCaptureVideoPreviewLayer *videoPreviewLayer;
+
+
+-(IBAction)startStopReading:(id)sender;
+-(BOOL)startReading;
+-(void)stopReading;
 @end

@@ -44,4 +44,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)disableTab:(NSString*)element {
+    NSArray* elements = self.tabBar.items;
+    for (id item in elements) {
+        if([((UIBarItem*)item).title isEqualToString:element]) {
+            ((UIBarItem*)item).enabled = false;
+        }
+    }
+}
+
 @end
