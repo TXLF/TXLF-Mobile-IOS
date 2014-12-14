@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface TXLFTabBarController : UITabBarController
+@property (weak, nonatomic) IBOutlet UITabBar *tabBar;
+
+- (void)disableTab:(NSString*)element;
 
 @end

@@ -74,8 +74,13 @@ static UITableView *sessionTable;
     NSURLSessionDataTask *dataTask = [net_session dataTaskWithRequest:req completionHandler:
                                       ^(NSData *data, NSURLResponse *response, NSError *error) {
                                           dirtyJSON = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                                          NSLog(@"Remote Session Data pulled");
-                                          [TXLFSessionStore allSessions:TRUE];
+                                          if(((NSHTTPURLResponse*)response).statusCode != 200) {
+                                              NSLog(@"Failed to obtain session data");
+                                              
+                                          } else {
+                                            NSLog(@"Remote Session Data pulled");
+                                            [TXLFSessionStore allSessions:TRUE];
+                                          }
                                       }];
     [dataTask resume];
     
@@ -110,8 +115,11 @@ static UITableView *sessionTable;
 +(id) stripJSONObject:(NSDictionary *) dict :(NSString *) objectName {
     NSError *errorObj = [[NSError alloc] initWithCoder:nil];
     NSArray* innerArray = [dict objectForKey:objectName];
-    NSData*  innerData  = [NSJSONSerialization dataWithJSONObject:innerArray options:0 error:&errorObj];
-    id results = [NSJSONSerialization JSONObjectWithData:innerData options:0 error:&errorObj];
+    id results;
+    if(innerArray) {
+        NSData*  innerData  = [NSJSONSerialization dataWithJSONObject:innerArray options:0 error:&errorObj];
+        results = [NSJSONSerialization JSONObjectWithData:innerData options:0 error:&errorObj];
+    }
     return results;
 }
 
